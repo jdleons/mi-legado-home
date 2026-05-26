@@ -14,369 +14,201 @@ interface Props {
 
 export default function ConfiguradorForm({ lote, lead, onComplete, onBack }: Props) {
   const normativa = normativaData as typeof normativaData;
-
   const [config, setConfig] = useState<ConfiguracionCasa>({
-    lote_id: lote.id,
-    area_m2: 250,
-    niveles: 2,
-    habitaciones: 3,
-    estilo: "contemporaneo-bosque",
-    materiales: ["concreto-expuesto", "madera-natural"],
-    deck_tipo: "voladizo-bosque",
-    parqueos: 2,
-    relacion_bosque: "visual",
-    orientacion_vistas: "bosque",
-    tiene_estudio: false,
-    tiene_visitas: false,
-    tiene_servicio: true,
+    lote_id: lote.id, area_m2: 250, niveles: 2, habitaciones: 3,
+    estilo: "contemporaneo-bosque", materiales: ["concreto-expuesto","madera-natural"],
+    deck_tipo: "voladizo-bosque", parqueos: 2, relacion_bosque: "visual",
+    orientacion_vistas: "bosque", tiene_estudio: false, tiene_visitas: false, tiene_servicio: true,
   });
 
-  // Validar en tiempo real con cada cambio
   const validacion: ValidacionResultado = validarConstruccion(config, lote);
   const huellaEstimada = Math.round(config.area_m2 / config.niveles);
-
   const toggleMaterial = (id: string) => {
-    setConfig((prev) => ({
-      ...prev,
-      materiales: prev.materiales.includes(id)
-        ? prev.materiales.filter((m) => m !== id)
-        : [...prev.materiales, id],
-    }));
+    setConfig((prev) => ({ ...prev, materiales: prev.materiales.includes(id) ? prev.materiales.filter((m) => m !== id) : [...prev.materiales, id] }));
   };
-
   const materialesPermitidos = normativa.materiales_exteriores.filter((m) => m.permitido);
 
+  const card = { background:"white", border:"1px solid #E8DFC8", borderRadius:"16px", padding:"24px", marginBottom:"16px" };
+  const btnSelect = (sel:boolean) => ({ padding:"10px", borderRadius:"10px", border: sel?"none":"1px solid #B5A894", backgroundColor: sel?"#2C3B1F":"white", color: sel?"white":"#1A1F14", cursor:"pointer", fontSize:"13px", fontWeight:500 as const, transition:"all 0.2s" });
+  const sectionTitle = { fontFamily:"Georgia,serif", fontSize:"18px", color:"#1A1F14", marginBottom:"16px", display:"flex", alignItems:"center", gap:"8px" };
+
   return (
-    <div className="min-h-screen bg-ldb-cream pb-32">
-      {/* Header fijo */}
-      <header className="bg-ldb-forest px-6 py-4 flex items-center justify-between sticky top-0 z-10">
-        <div className="flex items-center gap-3">
-          <button onClick={onBack} className="text-ldb-sage hover:text-white transition-colors text-sm">
-            ← Volver
-          </button>
-          <span className="text-white/30">|</span>
-          <span className="font-serif text-lg text-white">Mi Legado</span>
+    <div style={{minHeight:"100vh",backgroundColor:"#F5F0E8",paddingBottom:"100px"}}>
+      <header style={{backgroundColor:"#2C3B1F",padding:"14px 24px",display:"flex",alignItems:"center",justifyContent:"space-between",position:"sticky",top:0,zIndex:10}}>
+        <div style={{display:"flex",alignItems:"center",gap:"12px"}}>
+          <button onClick={onBack} style={{color:"#8A9E6D",background:"none",border:"none",cursor:"pointer",fontSize:"14px"}}>← Volver</button>
+          <span style={{color:"rgba(255,255,255,0.3)"}}>|</span>
+          <span style={{fontFamily:"Georgia,serif",fontSize:"18px",color:"white"}}>Mi Legado</span>
         </div>
-        <div className="flex items-center gap-3">
-          <span className="text-ldb-sage text-xs">{lote.nombre}</span>
-          <ValidacionBadge valido={validacion.valido} errores={validacion.errores.length} />
+        <div style={{display:"flex",alignItems:"center",gap:"8px"}}>
+          <span style={{color:"#8A9E6D",fontSize:"12px"}}>{lote.nombre}</span>
+          <span style={{fontSize:"11px",padding:"3px 10px",borderRadius:"20px",backgroundColor:validacion.valido?"#EAF3DE":"#FCEBEB",color:validacion.valido?"#3B6D11":"#A32D2D"}}>
+            {validacion.valido?"✓ Cumple normativa":`${validacion.errores.length} error${validacion.errores.length>1?"es":""}`}
+          </span>
         </div>
       </header>
 
-      <div className="max-w-2xl mx-auto px-4 py-8">
-        <div className="mb-8">
-          <p className="text-ldb-moss text-xs font-medium uppercase tracking-wider mb-2">Paso 2 de 3 · Configurador</p>
-          <h2 className="font-serif text-3xl text-ldb-dark mb-2">Diseña tu casa</h2>
-          <p className="text-ldb-warm-gray text-sm">
-            Cada selección se valida en tiempo real contra la normativa de Legado del Bosque.
-          </p>
+      <div style={{maxWidth:"680px",margin:"0 auto",padding:"32px 16px"}}>
+        <p style={{color:"#556B2F",fontSize:"11px",fontWeight:500,textTransform:"uppercase" as const,letterSpacing:"0.1em",marginBottom:"8px"}}>Paso 2 de 3 · Configurador</p>
+        <h2 style={{fontFamily:"Georgia,serif",fontSize:"30px",color:"#1A1F14",marginBottom:"4px"}}>Diseña tu casa</h2>
+        <p style={{color:"#6B6B63",fontSize:"14px",marginBottom:"24px"}}>Cada selección se valida en tiempo real contra la normativa de Legado del Bosque.</p>
+
+        <div style={{...card,backgroundColor:"rgba(44,59,31,0.05)",border:"1px solid rgba(44,59,31,0.2)"}}>
+          <p style={{fontSize:"11px",fontWeight:500,color:"#556B2F",textTransform:"uppercase" as const,letterSpacing:"0.1em",marginBottom:"4px"}}>Lote seleccionado</p>
+          <p style={{fontWeight:500,color:"#1A1F14"}}>{lote.nombre}</p>
+          <p style={{fontSize:"13px",color:"#6B6B63"}}>{lote.area_m2} m² · {lote.topo_tipo} · {lote.dif_nivel_m}m desnivel</p>
+          <p style={{fontSize:"12px",color:"#6B6B63",marginTop:"4px"}}>{lote.descripcion_topo}</p>
         </div>
 
-        {/* Ficha del lote seleccionado */}
-        <div className="bg-ldb-forest/5 border border-ldb-forest/20 rounded-xl p-4 mb-8">
-          <p className="text-xs font-medium text-ldb-moss uppercase tracking-wider mb-1">Lote seleccionado</p>
-          <div className="flex items-start justify-between">
-            <div>
-              <p className="font-medium text-ldb-dark">{lote.nombre}</p>
-              <p className="text-sm text-ldb-warm-gray">{lote.area_m2} m² · {lote.topo_tipo} · {lote.dif_nivel_m}m desnivel</p>
-              <p className="text-xs text-ldb-warm-gray mt-1">{lote.descripcion_topo}</p>
+        <div style={card}>
+          <div style={sectionTitle}><span>📐</span> Dimensiones</div>
+          <div style={{marginBottom:"20px"}}>
+            <div style={{display:"flex",justifyContent:"space-between",alignItems:"baseline",marginBottom:"8px"}}>
+              <label style={{fontSize:"14px",fontWeight:500,color:"#1A1F14"}}>Área construida total</label>
+              <span style={{fontFamily:"Georgia,serif",fontSize:"24px",color:"#2C3B1F"}}>{config.area_m2} m²</span>
+            </div>
+            <input type="range" min={150} max={500} step={10} value={config.area_m2}
+              onChange={(e) => setConfig({...config,area_m2:Number(e.target.value)})}
+              style={{width:"100%",accentColor:"#2C3B1F"}} />
+            <div style={{display:"flex",justifyContent:"space-between",fontSize:"12px",color:"#6B6B63",marginTop:"4px"}}>
+              <span>150 m² mín.</span>
+              <span style={{color:config.area_m2>450?"#BA7517":""}}>500 m² máx. (normativa LDB)</span>
             </div>
           </div>
-        </div>
-
-        {/* SECCIÓN 1: Área y niveles */}
-        <SeccionCard titulo="Dimensiones" icono="📐">
-          <div className="space-y-6">
-            <div>
-              <div className="flex justify-between items-baseline mb-2">
-                <label className="text-sm font-medium text-ldb-dark">Área construida total</label>
-                <span className="font-serif text-2xl text-ldb-forest">{config.area_m2} m²</span>
-              </div>
-              <input
-                type="range" min={150} max={500} step={10}
-                value={config.area_m2}
-                onChange={(e) => setConfig({ ...config, area_m2: Number(e.target.value) })}
-                className="w-full accent-ldb-forest"
-              />
-              <div className="flex justify-between text-xs text-ldb-warm-gray mt-1">
-                <span>150 m² mín.</span>
-                <span className={config.area_m2 > 450 ? "text-amber-600 font-medium" : ""}>
-                  500 m² máx. (normativa LDB)
-                </span>
-              </div>
-            </div>
-
-            <div>
-              <label className="text-sm font-medium text-ldb-dark block mb-3">Número de niveles</label>
-              <div className="grid grid-cols-3 gap-3">
-                {[1, 2, 3].map((n) => (
-                  <button
-                    key={n}
-                    onClick={() => setConfig({ ...config, niveles: n as 1 | 2 | 3 })}
-                    className={`py-3 rounded-xl border text-sm font-medium transition-all ${
-                      config.niveles === n
-                        ? "bg-ldb-forest text-white border-ldb-forest"
-                        : "bg-white text-ldb-dark border-ldb-stone/40 hover:border-ldb-moss"
-                    }`}
-                  >
-                    {n} nivel{n > 1 ? "es" : ""}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Indicador de huella */}
-            <div className={`flex items-center gap-2 p-3 rounded-lg text-sm ${
-              huellaEstimada > 325 ? "bg-red-50 text-red-700" : "bg-green-50 text-green-700"
-            }`}>
-              <span>{huellaEstimada > 325 ? "⚠️" : "✓"}</span>
-              <span>
-                Huella estimada por nivel: <strong>{huellaEstimada} m²</strong>
-                {huellaEstimada > 325
-                  ? " — excede el límite de 325 m²"
-                  : " — dentro del límite normativo"}
-              </span>
-            </div>
-          </div>
-        </SeccionCard>
-
-        {/* SECCIÓN 2: Habitaciones */}
-        <SeccionCard titulo="Distribución" icono="🛏">
-          <div className="space-y-4">
-            <div>
-              <label className="text-sm font-medium text-ldb-dark block mb-3">Habitaciones</label>
-              <div className="grid grid-cols-4 gap-2">
-                {[2, 3, 4, 5].map((n) => (
-                  <button
-                    key={n}
-                    onClick={() => setConfig({ ...config, habitaciones: n })}
-                    className={`py-2.5 rounded-lg border text-sm font-medium transition-all ${
-                      config.habitaciones === n
-                        ? "bg-ldb-forest text-white border-ldb-forest"
-                        : "bg-white text-ldb-dark border-ldb-stone/40 hover:border-ldb-moss"
-                    }`}
-                  >
-                    {n === 5 ? "5+" : n}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <label className="text-sm font-medium text-ldb-dark block mb-3">Parqueos</label>
-              <div className="grid grid-cols-3 gap-2">
-                {[1, 2, 3].map((n) => (
-                  <button
-                    key={n}
-                    onClick={() => setConfig({ ...config, parqueos: n })}
-                    className={`py-2.5 rounded-lg border text-sm font-medium transition-all ${
-                      config.parqueos === n
-                        ? "bg-ldb-forest text-white border-ldb-forest"
-                        : "bg-white text-ldb-dark border-ldb-stone/40 hover:border-ldb-moss"
-                    }`}
-                  >
-                    {n} auto{n > 1 ? "s" : ""}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className="grid grid-cols-3 gap-2">
-              {[
-                { key: "tiene_estudio", label: "Estudio / home office" },
-                { key: "tiene_visitas", label: "Cuarto de visitas" },
-                { key: "tiene_servicio", label: "Área de servicio" },
-              ].map(({ key, label }) => (
-                <button
-                  key={key}
-                  onClick={() => setConfig({ ...config, [key]: !config[key as keyof ConfiguracionCasa] })}
-                  className={`py-2.5 px-3 rounded-lg border text-xs font-medium transition-all text-left ${
-                    config[key as keyof ConfiguracionCasa]
-                      ? "bg-ldb-forest/10 text-ldb-forest border-ldb-forest/40"
-                      : "bg-white text-ldb-warm-gray border-ldb-stone/40"
-                  }`}
-                >
-                  {config[key as keyof ConfiguracionCasa] ? "✓ " : ""}{label}
+          <div>
+            <label style={{fontSize:"14px",fontWeight:500,color:"#1A1F14",display:"block",marginBottom:"12px"}}>Número de niveles</label>
+            <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:"8px",marginBottom:"12px"}}>
+              {[1,2,3].map((n) => (
+                <button key={n} onClick={() => setConfig({...config,niveles:n as 1|2|3})} style={btnSelect(config.niveles===n)}>
+                  {n} nivel{n>1?"es":""}
                 </button>
               ))}
             </div>
+            <div style={{padding:"10px 12px",borderRadius:"8px",fontSize:"13px",backgroundColor:huellaEstimada>325?"#FCEBEB":"#EAF3DE",color:huellaEstimada>325?"#A32D2D":"#3B6D11"}}>
+              {huellaEstimada>325?"⚠️":"✓"} Huella estimada: <strong>{huellaEstimada} m²</strong>
+              {huellaEstimada>325?" — excede el límite de 325 m²":" — dentro del límite normativo"}
+            </div>
           </div>
-        </SeccionCard>
+        </div>
 
-        {/* SECCIÓN 3: Estilo */}
-        <SeccionCard titulo="Estilo arquitectónico" icono="🏛">
-          <div className="grid grid-cols-1 gap-3">
-            {normativa.estilos_permitidos.map((estilo) => (
-              <button
-                key={estilo.id}
-                onClick={() => setConfig({ ...config, estilo: estilo.id })}
-                className={`p-4 rounded-xl border text-left transition-all ${
-                  config.estilo === estilo.id
-                    ? "bg-ldb-forest text-white border-ldb-forest"
-                    : "bg-white text-ldb-dark border-ldb-stone/40 hover:border-ldb-moss"
-                }`}
-              >
-                <p className="font-medium text-sm">{estilo.nombre}</p>
-                <p className={`text-xs mt-0.5 leading-relaxed ${config.estilo === estilo.id ? "text-ldb-sage" : "text-ldb-warm-gray"}`}>
-                  {estilo.descripcion}
-                </p>
+        <div style={card}>
+          <div style={sectionTitle}><span>🛏</span> Distribución</div>
+          <div style={{marginBottom:"16px"}}>
+            <label style={{fontSize:"14px",fontWeight:500,color:"#1A1F14",display:"block",marginBottom:"10px"}}>Habitaciones</label>
+            <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr 1fr",gap:"8px"}}>
+              {[2,3,4,5].map((n) => <button key={n} onClick={() => setConfig({...config,habitaciones:n})} style={btnSelect(config.habitaciones===n)}>{n===5?"5+":n}</button>)}
+            </div>
+          </div>
+          <div style={{marginBottom:"16px"}}>
+            <label style={{fontSize:"14px",fontWeight:500,color:"#1A1F14",display:"block",marginBottom:"10px"}}>Parqueos</label>
+            <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:"8px"}}>
+              {[1,2,3].map((n) => <button key={n} onClick={() => setConfig({...config,parqueos:n})} style={btnSelect(config.parqueos===n)}>{n} auto{n>1?"s":""}</button>)}
+            </div>
+          </div>
+          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:"8px"}}>
+            {[{key:"tiene_estudio",label:"Estudio"},{key:"tiene_visitas",label:"Visitas"},{key:"tiene_servicio",label:"Servicio"}].map(({key,label}) => (
+              <button key={key} onClick={() => setConfig({...config,[key]:!config[key as keyof ConfiguracionCasa]})}
+                style={{...btnSelect(!!config[key as keyof ConfiguracionCasa]),fontSize:"12px",textAlign:"left" as const}}>
+                {config[key as keyof ConfiguracionCasa]?"✓ ":""}{label}
               </button>
             ))}
           </div>
-        </SeccionCard>
+        </div>
 
-        {/* SECCIÓN 4: Materiales */}
-        <SeccionCard titulo="Materiales exteriores" icono="🪨">
-          <p className="text-xs text-ldb-warm-gray mb-4">Selecciona uno o más materiales. Los materiales prohibidos por normativa están desactivados.</p>
-          <div className="grid grid-cols-1 gap-2">
+        <div style={card}>
+          <div style={sectionTitle}><span>🏛</span> Estilo arquitectónico</div>
+          <div style={{display:"flex",flexDirection:"column" as const,gap:"8px"}}>
+            {normativa.estilos_permitidos.map((estilo) => (
+              <button key={estilo.id} onClick={() => setConfig({...config,estilo:estilo.id})}
+                style={{...btnSelect(config.estilo===estilo.id),textAlign:"left" as const,padding:"14px"}}>
+                <div style={{fontWeight:500,fontSize:"14px"}}>{estilo.nombre}</div>
+                <div style={{fontSize:"12px",marginTop:"2px",color:config.estilo===estilo.id?"#8A9E6D":"#6B6B63"}}>{estilo.descripcion}</div>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div style={card}>
+          <div style={sectionTitle}><span>🪨</span> Materiales exteriores</div>
+          <div style={{display:"flex",flexDirection:"column" as const,gap:"8px"}}>
             {materialesPermitidos.map((mat) => (
-              <button
-                key={mat.id}
-                onClick={() => toggleMaterial(mat.id)}
-                className={`p-3 rounded-lg border text-left transition-all flex items-start gap-3 ${
-                  config.materiales.includes(mat.id)
-                    ? "bg-ldb-forest/10 border-ldb-forest/40 text-ldb-forest"
-                    : "bg-white border-ldb-stone/40 hover:border-ldb-moss"
-                }`}
-              >
-                <span className="mt-0.5 flex-shrink-0">
-                  {config.materiales.includes(mat.id) ? "☑" : "☐"}
-                </span>
+              <button key={mat.id} onClick={() => toggleMaterial(mat.id)}
+                style={{display:"flex",gap:"10px",alignItems:"flex-start",padding:"12px",borderRadius:"8px",border:config.materiales.includes(mat.id)?"1px solid rgba(44,59,31,0.4)":"1px solid #B5A894",backgroundColor:config.materiales.includes(mat.id)?"rgba(44,59,31,0.08)":"white",cursor:"pointer",textAlign:"left" as const}}>
+                <span style={{fontSize:"16px",marginTop:"1px"}}>{config.materiales.includes(mat.id)?"☑":"☐"}</span>
                 <div>
-                  <p className="text-sm font-medium">{mat.nombre}</p>
-                  <p className="text-xs text-ldb-warm-gray leading-relaxed">{mat.descripcion}</p>
+                  <div style={{fontSize:"13px",fontWeight:500,color:"#1A1F14"}}>{mat.nombre}</div>
+                  <div style={{fontSize:"12px",color:"#6B6B63",lineHeight:1.5}}>{mat.descripcion}</div>
                 </div>
               </button>
             ))}
           </div>
-        </SeccionCard>
+        </div>
 
-        {/* SECCIÓN 5: Deck y relación con bosque */}
-        <SeccionCard titulo="Exterior y bosque" icono="🌲">
-          <div className="space-y-5">
-            <div>
-              <label className="text-sm font-medium text-ldb-dark block mb-3">Tipo de deck / terraza</label>
-              <div className="grid grid-cols-1 gap-2">
-                {normativa.tipos_deck.map((deck) => (
-                  <button
-                    key={deck.id}
-                    onClick={() => setConfig({ ...config, deck_tipo: deck.id })}
-                    className={`p-3 rounded-lg border text-left transition-all ${
-                      config.deck_tipo === deck.id
-                        ? "bg-ldb-forest text-white border-ldb-forest"
-                        : "bg-white text-ldb-dark border-ldb-stone/40 hover:border-ldb-moss"
-                    }`}
-                  >
-                    <p className="text-sm font-medium">{deck.nombre}</p>
-                    <p className={`text-xs mt-0.5 ${config.deck_tipo === deck.id ? "text-ldb-sage" : "text-ldb-warm-gray"}`}>
-                      {deck.descripcion}
-                    </p>
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <label className="text-sm font-medium text-ldb-dark block mb-3">Relación con el bosque</label>
-              <div className="grid grid-cols-1 gap-2">
-                {normativa.relacion_bosque.map((rel) => (
-                  <button
-                    key={rel.id}
-                    onClick={() => setConfig({ ...config, relacion_bosque: rel.id })}
-                    className={`p-3 rounded-lg border text-left transition-all ${
-                      config.relacion_bosque === rel.id
-                        ? "bg-ldb-forest text-white border-ldb-forest"
-                        : "bg-white text-ldb-dark border-ldb-stone/40 hover:border-ldb-moss"
-                    }`}
-                  >
-                    <p className="text-sm font-medium">{rel.nombre}</p>
-                    <p className={`text-xs mt-0.5 ${config.relacion_bosque === rel.id ? "text-ldb-sage" : "text-ldb-warm-gray"}`}>
-                      {rel.descripcion}
-                    </p>
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <label className="text-sm font-medium text-ldb-dark block mb-3">Orientación principal de vistas</label>
-              <div className="grid grid-cols-2 gap-2">
-                {["Bosque", "Valle", "Ciudad", "Mixto"].map((v) => (
-                  <button
-                    key={v}
-                    onClick={() => setConfig({ ...config, orientacion_vistas: v.toLowerCase() })}
-                    className={`py-2.5 rounded-lg border text-sm font-medium transition-all ${
-                      config.orientacion_vistas === v.toLowerCase()
-                        ? "bg-ldb-forest text-white border-ldb-forest"
-                        : "bg-white text-ldb-dark border-ldb-stone/40 hover:border-ldb-moss"
-                    }`}
-                  >
-                    {v}
-                  </button>
-                ))}
-              </div>
+        <div style={card}>
+          <div style={sectionTitle}><span>🌲</span> Exterior y bosque</div>
+          <div style={{marginBottom:"20px"}}>
+            <label style={{fontSize:"14px",fontWeight:500,color:"#1A1F14",display:"block",marginBottom:"10px"}}>Tipo de deck / terraza</label>
+            <div style={{display:"flex",flexDirection:"column" as const,gap:"8px"}}>
+              {normativa.tipos_deck.map((deck) => (
+                <button key={deck.id} onClick={() => setConfig({...config,deck_tipo:deck.id})}
+                  style={{...btnSelect(config.deck_tipo===deck.id),textAlign:"left" as const,padding:"12px"}}>
+                  <div style={{fontWeight:500,fontSize:"13px"}}>{deck.nombre}</div>
+                  <div style={{fontSize:"12px",color:config.deck_tipo===deck.id?"#8A9E6D":"#6B6B63"}}>{deck.descripcion}</div>
+                </button>
+              ))}
             </div>
           </div>
-        </SeccionCard>
+          <div style={{marginBottom:"20px"}}>
+            <label style={{fontSize:"14px",fontWeight:500,color:"#1A1F14",display:"block",marginBottom:"10px"}}>Relación con el bosque</label>
+            <div style={{display:"flex",flexDirection:"column" as const,gap:"8px"}}>
+              {normativa.relacion_bosque.map((rel) => (
+                <button key={rel.id} onClick={() => setConfig({...config,relacion_bosque:rel.id})}
+                  style={{...btnSelect(config.relacion_bosque===rel.id),textAlign:"left" as const,padding:"12px"}}>
+                  <div style={{fontWeight:500,fontSize:"13px"}}>{rel.nombre}</div>
+                  <div style={{fontSize:"12px",color:config.relacion_bosque===rel.id?"#8A9E6D":"#6B6B63"}}>{rel.descripcion}</div>
+                </button>
+              ))}
+            </div>
+          </div>
+          <div>
+            <label style={{fontSize:"14px",fontWeight:500,color:"#1A1F14",display:"block",marginBottom:"10px"}}>Orientación de vistas</label>
+            <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"8px"}}>
+              {["Bosque","Valle","Ciudad","Mixto"].map((v) => (
+                <button key={v} onClick={() => setConfig({...config,orientacion_vistas:v.toLowerCase()})} style={btnSelect(config.orientacion_vistas===v.toLowerCase())}>{v}</button>
+              ))}
+            </div>
+          </div>
+        </div>
 
-        {/* Alertas de validación */}
-        {(validacion.errores.length > 0 || validacion.advertencias.length > 0) && (
-          <div className="space-y-2 mb-6">
-            {validacion.errores.map((e, i) => (
-              <div key={i} className="flex gap-2 p-3 bg-red-50 border border-red-200 rounded-lg">
-                <span className="text-red-500 flex-shrink-0">✖</span>
-                <p className="text-sm text-red-700">{e}</p>
+        {(validacion.errores.length>0||validacion.advertencias.length>0||validacion.sugerencias.length>0) && (
+          <div style={{display:"flex",flexDirection:"column" as const,gap:"8px",marginBottom:"16px"}}>
+            {validacion.errores.map((e,i) => (
+              <div key={i} style={{display:"flex",gap:"8px",padding:"12px",backgroundColor:"#FCEBEB",border:"1px solid #F7C1C1",borderRadius:"8px"}}>
+                <span style={{color:"#A32D2D"}}>✖</span><p style={{fontSize:"13px",color:"#791F1F"}}>{e}</p>
               </div>
             ))}
-            {validacion.advertencias.map((w, i) => (
-              <div key={i} className="flex gap-2 p-3 bg-amber-50 border border-amber-200 rounded-lg">
-                <span className="text-amber-600 flex-shrink-0">⚠</span>
-                <p className="text-sm text-amber-800">{w}</p>
+            {validacion.advertencias.map((w,i) => (
+              <div key={i} style={{display:"flex",gap:"8px",padding:"12px",backgroundColor:"#FAEEDA",border:"1px solid #FAC775",borderRadius:"8px"}}>
+                <span style={{color:"#BA7517"}}>⚠</span><p style={{fontSize:"13px",color:"#633806"}}>{w}</p>
               </div>
             ))}
-            {validacion.sugerencias.map((s, i) => (
-              <div key={i} className="flex gap-2 p-3 bg-green-50 border border-green-200 rounded-lg">
-                <span className="text-green-600 flex-shrink-0">💡</span>
-                <p className="text-sm text-green-800">{s}</p>
+            {validacion.sugerencias.map((s,i) => (
+              <div key={i} style={{display:"flex",gap:"8px",padding:"12px",backgroundColor:"#EAF3DE",border:"1px solid #C0DD97",borderRadius:"8px"}}>
+                <span>💡</span><p style={{fontSize:"13px",color:"#3B6D11"}}>{s}</p>
               </div>
             ))}
           </div>
         )}
       </div>
 
-      {/* Botón continuar fijo */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-ldb-stone/20 p-4">
-        <div className="max-w-2xl mx-auto">
-          <button
-            onClick={() => onComplete(config)}
-            disabled={!validacion.valido}
-            className="w-full bg-ldb-forest text-white py-3.5 rounded-xl font-medium hover:bg-ldb-forest-mid transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
-          >
-            {validacion.valido ? "Generar mi concepto →" : "Corrige los errores para continuar"}
+      <div style={{position:"fixed",bottom:0,left:0,right:0,backgroundColor:"white",borderTop:"1px solid #E8DFC8",padding:"16px"}}>
+        <div style={{maxWidth:"680px",margin:"0 auto"}}>
+          <button onClick={() => onComplete(config)} disabled={!validacion.valido}
+            style={{width:"100%",backgroundColor:validacion.valido?"#2C3B1F":"#B5A894",color:"white",padding:"14px",borderRadius:"12px",fontWeight:500,cursor:validacion.valido?"pointer":"not-allowed",border:"none",fontSize:"15px"}}>
+            {validacion.valido?"Generar mi concepto →":"Corrige los errores para continuar"}
           </button>
         </div>
       </div>
     </div>
-  );
-}
-
-function SeccionCard({ titulo, icono, children }: { titulo: string; icono: string; children: React.ReactNode }) {
-  return (
-    <div className="bg-white rounded-2xl p-6 mb-4 border border-ldb-stone/20">
-      <div className="flex items-center gap-2 mb-5">
-        <span className="text-xl">{icono}</span>
-        <h3 className="font-serif text-lg text-ldb-dark">{titulo}</h3>
-      </div>
-      {children}
-    </div>
-  );
-}
-
-function ValidacionBadge({ valido, errores }: { valido: boolean; errores: number }) {
-  if (valido) return (
-    <span className="text-xs bg-green-100 text-green-700 px-2.5 py-1 rounded-full">✓ Cumple normativa</span>
-  );
-  return (
-    <span className="text-xs bg-red-100 text-red-700 px-2.5 py-1 rounded-full">{errores} error{errores > 1 ? "es" : ""}</span>
   );
 }
