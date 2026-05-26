@@ -1,195 +1,93 @@
 "use client";
-
-// COMPONENTE: LoteCard
-// Este componente muestra la tarjeta de un lote.
-// Se usa así: <LoteCard lote={lote22} onSelect={handleSelect} />
-// Cada vez que lo uses, muestra los datos del lote que le pases.
-
 import { Lote } from "../types";
 
-// Función auxiliar: convierte el tipo de topografía a texto y color legible
 function topoInfo(tipo: Lote["topo_tipo"]) {
   const map = {
-    plano: {
-      label: "Pendiente suave",
-      color: "bg-green-100 text-green-800",
-      icon: "▬",
-    },
-    medio: {
-      label: "Pendiente media",
-      color: "bg-amber-100 text-amber-800",
-      icon: "◥",
-    },
-    pronunciado: {
-      label: "Pendiente pronunciada",
-      color: "bg-red-100 text-red-800",
-      icon: "▲",
-    },
+    plano: { label: "Pendiente suave", bg: "#EAF3DE", color: "#3B6D11", icon: "▬" },
+    medio: { label: "Pendiente media", bg: "#FAEEDA", color: "#633806", icon: "◥" },
+    pronunciado: { label: "Pendiente pronunciada", bg: "#FCEBEB", color: "#A32D2D", icon: "▲" },
   };
   return map[tipo];
 }
 
-// Función auxiliar: formatea un número como precio en dólares
-// 738400 → "$738,400"
 function formatPrecio(n: number) {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    maximumFractionDigits: 0,
-  }).format(n);
+  return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(n);
 }
 
-// Las "props" son los datos que recibe el componente desde afuera.
-// onSelect es una función que se llama cuando el usuario hace clic en "Seleccionar".
 interface LoteCardProps {
   lote: Lote;
   seleccionado?: boolean;
   onSelect: (lote: Lote) => void;
 }
 
-export default function LoteCard({
-  lote,
-  seleccionado = false,
-  onSelect,
-}: LoteCardProps) {
+export default function LoteCard({ lote, seleccionado = false, onSelect }: LoteCardProps) {
   const topo = topoInfo(lote.topo_tipo);
 
-  // Si el lote no está disponible, mostramos una versión grisada
   if (!lote.disponible) {
     return (
-      <div className="border border-ldb-stone/30 rounded-xl p-5 bg-ldb-sand/30 opacity-50">
-        <div className="flex justify-between items-start mb-3">
-          <div>
-            <p className="text-xs font-medium text-ldb-warm-gray uppercase tracking-wider">
-              {lote.zona}
-            </p>
-            <h3 className="font-serif text-xl text-ldb-warm-gray">
-              Lote {lote.numero}
-            </h3>
-          </div>
-          <span className="bg-ldb-stone/30 text-ldb-warm-gray text-xs px-3 py-1 rounded-full">
-            Reservado
-          </span>
-        </div>
-        <p className="text-sm text-ldb-warm-gray">
-          {lote.area_m2.toLocaleString()} m²
-        </p>
+      <div style={{border:"1px solid #E8DFC8",borderRadius:"12px",padding:"20px",opacity:0.5,backgroundColor:"#F5F0E8"}}>
+        <p style={{fontSize:"11px",color:"#6B6B63",textTransform:"uppercase",letterSpacing:"0.1em"}}>{lote.zona}</p>
+        <h3 style={{fontFamily:"Georgia,serif",fontSize:"20px",color:"#6B6B63"}}>Lote {lote.numero}</h3>
+        <span style={{backgroundColor:"rgba(181,168,148,0.3)",color:"#6B6B63",fontSize:"11px",padding:"3px 10px",borderRadius:"20px"}}>Reservado</span>
       </div>
     );
   }
 
   return (
-    // El borde cambia a verde oscuro si este lote está seleccionado
-    <div
-      className={`
-        border rounded-xl p-5 cursor-pointer transition-all duration-200
-        hover:shadow-md hover:-translate-y-0.5
-        ${
-          seleccionado
-            ? "border-ldb-forest bg-ldb-forest/5 shadow-md"
-            : "border-ldb-stone/40 bg-white hover:border-ldb-moss"
-        }
-      `}
-      onClick={() => onSelect(lote)}
-    >
-      {/* CABECERA: zona + número + badge de topografía */}
-      <div className="flex justify-between items-start mb-4">
+    <div onClick={() => onSelect(lote)}
+      style={{border:seleccionado?"2px solid #2C3B1F":"1px solid #E8DFC8",borderRadius:"12px",padding:"20px",cursor:"pointer",backgroundColor:seleccionado?"rgba(44,59,31,0.04)":"white",transition:"all 0.2s",boxShadow:seleccionado?"0 4px 16px rgba(44,59,31,0.12)":"none"}}>
+
+      <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:"16px"}}>
         <div>
-          <p className="text-xs font-medium text-ldb-moss uppercase tracking-wider mb-1">
-            {lote.zona}
-          </p>
-          <h3 className="font-serif text-2xl font-semibold text-ldb-dark">
-            Lote {lote.numero}
-          </h3>
+          <p style={{fontSize:"10px",fontWeight:500,color:"#556B2F",textTransform:"uppercase",letterSpacing:"0.12em",marginBottom:"4px"}}>{lote.zona}</p>
+          <h3 style={{fontFamily:"Georgia,serif",fontSize:"22px",fontWeight:600,color:"#1A1F14"}}>Lote {lote.numero}</h3>
         </div>
-        <span
-          className={`text-xs px-2.5 py-1 rounded-full font-medium ${topo.color}`}
-        >
+        <span style={{backgroundColor:topo.bg,color:topo.color,fontSize:"11px",fontWeight:500,padding:"4px 10px",borderRadius:"20px",whiteSpace:"nowrap"}}>
           {topo.icon} {topo.label}
         </span>
       </div>
 
-      {/* MÉTRICAS PRINCIPALES en grid de 2 columnas */}
-      <div className="grid grid-cols-2 gap-3 mb-4">
-        <div className="bg-ldb-cream rounded-lg p-3">
-          <p className="text-xs text-ldb-warm-gray mb-0.5">Área total</p>
-          <p className="font-medium text-ldb-dark">
-            {lote.area_m2.toLocaleString()} m²
-          </p>
-          <p className="text-xs text-ldb-warm-gray">
-            {lote.area_varas2.toLocaleString()} vrs²
-          </p>
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"10px",marginBottom:"16px"}}>
+        <div style={{backgroundColor:"#F5F0E8",borderRadius:"8px",padding:"12px"}}>
+          <p style={{fontSize:"11px",color:"#6B6B63",marginBottom:"2px"}}>Área total</p>
+          <p style={{fontWeight:500,color:"#1A1F14",fontSize:"15px"}}>{lote.area_m2.toLocaleString()} m²</p>
+          <p style={{fontSize:"11px",color:"#6B6B63"}}>{lote.area_varas2.toLocaleString()} vrs²</p>
         </div>
-        <div className="bg-ldb-cream rounded-lg p-3">
-          <p className="text-xs text-ldb-warm-gray mb-0.5">Desde</p>
-          <p className="font-medium text-ldb-dark">
-            {formatPrecio(lote.precio_total_usd)}
-          </p>
-          <p className="text-xs text-ldb-warm-gray">
-            ${lote.precio_vara2_usd}/vara²
-          </p>
+        <div style={{backgroundColor:"#F5F0E8",borderRadius:"8px",padding:"12px"}}>
+          <p style={{fontSize:"11px",color:"#6B6B63",marginBottom:"2px"}}>Desde</p>
+          <p style={{fontWeight:500,color:"#1A1F14",fontSize:"15px"}}>{formatPrecio(lote.precio_total_usd)}</p>
+          <p style={{fontSize:"11px",color:"#6B6B63"}}>${lote.precio_vara2_usd}/vara²</p>
         </div>
       </div>
 
-      {/* DATOS TOPOGRÁFICOS — los más importantes para el configurador */}
-      <div className="border-t border-ldb-stone/20 pt-4 mb-4">
-        <p className="text-xs font-medium text-ldb-warm-gray uppercase tracking-wider mb-2">
-          Topografía
-        </p>
-        <div className="grid grid-cols-3 gap-2 text-center">
+      <div style={{borderTop:"1px solid #E8DFC8",paddingTop:"14px",marginBottom:"14px"}}>
+        <p style={{fontSize:"10px",fontWeight:500,color:"#6B6B63",textTransform:"uppercase",letterSpacing:"0.08em",marginBottom:"10px"}}>Topografía</p>
+        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",textAlign:"center",gap:"4px"}}>
           <div>
-            <p className="text-sm font-medium text-ldb-dark">
-              {lote.frente_m}m
-            </p>
-            <p className="text-xs text-ldb-warm-gray">Frente</p>
+            <p style={{fontSize:"14px",fontWeight:500,color:"#1A1F14"}}>{lote.frente_m}m</p>
+            <p style={{fontSize:"11px",color:"#6B6B63"}}>Frente</p>
           </div>
           <div>
-            <p className="text-sm font-medium text-ldb-dark">
-              {lote.fondo_promedio_m}m
-            </p>
-            <p className="text-xs text-ldb-warm-gray">Fondo</p>
+            <p style={{fontSize:"14px",fontWeight:500,color:"#1A1F14"}}>{lote.fondo_promedio_m}m</p>
+            <p style={{fontSize:"11px",color:"#6B6B63"}}>Fondo</p>
           </div>
           <div>
-            <p
-              className={`text-sm font-medium ${lote.dif_nivel_m > 5 ? "text-amber-700" : "text-ldb-dark"}`}
-            >
-              {lote.dif_nivel_m}m
-            </p>
-            <p className="text-xs text-ldb-warm-gray">Dif. nivel</p>
+            <p style={{fontSize:"14px",fontWeight:500,color:lote.dif_nivel_m>5?"#BA7517":"#1A1F14"}}>{lote.dif_nivel_m}m</p>
+            <p style={{fontSize:"11px",color:"#6B6B63"}}>Dif. nivel</p>
           </div>
         </div>
       </div>
 
-      {/* DESCRIPCIÓN BREVE */}
-      <p className="text-xs text-ldb-warm-gray leading-relaxed mb-4 line-clamp-2">
-        {lote.descripcion_topo}
-      </p>
+      <p style={{fontSize:"12px",color:"#6B6B63",lineHeight:1.5,marginBottom:"14px"}}>{lote.descripcion_topo}</p>
 
-      {/* DATOS FINANCIEROS */}
-      <div className="flex items-center justify-between text-xs text-ldb-warm-gray border-t border-ldb-stone/20 pt-3">
+      <div style={{display:"flex",justifyContent:"space-between",fontSize:"11px",color:"#6B6B63",borderTop:"1px solid #E8DFC8",paddingTop:"10px",marginBottom:"14px"}}>
         <span>Enganche {lote.enganche_porcentaje}%</span>
-        <span>
-          {lote.cuotas_enganche} cuotas · ${lote.mantenimiento_mensual_usd}
-          /mes mant.
-        </span>
+        <span>{lote.cuotas_enganche} cuotas · ${lote.mantenimiento_mensual_usd}/mes mant.</span>
       </div>
 
-      {/* BOTÓN DE SELECCIÓN */}
-      <button
-        className={`
-          w-full mt-4 py-2.5 rounded-lg text-sm font-medium transition-all
-          ${
-            seleccionado
-              ? "bg-ldb-forest text-white"
-              : "bg-ldb-sand text-ldb-forest hover:bg-ldb-forest hover:text-white"
-          }
-        `}
-        onClick={(e) => {
-          e.stopPropagation(); // Evitar doble clic
-          onSelect(lote);
-        }}
-      >
-        {seleccionado ? "✓ Lote seleccionado" : "Seleccionar este lote"}
+      <button onClick={(e) => { e.stopPropagation(); onSelect(lote); }}
+        style={{width:"100%",padding:"10px",borderRadius:"10px",border:"none",backgroundColor:seleccionado?"#2C3B1F":"#E8DFC8",color:seleccionado?"white":"#2C3B1F",fontWeight:500,cursor:"pointer",fontSize:"14px",transition:"all 0.2s"}}>
+        {seleccionado?"✓ Lote seleccionado":"Seleccionar este lote"}
       </button>
     </div>
   );

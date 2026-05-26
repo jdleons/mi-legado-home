@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import { Lote, Lead, ConfiguracionCasa } from "../types";
 import { generarPrompt } from "../utils/validador";
@@ -17,13 +16,12 @@ export default function ResumenFinal({ lote, configuracion, lead, onReset }: Pro
   const normativa = normativaData as typeof normativaData;
 
   const prompt = generarPrompt(
-    configuracion,
-    lote,
-    normativa.materiales_exteriores as Array<{ id: string; prompt_keyword: string }>,
-    normativa.estilos_permitidos as Array<{ id: string; prompt_descriptor: string }>,
+    configuracion, lote,
+    normativa.materiales_exteriores as Array<{id:string;prompt_keyword:string}>,
+    normativa.estilos_permitidos as Array<{id:string;prompt_descriptor:string}>,
     normativa.topo_descriptores,
-    normativa.relacion_bosque as Array<{ id: string; prompt_keyword: string }>,
-    normativa.tipos_deck as Array<{ id: string; prompt_keyword: string }>
+    normativa.relacion_bosque as Array<{id:string;prompt_keyword:string}>,
+    normativa.tipos_deck as Array<{id:string;prompt_keyword:string}>
   );
 
   const copiarPrompt = () => {
@@ -33,168 +31,105 @@ export default function ResumenFinal({ lote, configuracion, lead, onReset }: Pro
     });
   };
 
-  // Datos calculados
-  const nombreEstilo = normativa.estilos_permitidos.find((e) => e.id === configuracion.estilo)?.nombre || "";
-  const nombreMateriales = configuracion.materiales
-    .map((m) => normativa.materiales_exteriores.find((mat) => mat.id === m)?.nombre)
-    .filter(Boolean).join(", ");
-  const nombreDeck = normativa.tipos_deck.find((d) => d.id === configuracion.deck_tipo)?.nombre || "";
-  const nombreBosque = normativa.relacion_bosque.find((r) => r.id === configuracion.relacion_bosque)?.nombre || "";
+  const nombreEstilo = normativa.estilos_permitidos.find((e) => e.id===configuracion.estilo)?.nombre||"";
+  const nombreMateriales = configuracion.materiales.map((m) => normativa.materiales_exteriores.find((mat) => mat.id===m)?.nombre).filter(Boolean).join(", ");
+  const nombreDeck = normativa.tipos_deck.find((d) => d.id===configuracion.deck_tipo)?.nombre||"";
+  const nombreBosque = normativa.relacion_bosque.find((r) => r.id===configuracion.relacion_bosque)?.nombre||"";
 
   return (
-    <div className="min-h-screen bg-ldb-cream">
-      <header className="bg-ldb-forest px-6 py-4 flex items-center justify-between">
-        <span className="font-serif text-lg text-white">Mi Legado</span>
-        <span className="text-ldb-sage text-xs border border-ldb-sage/30 px-3 py-1 rounded-full">
-          Visualización conceptual
-        </span>
+    <div style={{minHeight:"100vh",backgroundColor:"#F5F0E8"}}>
+      <header style={{backgroundColor:"#2C3B1F",padding:"14px 24px",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
+        <span style={{fontFamily:"Georgia,serif",fontSize:"18px",color:"white"}}>Mi Legado</span>
+        <span style={{color:"#8A9E6D",fontSize:"12px",border:"1px solid rgba(138,158,109,0.3)",padding:"4px 12px",borderRadius:"20px"}}>Visualización conceptual</span>
       </header>
 
-      <div className="max-w-2xl mx-auto px-4 py-8">
-        <div className="mb-6">
-          <p className="text-ldb-moss text-xs font-medium uppercase tracking-wider mb-2">Paso 3 de 3 · Tu concepto</p>
-          <h2 className="font-serif text-3xl text-ldb-dark mb-1">
-            {lead.nombre.split(" ")[0]}, aquí está tu visión
-          </h2>
-          <p className="text-ldb-warm-gray text-sm">
-            Resumen de tu casa conceptual en {lote.nombre}
-          </p>
-        </div>
+      <div style={{maxWidth:"680px",margin:"0 auto",padding:"32px 16px"}}>
+        <p style={{color:"#556B2F",fontSize:"11px",fontWeight:500,textTransform:"uppercase",letterSpacing:"0.1em",marginBottom:"8px"}}>Paso 3 de 3 · Tu concepto</p>
+        <h2 style={{fontFamily:"Georgia,serif",fontSize:"32px",color:"#1A1F14",marginBottom:"4px"}}>
+          {lead.nombre.split(" ")[0]}, aquí está tu visión
+        </h2>
+        <p style={{color:"#6B6B63",fontSize:"14px",marginBottom:"24px"}}>Resumen de tu casa conceptual en {lote.nombre}</p>
 
-        {/* Tarjeta resumen de la casa */}
-        <div className="bg-white rounded-2xl border border-ldb-stone/20 overflow-hidden mb-6">
-          {/* Header visual */}
-          <div className="bg-ldb-forest p-6">
-            <p className="text-ldb-sage text-xs uppercase tracking-wider mb-1">{lote.zona}</p>
-            <h3 className="font-serif text-2xl text-white font-semibold mb-1">{lote.nombre}</h3>
-            <p className="text-ldb-sage text-sm">{nombreEstilo}</p>
+        <div style={{backgroundColor:"white",border:"1px solid #E8DFC8",borderRadius:"16px",overflow:"hidden",marginBottom:"16px"}}>
+          <div style={{backgroundColor:"#2C3B1F",padding:"24px"}}>
+            <p style={{color:"#8A9E6D",fontSize:"11px",textTransform:"uppercase",letterSpacing:"0.1em",marginBottom:"4px"}}>{lote.zona}</p>
+            <h3 style={{fontFamily:"Georgia,serif",fontSize:"24px",color:"white",fontWeight:600,marginBottom:"4px"}}>{lote.nombre}</h3>
+            <p style={{color:"#8A9E6D",fontSize:"14px"}}>{nombreEstilo}</p>
           </div>
-
-          {/* Métricas */}
-          <div className="grid grid-cols-3 divide-x divide-ldb-stone/20 border-b border-ldb-stone/20">
-            <div className="p-4 text-center">
-              <p className="font-serif text-2xl text-ldb-dark">{configuracion.area_m2}</p>
-              <p className="text-xs text-ldb-warm-gray">m² construidos</p>
-            </div>
-            <div className="p-4 text-center">
-              <p className="font-serif text-2xl text-ldb-dark">{configuracion.niveles}</p>
-              <p className="text-xs text-ldb-warm-gray">nivel{configuracion.niveles > 1 ? "es" : ""}</p>
-            </div>
-            <div className="p-4 text-center">
-              <p className="font-serif text-2xl text-ldb-dark">{configuracion.habitaciones}</p>
-              <p className="text-xs text-ldb-warm-gray">habitaciones</p>
-            </div>
+          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",borderBottom:"1px solid #E8DFC8"}}>
+            {[{n:configuracion.area_m2,l:"m² construidos"},{n:configuracion.niveles,l:`nivel${configuracion.niveles>1?"es":""}`},{n:configuracion.habitaciones,l:"habitaciones"}].map(({n,l}) => (
+              <div key={l} style={{padding:"20px",textAlign:"center",borderRight:"1px solid #E8DFC8"}}>
+                <p style={{fontFamily:"Georgia,serif",fontSize:"28px",color:"#1A1F14"}}>{n}</p>
+                <p style={{fontSize:"12px",color:"#6B6B63"}}>{l}</p>
+              </div>
+            ))}
           </div>
-
-          {/* Detalles */}
-          <div className="p-6 space-y-3">
-            <DetalleRow label="Lote" valor={`${lote.area_m2} m² · ${lote.topo_tipo}`} />
-            <DetalleRow label="Topografía" valor={`${lote.dif_nivel_m}m de desnivel · acceso al ${lote.orientacion_calle}`} />
-            <DetalleRow label="Materiales" valor={nombreMateriales} />
-            <DetalleRow label="Deck / terraza" valor={nombreDeck} />
-            <DetalleRow label="Relación bosque" valor={nombreBosque} />
-            <DetalleRow label="Vistas" valor={configuracion.orientacion_vistas} />
-            <DetalleRow label="Parqueos" valor={`${configuracion.parqueos} cubierto${configuracion.parqueos > 1 ? "s" : ""}`} />
-            {(configuracion.tiene_estudio || configuracion.tiene_visitas || configuracion.tiene_servicio) && (
-              <DetalleRow
-                label="Extras"
-                valor={[
-                  configuracion.tiene_estudio && "Estudio",
-                  configuracion.tiene_visitas && "Cuarto de visitas",
-                  configuracion.tiene_servicio && "Área de servicio",
-                ].filter(Boolean).join(" · ")}
-              />
-            )}
+          <div style={{padding:"24px"}}>
+            {[
+              {l:"Lote",v:`${lote.area_m2} m² · ${lote.topo_tipo}`},
+              {l:"Topografía",v:`${lote.dif_nivel_m}m de desnivel · acceso al ${lote.orientacion_calle}`},
+              {l:"Materiales",v:nombreMateriales},
+              {l:"Deck / terraza",v:nombreDeck},
+              {l:"Relación bosque",v:nombreBosque},
+              {l:"Vistas",v:configuracion.orientacion_vistas},
+              {l:"Parqueos",v:`${configuracion.parqueos} cubierto${configuracion.parqueos>1?"s":""}`},
+            ].map(({l,v}) => (
+              <div key={l} style={{display:"flex",gap:"12px",fontSize:"14px",paddingBottom:"10px",borderBottom:"1px solid #F5F0E8"}}>
+                <span style={{color:"#6B6B63",minWidth:"120px",flexShrink:0}}>{l}</span>
+                <span style={{color:"#1A1F14",fontWeight:500,textTransform:"capitalize"}}>{v}</span>
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* PROMPT DE IMAGEN */}
-        <div className="bg-white rounded-2xl border border-ldb-stone/20 p-6 mb-6">
-          <div className="flex items-start justify-between mb-4">
-            <div>
-              <h3 className="font-serif text-xl text-ldb-dark mb-1">Prompt para generar tu render</h3>
-              <p className="text-sm text-ldb-warm-gray">
-                Copia este texto y pégalo en ChatGPT, Gemini, Midjourney o DALL·E para generar un render conceptual de tu casa.
-              </p>
-            </div>
-          </div>
+        <div style={{backgroundColor:"white",border:"1px solid #E8DFC8",borderRadius:"16px",padding:"24px",marginBottom:"16px"}}>
+          <h3 style={{fontFamily:"Georgia,serif",fontSize:"20px",color:"#1A1F14",marginBottom:"4px"}}>Prompt para generar tu render</h3>
+          <p style={{fontSize:"13px",color:"#6B6B63",marginBottom:"16px"}}>Copia este texto y pégalo en ChatGPT, Gemini, Midjourney o DALL·E para generar un render conceptual de tu casa.</p>
 
-          {/* Cajas de herramientas */}
-          <div className="flex gap-2 mb-4 flex-wrap">
-            <a
-              href={`https://chat.openai.com/?q=${encodeURIComponent("Generate an architectural render based on this prompt:\n\n" + prompt)}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-xs bg-ldb-sand border border-ldb-stone/40 text-ldb-dark px-3 py-1.5 rounded-lg hover:bg-ldb-stone/20 transition-colors"
-            >
+          <div style={{display:"flex",gap:"8px",marginBottom:"16px",flexWrap:"wrap"}}>
+            <a href={`https://chat.openai.com/?q=${encodeURIComponent("Generate an architectural render:\n\n"+prompt)}`}
+              target="_blank" rel="noopener noreferrer"
+              style={{fontSize:"12px",backgroundColor:"#F5F0E8",border:"1px solid #E8DFC8",color:"#1A1F14",padding:"6px 14px",borderRadius:"8px",textDecoration:"none"}}>
               Abrir en ChatGPT ↗
             </a>
-            <a
-              href={`https://gemini.google.com/app?q=${encodeURIComponent(prompt)}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-xs bg-ldb-sand border border-ldb-stone/40 text-ldb-dark px-3 py-1.5 rounded-lg hover:bg-ldb-stone/20 transition-colors"
-            >
+            <a href={`https://gemini.google.com/app?q=${encodeURIComponent(prompt)}`}
+              target="_blank" rel="noopener noreferrer"
+              style={{fontSize:"12px",backgroundColor:"#F5F0E8",border:"1px solid #E8DFC8",color:"#1A1F14",padding:"6px 14px",borderRadius:"8px",textDecoration:"none"}}>
               Abrir en Gemini ↗
             </a>
           </div>
 
-          {/* El prompt */}
-          <div className="bg-ldb-dark rounded-xl p-4 font-mono text-xs text-green-300 leading-relaxed whitespace-pre-wrap max-h-48 overflow-y-auto mb-4">
+          <div style={{backgroundColor:"#1A1F14",borderRadius:"10px",padding:"16px",fontFamily:"monospace",fontSize:"11px",color:"#86efac",lineHeight:1.8,whiteSpace:"pre-wrap",maxHeight:"200px",overflow:"auto",marginBottom:"16px"}}>
             {prompt}
           </div>
 
-          <button
-            onClick={copiarPrompt}
-            className={`w-full py-3 rounded-xl font-medium text-sm transition-all ${
-              promptCopiado
-                ? "bg-green-100 text-green-700 border border-green-200"
-                : "bg-ldb-forest text-white hover:bg-ldb-forest-mid"
-            }`}
-          >
-            {promptCopiado ? "✓ Prompt copiado al portapapeles" : "Copiar prompt completo"}
+          <button onClick={copiarPrompt}
+            style={{width:"100%",padding:"12px",borderRadius:"10px",border:"none",backgroundColor:promptCopiado?"#EAF3DE":"#2C3B1F",color:promptCopiado?"#3B6D11":"white",fontWeight:500,cursor:"pointer",fontSize:"14px",transition:"all 0.2s"}}>
+            {promptCopiado?"✓ Prompt copiado al portapapeles":"Copiar prompt completo"}
           </button>
         </div>
 
-        {/* Disclaimer */}
-        <div className="bg-ldb-sand border border-ldb-stone/30 rounded-xl p-4 mb-6">
-          <p className="text-xs font-medium text-ldb-dark mb-1">Nota importante</p>
-          <p className="text-xs text-ldb-warm-gray leading-relaxed">{normativa.disclaimer}</p>
+        <div style={{backgroundColor:"#F5F0E8",border:"1px solid #B5A894",borderRadius:"12px",padding:"16px",marginBottom:"16px"}}>
+          <p style={{fontSize:"12px",fontWeight:500,color:"#1A1F14",marginBottom:"4px"}}>Nota importante</p>
+          <p style={{fontSize:"12px",color:"#6B6B63",lineHeight:1.6}}>{normativa.disclaimer}</p>
         </div>
 
-        {/* CTA Ventas */}
-        <div className="bg-ldb-forest rounded-2xl p-6 text-center">
-          <p className="font-serif text-xl text-white mb-2">¿Listo para dar el siguiente paso?</p>
-          <p className="text-ldb-sage text-sm mb-5">
-            Tu asesor de Legado del Bosque puede mostrarte el lote en persona y conectarte con el equipo de arquitectura.
-          </p>
-          <a
-            href="https://wa.me/50200000000?text=Hola%2C%20generé%20mi%20concepto%20de%20casa%20en%20Mi%20Legado%20y%20quisiera%20agendar%20una%20visita."
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-white text-ldb-forest font-semibold px-8 py-3 rounded-xl hover:bg-ldb-cream transition-colors text-sm"
-          >
+        <div style={{backgroundColor:"#2C3B1F",borderRadius:"16px",padding:"32px",textAlign:"center"}}>
+          <p style={{fontFamily:"Georgia,serif",fontSize:"22px",color:"white",marginBottom:"8px"}}>¿Listo para dar el siguiente paso?</p>
+          <p style={{color:"#8A9E6D",fontSize:"14px",marginBottom:"24px"}}>Tu asesor de Legado del Bosque puede mostrarte el lote en persona y conectarte con el equipo de arquitectura.</p>
+          <a href="https://wa.me/50200000000?text=Hola%2C%20generé%20mi%20concepto%20en%20Mi%20Legado%20y%20quisiera%20agendar%20una%20visita."
+            target="_blank" rel="noopener noreferrer"
+            style={{display:"inline-block",backgroundColor:"white",color:"#2C3B1F",fontWeight:600,padding:"12px 32px",borderRadius:"12px",textDecoration:"none",fontSize:"14px"}}>
             Agendar visita con mi asesor →
           </a>
-          <p className="text-ldb-sage/60 text-xs mt-3">Mariangel Ruiz · mruiz@legado.gt</p>
+          <p style={{color:"rgba(138,158,109,0.6)",fontSize:"12px",marginTop:"12px"}}>Mariangel Ruiz · mruiz@legado.gt</p>
         </div>
 
-        <button
-          onClick={onReset}
-          className="w-full mt-4 py-3 text-sm text-ldb-warm-gray hover:text-ldb-dark transition-colors"
-        >
+        <button onClick={onReset}
+          style={{width:"100%",marginTop:"16px",padding:"12px",fontSize:"14px",color:"#6B6B63",background:"none",border:"none",cursor:"pointer"}}>
           ← Comenzar una nueva configuración
         </button>
       </div>
-    </div>
-  );
-}
-
-function DetalleRow({ label, valor }: { label: string; valor: string }) {
-  return (
-    <div className="flex items-start gap-3 text-sm">
-      <span className="text-ldb-warm-gray min-w-24 flex-shrink-0">{label}</span>
-      <span className="text-ldb-dark font-medium capitalize">{valor}</span>
     </div>
   );
 }
