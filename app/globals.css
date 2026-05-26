@@ -1,3 +1,45 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --forest: #2C3B1F;
+  --forest-mid: #3D5428;
+  --moss: #556B2F;
+  --sage: #8A9E6D;
+  --stone: #B5A894;
+  --sand: #E8DFC8;
+  --cream: #F5F0E8;
+  --dark: #1A1F14;
+  --warm-gray: #6B6B63;
+}
+
+body {
+  background-color: #F5F0E8;
+  color: #1A1F14;
+  font-family: 'DM Sans', system-ui, sans-serif;
+}
+
+.bg-ldb-forest { background-color: #2C3B1F !important; }
+.bg-ldb-forest-mid { background-color: #3D5428 !important; }
+.bg-ldb-moss { background-color: #556B2F !important; }
+.bg-ldb-sage { background-color: #8A9E6D !important; }
+.bg-ldb-stone { background-color: #B5A894 !important; }
+.bg-ldb-sand { background-color: #E8DFC8 !important; }
+.bg-ldb-cream { background-color: #F5F0E8 !important; }
+.bg-ldb-dark { background-color: #1A1F14 !important; }
+
+.text-ldb-forest { color: #2C3B1F !important; }
+.text-ldb-moss { color: #556B2F !important; }
+.text-ldb-sage { color: #8A9E6D !important; }
+.text-ldb-stone { color: #B5A894 !important; }
+.text-ldb-dark { color: #1A1F14 !important; }
+.text-ldb-warm-gray { color: #6B6B63 !important; }
+
+.border-ldb-forest { border-color: #2C3B1F !important; }
+.border-ldb-moss { border-color: #556B2F !important; }
+.border-ldb-stone { border-color: #B5A894 !important; }
+.border-ldb-sage { border-color: #8A9E6D !important; }
+
+.font-serif { font-family: 'Cormorant Garamond', Georgia, serif !important; }
+.font-sans { font-family: 'DM Sans', system-ui, sans-serif !important; }
