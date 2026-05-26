@@ -12,11 +12,41 @@ interface Props {
   onBack: () => void;
 }
 
+const ESTILOS_IMAGENES: Record<string, string> = {
+  "contemporaneo-bosque": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80",
+  "organico-natural": "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=600&q=80",
+  "industrial-natural": "https://images.unsplash.com/photo-1565182999561-18d7dc61c393?w=600&q=80",
+  "minimalista-calido": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&q=80",
+};
+
+const MATERIALES_IMAGENES: Record<string, string> = {
+  "concreto-expuesto": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80",
+  "madera-natural": "https://images.unsplash.com/photo-1449844908441-8829872d2607?w=400&q=80",
+  "piedra-volcanica": "https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=400&q=80",
+  "vidrio-negro": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=400&q=80",
+  "acero-corten": "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=400&q=80",
+  "porcelana-gran-formato": "https://images.unsplash.com/photo-1615874959474-d609969a20ed?w=400&q=80",
+  "pintura-acento": "https://images.unsplash.com/photo-1589834390005-5d4fb9bf3d32?w=400&q=80",
+};
+
+const DECK_IMAGENES: Record<string, string> = {
+  "voladizo-bosque": "https://images.unsplash.com/photo-1600607687644-aac4c3eac7f4?w=500&q=80",
+  "nivel-jardin": "https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=500&q=80",
+  "semi-enterrado": "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=500&q=80",
+  "techo-habitable": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500&q=80",
+};
+
+const BOSQUE_IMAGENES: Record<string, string> = {
+  "integrado": "https://images.unsplash.com/photo-1448375240586-882707db888b?w=500&q=80",
+  "visual": "https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?w=500&q=80",
+  "protegido": "https://images.unsplash.com/photo-1440342359743-84fcb8c21f21?w=500&q=80",
+};
+
 export default function ConfiguradorForm({ lote, lead, onComplete, onBack }: Props) {
   const normativa = normativaData as typeof normativaData;
   const [config, setConfig] = useState<ConfiguracionCasa>({
     lote_id: lote.id, area_m2: 250, niveles: 2, habitaciones: 3,
-    estilo: "contemporaneo-bosque", materiales: ["concreto-expuesto","madera-natural"],
+    estilo: "contemporaneo-bosque", materiales: ["concreto-expuesto", "madera-natural"],
     deck_tipo: "voladizo-bosque", parqueos: 2, relacion_bosque: "visual",
     orientacion_vistas: "bosque", tiene_estudio: false, tiene_visitas: false, tiene_servicio: true,
   });
@@ -24,13 +54,14 @@ export default function ConfiguradorForm({ lote, lead, onComplete, onBack }: Pro
   const validacion: ValidacionResultado = validarConstruccion(config, lote);
   const huellaEstimada = Math.round(config.area_m2 / config.niveles);
   const toggleMaterial = (id: string) => {
-    setConfig((prev) => ({ ...prev, materiales: prev.materiales.includes(id) ? prev.materiales.filter((m) => m !== id) : [...prev.materiales, id] }));
+    setConfig((prev) => ({
+      ...prev,
+      materiales: prev.materiales.includes(id)
+        ? prev.materiales.filter((m) => m !== id)
+        : [...prev.materiales, id],
+    }));
   };
   const materialesPermitidos = normativa.materiales_exteriores.filter((m) => m.permitido);
-
-  const card = { background:"white", border:"1px solid #E8DFC8", borderRadius:"16px", padding:"24px", marginBottom:"16px" };
-  const btnSelect = (sel:boolean) => ({ padding:"10px", borderRadius:"10px", border: sel?"none":"1px solid #B5A894", backgroundColor: sel?"#2C3B1F":"white", color: sel?"white":"#1A1F14", cursor:"pointer", fontSize:"13px", fontWeight:500 as const, transition:"all 0.2s" });
-  const sectionTitle = { fontFamily:"Georgia,serif", fontSize:"18px", color:"#1A1F14", marginBottom:"16px", display:"flex", alignItems:"center", gap:"8px" };
 
   return (
     <div style={{minHeight:"100vh",backgroundColor:"#F5F0E8",paddingBottom:"100px"}}>
@@ -38,34 +69,38 @@ export default function ConfiguradorForm({ lote, lead, onComplete, onBack }: Pro
         <div style={{display:"flex",alignItems:"center",gap:"12px"}}>
           <button onClick={onBack} style={{color:"#8A9E6D",background:"none",border:"none",cursor:"pointer",fontSize:"14px"}}>← Volver</button>
           <span style={{color:"rgba(255,255,255,0.3)"}}>|</span>
-          <span style={{fontFamily:"Georgia,serif",fontSize:"18px",color:"white"}}>Mi Legado</span>
+          <img src="/logo-isotipo.png" alt="LDB" style={{height:"32px",objectFit:"contain"}} />
         </div>
         <div style={{display:"flex",alignItems:"center",gap:"8px"}}>
           <span style={{color:"#8A9E6D",fontSize:"12px"}}>{lote.nombre}</span>
           <span style={{fontSize:"11px",padding:"3px 10px",borderRadius:"20px",backgroundColor:validacion.valido?"#EAF3DE":"#FCEBEB",color:validacion.valido?"#3B6D11":"#A32D2D"}}>
-            {validacion.valido?"✓ Cumple normativa":`${validacion.errores.length} error${validacion.errores.length>1?"es":""}`}
+            {validacion.valido ? "✓ Cumple normativa" : `${validacion.errores.length} error${validacion.errores.length > 1 ? "es" : ""}`}
           </span>
         </div>
       </header>
 
-      <div style={{maxWidth:"680px",margin:"0 auto",padding:"32px 16px"}}>
+      <div style={{maxWidth:"720px",margin:"0 auto",padding:"32px 16px"}}>
         <p style={{color:"#556B2F",fontSize:"11px",fontWeight:500,textTransform:"uppercase" as const,letterSpacing:"0.1em",marginBottom:"8px"}}>Paso 2 de 3 · Configurador</p>
         <h2 style={{fontFamily:"Georgia,serif",fontSize:"30px",color:"#1A1F14",marginBottom:"4px"}}>Diseña tu casa</h2>
         <p style={{color:"#6B6B63",fontSize:"14px",marginBottom:"24px"}}>Cada selección se valida en tiempo real contra la normativa de Legado del Bosque.</p>
 
-        <div style={{...card,backgroundColor:"rgba(44,59,31,0.05)",border:"1px solid rgba(44,59,31,0.2)"}}>
-          <p style={{fontSize:"11px",fontWeight:500,color:"#556B2F",textTransform:"uppercase" as const,letterSpacing:"0.1em",marginBottom:"4px"}}>Lote seleccionado</p>
-          <p style={{fontWeight:500,color:"#1A1F14"}}>{lote.nombre}</p>
-          <p style={{fontSize:"13px",color:"#6B6B63"}}>{lote.area_m2} m² · {lote.topo_tipo} · {lote.dif_nivel_m}m desnivel</p>
-          <p style={{fontSize:"12px",color:"#6B6B63",marginTop:"4px"}}>{lote.descripcion_topo}</p>
+        {/* Ficha lote */}
+        <div style={{background:"linear-gradient(135deg,#2C3B1F,#3D5428)",borderRadius:"16px",padding:"20px",marginBottom:"24px",display:"flex",gap:"16px",alignItems:"center"}}>
+          <img src="/foto-aerea.jpg" alt="Lote" style={{width:"80px",height:"80px",borderRadius:"10px",objectFit:"cover",flexShrink:0}} />
+          <div>
+            <p style={{fontSize:"11px",fontWeight:500,color:"#8A9E6D",textTransform:"uppercase" as const,letterSpacing:"0.1em",marginBottom:"2px"}}>{lote.zona}</p>
+            <p style={{fontWeight:600,color:"white",fontSize:"17px",marginBottom:"2px"}}>{lote.nombre}</p>
+            <p style={{fontSize:"13px",color:"rgba(255,255,255,0.6)"}}>{lote.area_m2} m² · {lote.topo_tipo} · {lote.dif_nivel_m}m desnivel</p>
+            <p style={{fontSize:"12px",color:"rgba(255,255,255,0.4)",marginTop:"4px"}}>{lote.descripcion_topo}</p>
+          </div>
         </div>
 
-        <div style={card}>
-          <div style={sectionTitle}><span>📐</span> Dimensiones</div>
+        {/* DIMENSIONES */}
+        <SeccionCard titulo="Dimensiones" icono="📐">
           <div style={{marginBottom:"20px"}}>
             <div style={{display:"flex",justifyContent:"space-between",alignItems:"baseline",marginBottom:"8px"}}>
               <label style={{fontSize:"14px",fontWeight:500,color:"#1A1F14"}}>Área construida total</label>
-              <span style={{fontFamily:"Georgia,serif",fontSize:"24px",color:"#2C3B1F"}}>{config.area_m2} m²</span>
+              <span style={{fontFamily:"Georgia,serif",fontSize:"28px",color:"#2C3B1F",fontWeight:600}}>{config.area_m2} m²</span>
             </div>
             <input type="range" min={150} max={500} step={10} value={config.area_m2}
               onChange={(e) => setConfig({...config,area_m2:Number(e.target.value)})}
@@ -76,10 +111,11 @@ export default function ConfiguradorForm({ lote, lead, onComplete, onBack }: Pro
             </div>
           </div>
           <div>
-            <label style={{fontSize:"14px",fontWeight:500,color:"#1A1F14",display:"block",marginBottom:"12px"}}>Número de niveles</label>
+            <label style={{fontSize:"14px",fontWeight:500,color:"#1A1F14",display:"block",marginBottom:"10px"}}>Número de niveles</label>
             <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:"8px",marginBottom:"12px"}}>
               {[1,2,3].map((n) => (
-                <button key={n} onClick={() => setConfig({...config,niveles:n as 1|2|3})} style={btnSelect(config.niveles===n)}>
+                <button key={n} onClick={() => setConfig({...config,niveles:n as 1|2|3})}
+                  style={{padding:"12px",borderRadius:"10px",border:config.niveles===n?"none":"1px solid #B5A894",backgroundColor:config.niveles===n?"#2C3B1F":"white",color:config.niveles===n?"white":"#1A1F14",cursor:"pointer",fontSize:"13px",fontWeight:500,transition:"all 0.2s"}}>
                   {n} nivel{n>1?"es":""}
                 </button>
               ))}
@@ -89,97 +125,152 @@ export default function ConfiguradorForm({ lote, lead, onComplete, onBack }: Pro
               {huellaEstimada>325?" — excede el límite de 325 m²":" — dentro del límite normativo"}
             </div>
           </div>
-        </div>
+        </SeccionCard>
 
-        <div style={card}>
-          <div style={sectionTitle}><span>🛏</span> Distribución</div>
+        {/* DISTRIBUCIÓN */}
+        <SeccionCard titulo="Distribución" icono="🛏">
           <div style={{marginBottom:"16px"}}>
             <label style={{fontSize:"14px",fontWeight:500,color:"#1A1F14",display:"block",marginBottom:"10px"}}>Habitaciones</label>
             <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr 1fr",gap:"8px"}}>
-              {[2,3,4,5].map((n) => <button key={n} onClick={() => setConfig({...config,habitaciones:n})} style={btnSelect(config.habitaciones===n)}>{n===5?"5+":n}</button>)}
+              {[2,3,4,5].map((n) => (
+                <button key={n} onClick={() => setConfig({...config,habitaciones:n})}
+                  style={{padding:"12px",borderRadius:"10px",border:config.habitaciones===n?"none":"1px solid #B5A894",backgroundColor:config.habitaciones===n?"#2C3B1F":"white",color:config.habitaciones===n?"white":"#1A1F14",cursor:"pointer",fontSize:"14px",fontWeight:500,transition:"all 0.2s"}}>
+                  {n===5?"5+":n}
+                </button>
+              ))}
             </div>
           </div>
           <div style={{marginBottom:"16px"}}>
             <label style={{fontSize:"14px",fontWeight:500,color:"#1A1F14",display:"block",marginBottom:"10px"}}>Parqueos</label>
             <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:"8px"}}>
-              {[1,2,3].map((n) => <button key={n} onClick={() => setConfig({...config,parqueos:n})} style={btnSelect(config.parqueos===n)}>{n} auto{n>1?"s":""}</button>)}
-            </div>
-          </div>
-          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:"8px"}}>
-            {[{key:"tiene_estudio",label:"Estudio"},{key:"tiene_visitas",label:"Visitas"},{key:"tiene_servicio",label:"Servicio"}].map(({key,label}) => (
-              <button key={key} onClick={() => setConfig({...config,[key]:!config[key as keyof ConfiguracionCasa]})}
-                style={{...btnSelect(!!config[key as keyof ConfiguracionCasa]),fontSize:"12px",textAlign:"left" as const}}>
-                {config[key as keyof ConfiguracionCasa]?"✓ ":""}{label}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div style={card}>
-          <div style={sectionTitle}><span>🏛</span> Estilo arquitectónico</div>
-          <div style={{display:"flex",flexDirection:"column" as const,gap:"8px"}}>
-            {normativa.estilos_permitidos.map((estilo) => (
-              <button key={estilo.id} onClick={() => setConfig({...config,estilo:estilo.id})}
-                style={{...btnSelect(config.estilo===estilo.id),textAlign:"left" as const,padding:"14px"}}>
-                <div style={{fontWeight:500,fontSize:"14px"}}>{estilo.nombre}</div>
-                <div style={{fontSize:"12px",marginTop:"2px",color:config.estilo===estilo.id?"#8A9E6D":"#6B6B63"}}>{estilo.descripcion}</div>
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div style={card}>
-          <div style={sectionTitle}><span>🪨</span> Materiales exteriores</div>
-          <div style={{display:"flex",flexDirection:"column" as const,gap:"8px"}}>
-            {materialesPermitidos.map((mat) => (
-              <button key={mat.id} onClick={() => toggleMaterial(mat.id)}
-                style={{display:"flex",gap:"10px",alignItems:"flex-start",padding:"12px",borderRadius:"8px",border:config.materiales.includes(mat.id)?"1px solid rgba(44,59,31,0.4)":"1px solid #B5A894",backgroundColor:config.materiales.includes(mat.id)?"rgba(44,59,31,0.08)":"white",cursor:"pointer",textAlign:"left" as const}}>
-                <span style={{fontSize:"16px",marginTop:"1px"}}>{config.materiales.includes(mat.id)?"☑":"☐"}</span>
-                <div>
-                  <div style={{fontSize:"13px",fontWeight:500,color:"#1A1F14"}}>{mat.nombre}</div>
-                  <div style={{fontSize:"12px",color:"#6B6B63",lineHeight:1.5}}>{mat.descripcion}</div>
-                </div>
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div style={card}>
-          <div style={sectionTitle}><span>🌲</span> Exterior y bosque</div>
-          <div style={{marginBottom:"20px"}}>
-            <label style={{fontSize:"14px",fontWeight:500,color:"#1A1F14",display:"block",marginBottom:"10px"}}>Tipo de deck / terraza</label>
-            <div style={{display:"flex",flexDirection:"column" as const,gap:"8px"}}>
-              {normativa.tipos_deck.map((deck) => (
-                <button key={deck.id} onClick={() => setConfig({...config,deck_tipo:deck.id})}
-                  style={{...btnSelect(config.deck_tipo===deck.id),textAlign:"left" as const,padding:"12px"}}>
-                  <div style={{fontWeight:500,fontSize:"13px"}}>{deck.nombre}</div>
-                  <div style={{fontSize:"12px",color:config.deck_tipo===deck.id?"#8A9E6D":"#6B6B63"}}>{deck.descripcion}</div>
-                </button>
-              ))}
-            </div>
-          </div>
-          <div style={{marginBottom:"20px"}}>
-            <label style={{fontSize:"14px",fontWeight:500,color:"#1A1F14",display:"block",marginBottom:"10px"}}>Relación con el bosque</label>
-            <div style={{display:"flex",flexDirection:"column" as const,gap:"8px"}}>
-              {normativa.relacion_bosque.map((rel) => (
-                <button key={rel.id} onClick={() => setConfig({...config,relacion_bosque:rel.id})}
-                  style={{...btnSelect(config.relacion_bosque===rel.id),textAlign:"left" as const,padding:"12px"}}>
-                  <div style={{fontWeight:500,fontSize:"13px"}}>{rel.nombre}</div>
-                  <div style={{fontSize:"12px",color:config.relacion_bosque===rel.id?"#8A9E6D":"#6B6B63"}}>{rel.descripcion}</div>
+              {[1,2,3].map((n) => (
+                <button key={n} onClick={() => setConfig({...config,parqueos:n})}
+                  style={{padding:"12px",borderRadius:"10px",border:config.parqueos===n?"none":"1px solid #B5A894",backgroundColor:config.parqueos===n?"#2C3B1F":"white",color:config.parqueos===n?"white":"#1A1F14",cursor:"pointer",fontSize:"13px",fontWeight:500,transition:"all 0.2s"}}>
+                  {n} auto{n>1?"s":""}
                 </button>
               ))}
             </div>
           </div>
           <div>
-            <label style={{fontSize:"14px",fontWeight:500,color:"#1A1F14",display:"block",marginBottom:"10px"}}>Orientación de vistas</label>
-            <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"8px"}}>
-              {["Bosque","Valle","Ciudad","Mixto"].map((v) => (
-                <button key={v} onClick={() => setConfig({...config,orientacion_vistas:v.toLowerCase()})} style={btnSelect(config.orientacion_vistas===v.toLowerCase())}>{v}</button>
+            <label style={{fontSize:"14px",fontWeight:500,color:"#1A1F14",display:"block",marginBottom:"10px"}}>Espacios adicionales</label>
+            <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:"8px"}}>
+              {[{key:"tiene_estudio",label:"Estudio",icon:"💻"},{key:"tiene_visitas",label:"Visitas",icon:"🛏"},{key:"tiene_servicio",label:"Servicio",icon:"🏠"}].map(({key,label,icon}) => (
+                <button key={key} onClick={() => setConfig({...config,[key]:!config[key as keyof ConfiguracionCasa]})}
+                  style={{padding:"12px 8px",borderRadius:"10px",border:config[key as keyof ConfiguracionCasa]?"none":"1px solid #B5A894",backgroundColor:config[key as keyof ConfiguracionCasa]?"#2C3B1F":"white",color:config[key as keyof ConfiguracionCasa]?"white":"#1A1F14",cursor:"pointer",fontSize:"12px",fontWeight:500,transition:"all 0.2s",textAlign:"center" as const}}>
+                  <div style={{fontSize:"20px",marginBottom:"4px"}}>{icon}</div>
+                  {config[key as keyof ConfiguracionCasa]?"✓ ":""}{label}
+                </button>
               ))}
             </div>
           </div>
-        </div>
+        </SeccionCard>
 
+        {/* ESTILO ARQUITECTÓNICO - con imágenes */}
+        <SeccionCard titulo="Estilo arquitectónico" icono="🏛">
+          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"12px"}}>
+            {normativa.estilos_permitidos.map((estilo) => (
+              <button key={estilo.id} onClick={() => setConfig({...config,estilo:estilo.id})}
+                style={{borderRadius:"12px",border:config.estilo===estilo.id?"3px solid #2C3B1F":"1px solid #E8DFC8",overflow:"hidden",cursor:"pointer",textAlign:"left" as const,backgroundColor:"white",transition:"all 0.2s",boxShadow:config.estilo===estilo.id?"0 4px 16px rgba(44,59,31,0.2)":"none"}}>
+                <div style={{position:"relative",height:"120px",overflow:"hidden"}}>
+                  <img src={ESTILOS_IMAGENES[estilo.id]} alt={estilo.nombre}
+                    style={{width:"100%",height:"100%",objectFit:"cover",filter:config.estilo===estilo.id?"brightness(1)":"brightness(0.85)"}} />
+                  {config.estilo===estilo.id && (
+                    <div style={{position:"absolute",top:"8px",right:"8px",backgroundColor:"#2C3B1F",color:"white",width:"24px",height:"24px",borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"12px"}}>✓</div>
+                  )}
+                </div>
+                <div style={{padding:"10px 12px"}}>
+                  <p style={{fontSize:"13px",fontWeight:600,color:"#1A1F14",marginBottom:"2px"}}>{estilo.nombre}</p>
+                  <p style={{fontSize:"11px",color:"#6B6B63",lineHeight:1.4}}>{estilo.descripcion}</p>
+                </div>
+              </button>
+            ))}
+          </div>
+        </SeccionCard>
+
+        {/* MATERIALES - con imágenes */}
+        <SeccionCard titulo="Materiales exteriores" icono="🪨">
+          <p style={{fontSize:"12px",color:"#6B6B63",marginBottom:"14px"}}>Selecciona uno o más materiales. Solo materiales aprobados por la normativa de LDB.</p>
+          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"12px"}}>
+            {materialesPermitidos.map((mat) => {
+              const sel = config.materiales.includes(mat.id);
+              return (
+                <button key={mat.id} onClick={() => toggleMaterial(mat.id)}
+                  style={{borderRadius:"12px",border:sel?"3px solid #2C3B1F":"1px solid #E8DFC8",overflow:"hidden",cursor:"pointer",textAlign:"left" as const,backgroundColor:"white",transition:"all 0.2s",boxShadow:sel?"0 4px 16px rgba(44,59,31,0.2)":"none"}}>
+                  {MATERIALES_IMAGENES[mat.id] && (
+                    <div style={{position:"relative",height:"90px",overflow:"hidden"}}>
+                      <img src={MATERIALES_IMAGENES[mat.id]} alt={mat.nombre}
+                        style={{width:"100%",height:"100%",objectFit:"cover",filter:sel?"brightness(1)":"brightness(0.8)"}} />
+                      {sel && (
+                        <div style={{position:"absolute",top:"6px",right:"6px",backgroundColor:"#2C3B1F",color:"white",width:"20px",height:"20px",borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"10px"}}>✓</div>
+                      )}
+                    </div>
+                  )}
+                  <div style={{padding:"8px 10px"}}>
+                    <p style={{fontSize:"12px",fontWeight:600,color:"#1A1F14",marginBottom:"2px"}}>{mat.nombre}</p>
+                    <p style={{fontSize:"10px",color:"#6B6B63",lineHeight:1.4}}>{mat.descripcion}</p>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        </SeccionCard>
+
+        {/* DECK - con imágenes */}
+        <SeccionCard titulo="Deck y terraza" icono="🌿">
+          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"12px"}}>
+            {normativa.tipos_deck.map((deck) => (
+              <button key={deck.id} onClick={() => setConfig({...config,deck_tipo:deck.id})}
+                style={{borderRadius:"12px",border:config.deck_tipo===deck.id?"3px solid #2C3B1F":"1px solid #E8DFC8",overflow:"hidden",cursor:"pointer",textAlign:"left" as const,backgroundColor:"white",transition:"all 0.2s",boxShadow:config.deck_tipo===deck.id?"0 4px 16px rgba(44,59,31,0.2)":"none"}}>
+                <div style={{position:"relative",height:"100px",overflow:"hidden"}}>
+                  <img src={DECK_IMAGENES[deck.id]} alt={deck.nombre}
+                    style={{width:"100%",height:"100%",objectFit:"cover",filter:config.deck_tipo===deck.id?"brightness(1)":"brightness(0.8)"}} />
+                  {config.deck_tipo===deck.id && (
+                    <div style={{position:"absolute",top:"6px",right:"6px",backgroundColor:"#2C3B1F",color:"white",width:"20px",height:"20px",borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"10px"}}>✓</div>
+                  )}
+                </div>
+                <div style={{padding:"8px 10px"}}>
+                  <p style={{fontSize:"12px",fontWeight:600,color:"#1A1F14",marginBottom:"2px"}}>{deck.nombre}</p>
+                  <p style={{fontSize:"10px",color:"#6B6B63",lineHeight:1.4}}>{deck.descripcion}</p>
+                </div>
+              </button>
+            ))}
+          </div>
+        </SeccionCard>
+
+        {/* RELACIÓN CON EL BOSQUE - con imágenes */}
+        <SeccionCard titulo="Relación con el bosque" icono="🌲">
+          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:"10px",marginBottom:"20px"}}>
+            {normativa.relacion_bosque.map((rel) => (
+              <button key={rel.id} onClick={() => setConfig({...config,relacion_bosque:rel.id})}
+                style={{borderRadius:"12px",border:config.relacion_bosque===rel.id?"3px solid #2C3B1F":"1px solid #E8DFC8",overflow:"hidden",cursor:"pointer",textAlign:"left" as const,backgroundColor:"white",transition:"all 0.2s",boxShadow:config.relacion_bosque===rel.id?"0 4px 16px rgba(44,59,31,0.2)":"none"}}>
+                <div style={{position:"relative",height:"80px",overflow:"hidden"}}>
+                  <img src={BOSQUE_IMAGENES[rel.id]} alt={rel.nombre}
+                    style={{width:"100%",height:"100%",objectFit:"cover",filter:config.relacion_bosque===rel.id?"brightness(1)":"brightness(0.8)"}} />
+                  {config.relacion_bosque===rel.id && (
+                    <div style={{position:"absolute",top:"4px",right:"4px",backgroundColor:"#2C3B1F",color:"white",width:"18px",height:"18px",borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"9px"}}>✓</div>
+                  )}
+                </div>
+                <div style={{padding:"6px 8px"}}>
+                  <p style={{fontSize:"11px",fontWeight:600,color:"#1A1F14",lineHeight:1.3}}>{rel.nombre}</p>
+                </div>
+              </button>
+            ))}
+          </div>
+
+          <div>
+            <label style={{fontSize:"14px",fontWeight:500,color:"#1A1F14",display:"block",marginBottom:"10px"}}>Orientación de vistas</label>
+            <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"8px"}}>
+              {[{v:"bosque",l:"🌲 Bosque"},{v:"valle",l:"🏔 Valle"},{v:"ciudad",l:"🌆 Ciudad"},{v:"mixto",l:"🔭 Mixto"}].map(({v,l}) => (
+                <button key={v} onClick={() => setConfig({...config,orientacion_vistas:v})}
+                  style={{padding:"12px",borderRadius:"10px",border:config.orientacion_vistas===v?"none":"1px solid #B5A894",backgroundColor:config.orientacion_vistas===v?"#2C3B1F":"white",color:config.orientacion_vistas===v?"white":"#1A1F14",cursor:"pointer",fontSize:"13px",fontWeight:500,transition:"all 0.2s"}}>
+                  {l}
+                </button>
+              ))}
+            </div>
+          </div>
+        </SeccionCard>
+
+        {/* Alertas */}
         {(validacion.errores.length>0||validacion.advertencias.length>0||validacion.sugerencias.length>0) && (
           <div style={{display:"flex",flexDirection:"column" as const,gap:"8px",marginBottom:"16px"}}>
             {validacion.errores.map((e,i) => (
@@ -201,14 +292,27 @@ export default function ConfiguradorForm({ lote, lead, onComplete, onBack }: Pro
         )}
       </div>
 
-      <div style={{position:"fixed",bottom:0,left:0,right:0,backgroundColor:"white",borderTop:"1px solid #E8DFC8",padding:"16px"}}>
-        <div style={{maxWidth:"680px",margin:"0 auto"}}>
+      {/* Botón fijo */}
+      <div style={{position:"fixed",bottom:0,left:0,right:0,backgroundColor:"white",borderTop:"1px solid #E8DFC8",padding:"16px",boxShadow:"0 -4px 24px rgba(0,0,0,0.08)"}}>
+        <div style={{maxWidth:"720px",margin:"0 auto"}}>
           <button onClick={() => onComplete(config)} disabled={!validacion.valido}
-            style={{width:"100%",backgroundColor:validacion.valido?"#2C3B1F":"#B5A894",color:"white",padding:"14px",borderRadius:"12px",fontWeight:500,cursor:validacion.valido?"pointer":"not-allowed",border:"none",fontSize:"15px"}}>
+            style={{width:"100%",backgroundColor:validacion.valido?"#2C3B1F":"#B5A894",color:"white",padding:"16px",borderRadius:"12px",fontWeight:600,cursor:validacion.valido?"pointer":"not-allowed",border:"none",fontSize:"16px",letterSpacing:"0.02em"}}>
             {validacion.valido?"Generar mi concepto →":"Corrige los errores para continuar"}
           </button>
         </div>
       </div>
+    </div>
+  );
+}
+
+function SeccionCard({ titulo, icono, children }: { titulo: string; icono: string; children: React.ReactNode }) {
+  return (
+    <div style={{backgroundColor:"white",borderRadius:"16px",padding:"24px",marginBottom:"16px",border:"1px solid #E8DFC8",boxShadow:"0 2px 8px rgba(0,0,0,0.04)"}}>
+      <div style={{display:"flex",alignItems:"center",gap:"10px",marginBottom:"20px",paddingBottom:"14px",borderBottom:"1px solid #F5F0E8"}}>
+        <span style={{fontSize:"22px"}}>{icono}</span>
+        <h3 style={{fontFamily:"Georgia,serif",fontSize:"19px",color:"#1A1F14",fontWeight:600}}>{titulo}</h3>
+      </div>
+      {children}
     </div>
   );
 }
