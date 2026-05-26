@@ -1,0 +1,195 @@
+{
+  "limites": {
+    "huella_maxima_m2": 325,
+    "construccion_total_maxima_m2": 500,
+    "niveles_maximos": 3,
+    "muro_contencion_maximo_m": 5,
+    "retiro_frontal_m": 3,
+    "retiro_lateral_m": 2,
+    "retiro_posterior_m": 3
+  },
+
+  "estilos_permitidos": [
+    {
+      "id": "contemporaneo-bosque",
+      "nombre": "Contemporáneo bosque",
+      "descripcion": "Líneas limpias y horizontales, techos planos o de una agua, integración con el entorno natural. Voladizos generosos y decks sobre el bosque.",
+      "prompt_descriptor": "contemporary forest architecture, clean horizontal lines, deep roof overhangs, warm minimalism, cantilever deck over pine forest",
+      "imagen_referencia": "/images/estilos/contemporaneo-bosque.jpg"
+    },
+    {
+      "id": "organico-natural",
+      "nombre": "Orgánico natural",
+      "descripcion": "Formas que siguen la topografía del terreno. Muros curvos, techos verdes, integración total con la naturaleza.",
+      "prompt_descriptor": "organic architecture following terrain contours, curved concrete walls, green living roof, total nature integration",
+      "imagen_referencia": "/images/estilos/organico-natural.jpg"
+    },
+    {
+      "id": "industrial-natural",
+      "nombre": "Industrial natural",
+      "descripcion": "Acero y concreto expuesto como protagonistas, suavizados por madera y piedra. Ventanas industriales de acero negro.",
+      "prompt_descriptor": "industrial natural architecture, exposed concrete and weathering steel, black steel frame windows, wood accents, raw materials",
+      "imagen_referencia": "/images/estilos/industrial-natural.jpg"
+    },
+    {
+      "id": "minimalista-calido",
+      "nombre": "Minimalista cálido",
+      "descripcion": "Menos es más. Cada material elegido con precisión. Paleta restringida pero de altísima calidad. Espacios despejados.",
+      "prompt_descriptor": "warm minimalist architecture, precise material selection, restrained earth-tone palette, clean uncluttered spaces",
+      "imagen_referencia": "/images/estilos/minimalista-calido.jpg"
+    }
+  ],
+
+  "materiales_exteriores": [
+    {
+      "id": "concreto-expuesto",
+      "nombre": "Concreto expuesto",
+      "categoria": "estructura",
+      "permitido": true,
+      "recomendado": true,
+      "prompt_keyword": "board-formed exposed concrete walls",
+      "descripcion": "Concreto visto sin recubrimiento. Textura natural que se integra perfectamente con el entorno."
+    },
+    {
+      "id": "madera-natural",
+      "nombre": "Madera natural",
+      "categoria": "revestimiento",
+      "permitido": true,
+      "recomendado": true,
+      "prompt_keyword": "natural hardwood timber cladding, teak or cedar planks",
+      "descripcion": "Madera tratada para exteriores. Puede ser horizontal o vertical. Tonos cálidos que contrastan con el concreto."
+    },
+    {
+      "id": "piedra-volcanica",
+      "nombre": "Piedra volcánica",
+      "categoria": "revestimiento",
+      "permitido": true,
+      "recomendado": true,
+      "prompt_keyword": "guatemalan volcanic stone cladding, dark basalt stone walls",
+      "descripcion": "Piedra volcánica guatemalteca. Material local que conecta la casa con la geología del lugar."
+    },
+    {
+      "id": "vidrio-negro",
+      "nombre": "Vidrio negro / gris",
+      "categoria": "vanos",
+      "permitido": true,
+      "recomendado": true,
+      "prompt_keyword": "dark tinted glass facades, black steel frame floor-to-ceiling windows",
+      "descripcion": "Vidrio tintado oscuro en marcos de acero negro. Elimina los brillos y se integra con el bosque."
+    },
+    {
+      "id": "acero-corten",
+      "nombre": "Acero corten",
+      "categoria": "revestimiento",
+      "permitido": true,
+      "recomendado": true,
+      "prompt_keyword": "weathering corten steel panels, rust-patina steel cladding",
+      "descripcion": "Acero que se oxida de forma controlada tomando tonos tierra. Requiere cero mantenimiento."
+    },
+    {
+      "id": "porcelana-gran-formato",
+      "nombre": "Porcelana gran formato",
+      "categoria": "revestimiento",
+      "permitido": true,
+      "recomendado": false,
+      "prompt_keyword": "large format porcelain stone-effect panels",
+      "descripcion": "Porcelana que simula piedra. Bajo mantenimiento. En tonos oscuros y tierra únicamente."
+    },
+    {
+      "id": "pintura-acento",
+      "nombre": "Pintura (solo acentos)",
+      "categoria": "acabado",
+      "permitido": true,
+      "recomendado": false,
+      "prompt_keyword": "minimal paint accents in earth tones only",
+      "descripcion": "Pintura permitida ÚNICAMENTE en acentos y molduras. Tonos tierra, grises oscuros o negro. NO como material principal."
+    },
+    {
+      "id": "lamina-metalica",
+      "nombre": "Lámina metálica brillante",
+      "categoria": "prohibido",
+      "permitido": false,
+      "recomendado": false,
+      "prompt_keyword": null,
+      "descripcion": "PROHIBIDO. Genera reflexiones que impactan el paisaje y la fauna."
+    },
+    {
+      "id": "blanco-dominante",
+      "nombre": "Pintura blanca dominante",
+      "categoria": "prohibido",
+      "permitido": false,
+      "recomendado": false,
+      "prompt_keyword": null,
+      "descripcion": "PROHIBIDO como material dominante. El blanco rompe la armonía cromática del bosque."
+    },
+    {
+      "id": "colores-vivos",
+      "nombre": "Colores vivos o reflectivos",
+      "categoria": "prohibido",
+      "permitido": false,
+      "recomendado": false,
+      "prompt_keyword": null,
+      "descripcion": "PROHIBIDO. Colores que no se integren con la paleta natural del bosque guatemalteco."
+    }
+  ],
+
+  "tipos_deck": [
+    {
+      "id": "voladizo-bosque",
+      "nombre": "Deck voladizo sobre el bosque",
+      "prompt_keyword": "cantilevered deck extending over pine forest, floating terrace",
+      "requiere": ["topo_tipo:medio", "topo_tipo:pronunciado"],
+      "descripcion": "El deck se proyecta sobre el bosque sin tocar el suelo. Solo posible en terrenos con pendiente."
+    },
+    {
+      "id": "nivel-jardin",
+      "nombre": "Terraza a nivel del jardín",
+      "prompt_keyword": "ground-level terrace integrated with garden, seamless indoor-outdoor",
+      "requiere": [],
+      "descripcion": "Terraza al mismo nivel que el jardín. Funciona en cualquier tipo de terreno."
+    },
+    {
+      "id": "semi-enterrado",
+      "nombre": "Deck semi-enterrado / hundido",
+      "prompt_keyword": "sunken terrace carved into hillside, intimate outdoor seating pit",
+      "requiere": ["topo_tipo:medio", "topo_tipo:pronunciado"],
+      "descripcion": "La terraza se excava en la ladera creando un espacio íntimo protegido. Solo en terrenos inclinados."
+    },
+    {
+      "id": "techo-habitable",
+      "nombre": "Techo habitable / rooftop",
+      "prompt_keyword": "rooftop terrace with forest and valley views, green roof deck",
+      "requiere": [],
+      "descripcion": "La cubierta del último nivel es una terraza habitable. El techo se trata como quinta fachada."
+    }
+  ],
+
+  "relacion_bosque": [
+    {
+      "id": "integrado",
+      "nombre": "Integrado — el bosque entra",
+      "prompt_keyword": "trees growing through deck openings, forest floor as part of interior experience, glass walls dissolving boundary between house and forest",
+      "descripcion": "Árboles existentes se preservan pasando a través de decks y cubiertas. El bosque ES parte de la casa."
+    },
+    {
+      "id": "visual",
+      "nombre": "Visual — el bosque se enmarca",
+      "prompt_keyword": "panoramic glazed walls framing forest view, forest as living artwork through full-height windows",
+      "descripcion": "La casa tiene grandes ventanales que enmarcan el bosque como si fuera una pintura. El bosque es la vista principal."
+    },
+    {
+      "id": "protegido",
+      "nombre": "Protegido — el bosque rodea",
+      "prompt_keyword": "house nestled within protective ring of mature pines, forest buffer surrounding the residence",
+      "descripcion": "El bosque rodea la casa creando privacidad y microclima. La relación es de protección mutua."
+    }
+  ],
+
+  "topo_descriptores": {
+    "plano": "The house sits on a gently sloped clearing. Minimal site preparation required. Traditional foundation with slight grade adjustment.",
+    "medio": "The house is designed for a mid-slope hillside. Split-level layout follows the natural terrain. Partial basement or plinth foundation.",
+    "pronunciado": "Dramatic steep hillside site. The residence is elevated on concrete and steel pilotis above the forest floor, engaging the topography as a design feature. Retaining walls where required, maximum 5 meters height."
+  },
+
+  "disclaimer": "Esta configuración es una visualización conceptual para fines comerciales. No constituye un proyecto arquitectónico ni planos constructivos. La casa real será diseñada por Mario Noriega & Asociados (MN+A) respetando la topografía exacta del lote, la normativa de construcción vigente de Legado del Bosque y las condiciones específicas del terreno determinadas por ingeniería estructural y de suelos."
+}
