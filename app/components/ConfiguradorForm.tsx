@@ -13,27 +13,27 @@ interface Props {
 }
 
 const ESTILOS_IMAGENES: Record<string, string> = {
-  "contemporaneo-bosque": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80",
-  "organico-natural": "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=600&q=80",
-  "industrial-natural": "https://images.unsplash.com/photo-1565182999561-18d7dc61c393?w=600&q=80",
-  "minimalista-calido": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&q=80",
+  "contemporaneo-bosque": "/estilo-contemporaneo.jpg",
+  "organico-natural": "/estilo-organico.jpg",
+  "industrial-natural": "/estilo-industrial.jpg",
+  "minimalista-calido": "/estilo-minimalista.jpg",
 };
 
 const MATERIALES_IMAGENES: Record<string, string> = {
-  "concreto-expuesto": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80",
-  "madera-natural": "https://images.unsplash.com/photo-1449844908441-8829872d2607?w=400&q=80",
-  "piedra-volcanica": "https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=400&q=80",
-  "vidrio-negro": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=400&q=80",
-  "acero-corten": "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=400&q=80",
-  "porcelana-gran-formato": "https://images.unsplash.com/photo-1615874959474-d609969a20ed?w=400&q=80",
-  "pintura-acento": "https://images.unsplash.com/photo-1589834390005-5d4fb9bf3d32?w=400&q=80",
+  "concreto-expuesto": "/mat-concreto.jpg",
+  "madera-natural": "/mat-madera.jpg",
+  "piedra-volcanica": "/mat-piedra.jpg",
+  "vidrio-negro": "/mat-vidrio.jpg",
+  "acero-corten": "/mat-acero.jpg",
+  "porcelana-gran-formato": "/mat-porcelana.jpg",
+  "pintura-acento": "/mat-concreto.jpg",
 };
 
 const DECK_IMAGENES: Record<string, string> = {
-  "voladizo-bosque": "https://images.unsplash.com/photo-1600607687644-aac4c3eac7f4?w=500&q=80",
-  "nivel-jardin": "https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=500&q=80",
-  "semi-enterrado": "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=500&q=80",
-  "techo-habitable": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500&q=80",
+  "voladizo-bosque": "/deck-voladizo.jpg",
+  "nivel-jardin": "/deck-jardin.jpg",
+  "semi-enterrado": "/deck-semi.jpg",
+  "techo-habitable": "/deck-techo.jpg",
 };
 
 const BOSQUE_IMAGENES: Record<string, string> = {
