@@ -122,7 +122,10 @@ export function generarPrompt(
 
   return `Photorealistic architectural concept render.
 Residential house of ${config.area_m2} square meters, ${config.niveles} level(s), ${config.habitaciones} bedrooms.
-PARKING: ${config.parqueos} covered garage(s) at street level (top of lot). Since the camera looks DOWN from street level, the garage roof or entry may be partially visible at the top edge — do NOT show garage doors prominently. The garage is implied, not the focal point. Focus on the cascading living levels and terraces going downhill.
+PARKING: ${config.parqueos} covered garage(s) integrated at street level.
+- In Aurel Parque (street at top): garage is at the top edge, camera looks down — garage implied, not focal point.
+- In Aurel Valle (street at bottom): garage door faces the street at ground level, visible but not dominant — focus is on the house rising up the hillside behind it.
+Do NOT show garage on rooftop. Do NOT make garage the visual center of the render.
 Located at Legado del Bosque residential forest park, Guatemala City, Central America, 1,840 meters above sea level.
 
 ${orientacion_vial}
