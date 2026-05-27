@@ -40,12 +40,12 @@ export default function HomePage() {
             Este entorno merece la casa de tus sueños
           </h1>
           <p style={{color:"rgba(255,255,255,0.65)",fontSize:"clamp(16px,2vw,20px)",marginBottom:"48px",maxWidth:"480px",lineHeight:1.7}}>
-            Configura tu residencia ideal en Aurel dentro de los lineamientos reales de construcción de Legado del Bosque.
+            Hay lugares que te piden una casa a la altura. Este es uno de ellos.
           </p>
 
           <div style={{backgroundColor:"rgba(255,255,255,0.06)",backdropFilter:"blur(20px)",border:"1px solid rgba(255,255,255,0.12)",borderRadius:"20px",padding:"36px",width:"100%",maxWidth:"440px"}}>
             <h2 style={{fontFamily:"Georgia,serif",fontSize:"22px",color:"white",marginBottom:"6px"}}>Comenzar mi configuración</h2>
-            <p style={{color:"rgba(255,255,255,0.5)",fontSize:"13px",marginBottom:"24px"}}>Tu asesor de LDB recibirá tu concepto al finalizar.</p>
+            <p style={{color:"rgba(255,255,255,0.5)",fontSize:"13px",marginBottom:"24px"}}>Al final, tu concepto llega directo a Mariangel.</p>
             <LeadForm onSubmit={(data) => { setLead(data); setPaso("lote"); }} />
           </div>
 

@@ -8,38 +8,36 @@
     "retiro_lateral_m": 2,
     "retiro_posterior_m": 3
   },
-
   "estilos_permitidos": [
     {
       "id": "contemporaneo-bosque",
-      "nombre": "Contemporáneo bosque",
-      "descripcion": "Líneas limpias y horizontales, techos planos o de una agua, integración con el entorno natural. Voladizos generosos y decks sobre el bosque.",
+      "nombre": "El Sereno",
+      "descripcion": "Líneas limpias que no compiten con el bosque. Para quien quiere llegar a casa y sentir que todo se calma.",
       "prompt_descriptor": "contemporary forest architecture, clean horizontal lines, deep roof overhangs, warm minimalism, cantilever deck over pine forest",
       "imagen_referencia": "/images/estilos/contemporaneo-bosque.jpg"
     },
     {
       "id": "organico-natural",
-      "nombre": "Orgánico natural",
-      "descripcion": "Formas que siguen la topografía del terreno. Muros curvos, techos verdes, integración total con la naturaleza.",
+      "nombre": "El Explorador",
+      "descripcion": "Una casa que abraza el terreno tal como es. Para quien no busca controlar la naturaleza, sino vivir dentro de ella.",
       "prompt_descriptor": "organic architecture following terrain contours, curved concrete walls, green living roof, total nature integration",
       "imagen_referencia": "/images/estilos/organico-natural.jpg"
     },
     {
       "id": "industrial-natural",
-      "nombre": "Industrial natural",
-      "descripcion": "Acero y concreto expuesto como protagonistas, suavizados por madera y piedra. Ventanas industriales de acero negro.",
+      "nombre": "El Auténtico",
+      "descripcion": "Concreto, acero y madera sin pretensiones. Para quien valora lo que es real sobre lo que se ve bien.",
       "prompt_descriptor": "industrial natural architecture, exposed concrete and weathering steel, black steel frame windows, wood accents, raw materials",
       "imagen_referencia": "/images/estilos/industrial-natural.jpg"
     },
     {
       "id": "minimalista-calido",
-      "nombre": "Minimalista cálido",
-      "descripcion": "Menos es más. Cada material elegido con precisión. Paleta restringida pero de altísima calidad. Espacios despejados.",
+      "nombre": "El Esencial",
+      "descripcion": "Solo lo que importa. Cada espacio, cada material, elegido con precisión. Para quien sabe exactamente lo que quiere.",
       "prompt_descriptor": "warm minimalist architecture, precise material selection, restrained earth-tone palette, clean uncluttered spaces",
       "imagen_referencia": "/images/estilos/minimalista-calido.jpg"
     }
   ],
-
   "materiales_exteriores": [
     {
       "id": "concreto-expuesto",
@@ -132,13 +130,15 @@
       "descripcion": "PROHIBIDO. Colores que no se integren con la paleta natural del bosque guatemalteco."
     }
   ],
-
   "tipos_deck": [
     {
       "id": "voladizo-bosque",
       "nombre": "Deck voladizo sobre el bosque",
       "prompt_keyword": "cantilevered deck extending over pine forest, floating terrace",
-      "requiere": ["topo_tipo:medio", "topo_tipo:pronunciado"],
+      "requiere": [
+        "topo_tipo:medio",
+        "topo_tipo:pronunciado"
+      ],
       "descripcion": "El deck se proyecta sobre el bosque sin tocar el suelo. Solo posible en terrenos con pendiente."
     },
     {
@@ -152,7 +152,10 @@
       "id": "semi-enterrado",
       "nombre": "Deck semi-enterrado / hundido",
       "prompt_keyword": "sunken terrace carved into hillside, intimate outdoor seating pit",
-      "requiere": ["topo_tipo:medio", "topo_tipo:pronunciado"],
+      "requiere": [
+        "topo_tipo:medio",
+        "topo_tipo:pronunciado"
+      ],
       "descripcion": "La terraza se excava en la ladera creando un espacio íntimo protegido. Solo en terrenos inclinados."
     },
     {
@@ -163,7 +166,6 @@
       "descripcion": "La cubierta del último nivel es una terraza habitable. El techo se trata como quinta fachada."
     }
   ],
-
   "relacion_bosque": [
     {
       "id": "integrado",
@@ -184,12 +186,10 @@
       "descripcion": "El bosque rodea la casa creando privacidad y microclima. La relación es de protección mutua."
     }
   ],
-
   "topo_descriptores": {
     "plano": "The house sits on a gently sloped clearing. Minimal site preparation required. Traditional foundation with slight grade adjustment.",
     "medio": "The house is designed for a mid-slope hillside. Split-level layout follows the natural terrain. Partial basement or plinth foundation.",
     "pronunciado": "Dramatic steep hillside site. The residence is elevated on concrete and steel pilotis above the forest floor, engaging the topography as a design feature. Retaining walls where required, maximum 5 meters height."
   },
-
   "disclaimer": "Esta configuración es una visualización conceptual para fines comerciales. No constituye un proyecto arquitectónico ni planos constructivos. La casa real será diseñada por Mario Noriega & Asociados (MN+A) respetando la topografía exacta del lote, la normativa de construcción vigente de Legado del Bosque y las condiciones específicas del terreno determinadas por ingeniería estructural y de suelos."
 }

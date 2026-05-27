@@ -67,11 +67,11 @@ export default function ResumenFinal({ lote, configuracion, lead, onReset }: Pro
       </header>
 
       <div style={{maxWidth:"680px",margin:"0 auto",padding:"32px 16px"}}>
-        <p style={{color:"#556B2F",fontSize:"11px",fontWeight:500,textTransform:"uppercase",letterSpacing:"0.1em",marginBottom:"8px"}}>Paso 3 de 3 · Tu concepto</p>
+        <p style={{color:"#556B2F",fontSize:"11px",fontWeight:500,textTransform:"uppercase",letterSpacing:"0.1em",marginBottom:"8px"}}>Paso 3 de 3 · Tu visión</p>
         <h2 style={{fontFamily:"Georgia,serif",fontSize:"32px",color:"#1A1F14",marginBottom:"4px"}}>
-          {lead.nombre.split(" ")[0]}, aquí está tu visión
+          {lead.nombre.split(" ")[0]}, esto es lo que construirás
         </h2>
-        <p style={{color:"#6B6B63",fontSize:"14px",marginBottom:"24px"}}>Resumen de tu casa conceptual en {lote.nombre}</p>
+        <p style={{color:"#6B6B63",fontSize:"14px",marginBottom:"24px"}}>El primer trazo de tu casa en {lote.nombre}. Todo lo que sigue depende de este momento.</p>
 
         {/* Render con IA */}
         <div style={{backgroundColor:"white",border:"1px solid #E8DFC8",borderRadius:"16px",overflow:"hidden",marginBottom:"16px"}}>
@@ -191,12 +191,12 @@ export default function ResumenFinal({ lote, configuracion, lead, onReset }: Pro
         </div>
 
         <div style={{backgroundColor:"#2C3B1F",borderRadius:"16px",padding:"32px",textAlign:"center"}}>
-          <p style={{fontFamily:"Georgia,serif",fontSize:"22px",color:"white",marginBottom:"8px"}}>¿Listo para dar el siguiente paso?</p>
-          <p style={{color:"#8A9E6D",fontSize:"14px",marginBottom:"24px"}}>Tu asesor de Legado del Bosque puede mostrarte el lote en persona y conectarte con el equipo de arquitectura.</p>
+          <p style={{fontFamily:"Georgia,serif",fontSize:"22px",color:"white",marginBottom:"8px"}}>El bosque ya tiene tu lote. Solo falta tu casa.</p>
+          <p style={{color:"#8A9E6D",fontSize:"14px",marginBottom:"24px"}}>Mariangel puede llevarte a caminar el terreno, sentir la pendiente, ver los pinos que vas a conservar. Ese paseo cambia todo.</p>
           <a href="https://wa.me/50255267809?text=Hola%2C%20generé%20mi%20concepto%20en%20Mi%20Legado%20y%20quisiera%20agendar%20una%20visita."
             target="_blank" rel="noopener noreferrer"
             style={{display:"inline-block",backgroundColor:"white",color:"#2C3B1F",fontWeight:600,padding:"12px 32px",borderRadius:"12px",textDecoration:"none",fontSize:"14px"}}>
-            Agendar visita con mi asesor →
+            Quiero caminar mi lote →
           </a>
           <p style={{color:"rgba(138,158,109,0.6)",fontSize:"12px",marginTop:"12px"}}>Mariangel Ruiz · mruiz@legado.gt</p>
         </div>

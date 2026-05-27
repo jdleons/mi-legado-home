@@ -80,9 +80,28 @@ export default function ConfiguradorForm({ lote, lead, onComplete, onBack }: Pro
       </header>
 
       <div style={{maxWidth:"720px",margin:"0 auto",padding:"32px 16px"}}>
-        <p style={{color:"#556B2F",fontSize:"11px",fontWeight:500,textTransform:"uppercase" as const,letterSpacing:"0.1em",marginBottom:"8px"}}>Paso 2 de 3 · Configurador</p>
-        <h2 style={{fontFamily:"Georgia,serif",fontSize:"30px",color:"#1A1F14",marginBottom:"4px"}}>Diseña tu casa</h2>
-        <p style={{color:"#6B6B63",fontSize:"14px",marginBottom:"24px"}}>Cada selección se valida en tiempo real contra la normativa de Legado del Bosque.</p>
+        <p style={{color:"#556B2F",fontSize:"11px",fontWeight:500,textTransform:"uppercase" as const,letterSpacing:"0.1em",marginBottom:"8px"}}>Paso 2 de 3 · Tu casa</p>
+        <h2 style={{fontFamily:"Georgia,serif",fontSize:"30px",color:"#1A1F14",marginBottom:"4px"}}>Imagina cómo quieres vivir</h2>
+        <p style={{color:"#6B6B63",fontSize:"14px",marginBottom:"24px"}}>Define los trazos grandes de tu casa. Todo dentro de la normativa real de Legado del Bosque.</p>
+
+        {/* Momentos de vida */}
+        <div style={{backgroundColor:"#2C3B1F",borderRadius:"16px",padding:"24px",marginBottom:"24px"}}>
+          <p style={{color:"#8A9E6D",fontSize:"11px",fontWeight:500,textTransform:"uppercase" as const,letterSpacing:"0.1em",marginBottom:"12px"}}>La vida que te espera</p>
+          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"12px"}}>
+            {[
+              {icono:"☕",titulo:"Mañanas sin prisa",desc:"Café con vista al pino de siempre. El mismo que estará ahí mañana y en diez años."},
+              {icono:"🌿",titulo:"Salir a correr entre árboles",desc:"Sin semáforos. Sin ruido. Solo el sonido de tus pasos y el bosque despertando."},
+              {icono:"🌧️",titulo:"Tardes de lluvia con fuego",desc:"La chimenea encendida, la lluvia en el techo. Un privilegio que pocos conocen."},
+              {icono:"🌙",titulo:"Noches de silencio real",desc:"Sin luces de la ciudad. Solo estrellas y el viento entre los pinos."},
+            ].map(({icono,titulo,desc}) => (
+              <div key={titulo} style={{backgroundColor:"rgba(255,255,255,0.06)",borderRadius:"10px",padding:"14px"}}>
+                <p style={{fontSize:"20px",marginBottom:"6px"}}>{icono}</p>
+                <p style={{color:"white",fontWeight:500,fontSize:"13px",marginBottom:"4px"}}>{titulo}</p>
+                <p style={{color:"rgba(255,255,255,0.5)",fontSize:"11px",lineHeight:1.5}}>{desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
 
         {/* Ficha lote */}
         <div style={{background:"linear-gradient(135deg,#2C3B1F,#3D5428)",borderRadius:"16px",padding:"20px",marginBottom:"24px",display:"flex",gap:"16px",alignItems:"center"}}>
@@ -96,7 +115,7 @@ export default function ConfiguradorForm({ lote, lead, onComplete, onBack }: Pro
         </div>
 
         {/* DIMENSIONES */}
-        <SeccionCard titulo="Dimensiones" icono="📐">
+        <SeccionCard titulo="¿Cuánto espacio necesitas para vivir bien?" icono="📐">
           <div style={{marginBottom:"20px"}}>
             <div style={{display:"flex",justifyContent:"space-between",alignItems:"baseline",marginBottom:"8px"}}>
               <label style={{fontSize:"14px",fontWeight:500,color:"#1A1F14"}}>Área construida total</label>
@@ -166,7 +185,7 @@ export default function ConfiguradorForm({ lote, lead, onComplete, onBack }: Pro
         </SeccionCard>
 
         {/* ESTILO ARQUITECTÓNICO - con imágenes */}
-        <SeccionCard titulo="Estilo arquitectónico" icono="🏛">
+        <SeccionCard titulo="¿Cómo quieres sentirte en tu casa?" icono="🏛">
           <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"12px"}}>
             {normativa.estilos_permitidos.map((estilo) => (
               <button key={estilo.id} onClick={() => setConfig({...config,estilo:estilo.id})}
@@ -188,7 +207,7 @@ export default function ConfiguradorForm({ lote, lead, onComplete, onBack }: Pro
         </SeccionCard>
 
         {/* MATERIALES - con imágenes */}
-        <SeccionCard titulo="Materiales exteriores" icono="🪨">
+        <SeccionCard titulo="La piel de tu casa" icono="🪨">
           <p style={{fontSize:"12px",color:"#6B6B63",marginBottom:"14px"}}>Selecciona uno o más materiales. Solo materiales aprobados por la normativa de LDB.</p>
           <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"12px"}}>
             {materialesPermitidos.map((mat) => {
