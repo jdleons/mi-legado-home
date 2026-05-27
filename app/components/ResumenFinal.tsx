@@ -96,6 +96,39 @@ export default function ResumenFinal({ lote, configuracion, lead, onReset }: Pro
         </h2>
         <p style={{color:"#6B6B63",fontSize:"15px",marginBottom:"28px",fontWeight:300,animation:"fadeUp 0.7s ease 0.3s both"}}>El primer trazo de tu casa en {lote.nombre}. Todo lo que sigue depende de este momento.</p>
 
+        {/* Datos del lote */}
+        <div style={{backgroundColor:"white",border:"1px solid #E8DFC8",borderRadius:"16px",overflow:"hidden",marginBottom:"16px"}}>
+          <div style={{backgroundColor:"#2C3B1F",padding:"24px"}}>
+            <p style={{color:"#8A9E6D",fontSize:"11px",textTransform:"uppercase",letterSpacing:"0.1em",marginBottom:"4px"}}>{lote.zona}</p>
+            <h3 style={{fontFamily:"Georgia,serif",fontSize:"24px",color:"white",fontWeight:600,marginBottom:"4px"}}>{lote.nombre}</h3>
+            <p style={{color:"#8A9E6D",fontSize:"14px"}}>{nombreEstilo}</p>
+          </div>
+          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",borderBottom:"1px solid #E8DFC8"}}>
+            {[{n:configuracion.area_m2,l:"m² construidos"},{n:configuracion.niveles,l:`nivel${configuracion.niveles>1?"es":""}`},{n:configuracion.habitaciones,l:"habitaciones"}].map(({n,l})=>(
+              <div key={l} style={{padding:"20px",textAlign:"center",borderRight:"1px solid #E8DFC8"}}>
+                <p style={{fontFamily:"Georgia,serif",fontSize:"28px",color:"#1A1F14"}}>{n}</p>
+                <p style={{fontSize:"12px",color:"#6B6B63"}}>{l}</p>
+              </div>
+            ))}
+          </div>
+          <div style={{padding:"24px"}}>
+            {[
+              {l:"Lote",v:`${lote.area_m2} m² · ${lote.topo_tipo}`},
+              {l:"Topografía",v:`${lote.dif_nivel_m}m de desnivel`},
+              {l:"Materiales",v:nombreMateriales},
+              {l:"Deck / terraza",v:nombreDeck},
+              {l:"Relación bosque",v:nombreBosque},
+              {l:"Vistas",v:configuracion.orientacion_vistas},
+              {l:"Parqueos",v:`${configuracion.parqueos} cubierto${configuracion.parqueos>1?"s":""}`},
+            ].map(({l,v})=>(
+              <div key={l} style={{display:"flex",gap:"12px",fontSize:"14px",paddingBottom:"10px",borderBottom:"1px solid #F5F0E8"}}>
+                <span style={{color:"#6B6B63",minWidth:"120px",flexShrink:0}}>{l}</span>
+                <span style={{color:"#1A1F14",fontWeight:500,textTransform:"capitalize"}}>{v}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* Render con IA */}
         <div style={{backgroundColor:"white",border:"1px solid #E8DFC8",borderRadius:"16px",overflow:"hidden",marginBottom:"16px"}}>
           <div style={{padding:"24px 24px 0"}}>
@@ -148,39 +181,6 @@ export default function ResumenFinal({ lote, configuracion, lead, onReset }: Pro
               <p style={{fontSize:"11px",color:"#9A9A93",textAlign:"center",marginTop:"8px"}}>Imagen conceptual generada por IA · No representa el diseño final</p>
             </div>
           )}
-        </div>
-
-        {/* Datos del lote */}
-        <div style={{backgroundColor:"white",border:"1px solid #E8DFC8",borderRadius:"16px",overflow:"hidden",marginBottom:"16px"}}>
-          <div style={{backgroundColor:"#2C3B1F",padding:"24px"}}>
-            <p style={{color:"#8A9E6D",fontSize:"11px",textTransform:"uppercase",letterSpacing:"0.1em",marginBottom:"4px"}}>{lote.zona}</p>
-            <h3 style={{fontFamily:"Georgia,serif",fontSize:"24px",color:"white",fontWeight:600,marginBottom:"4px"}}>{lote.nombre}</h3>
-            <p style={{color:"#8A9E6D",fontSize:"14px"}}>{nombreEstilo}</p>
-          </div>
-          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",borderBottom:"1px solid #E8DFC8"}}>
-            {[{n:configuracion.area_m2,l:"m² construidos"},{n:configuracion.niveles,l:`nivel${configuracion.niveles>1?"es":""}`},{n:configuracion.habitaciones,l:"habitaciones"}].map(({n,l})=>(
-              <div key={l} style={{padding:"20px",textAlign:"center",borderRight:"1px solid #E8DFC8"}}>
-                <p style={{fontFamily:"Georgia,serif",fontSize:"28px",color:"#1A1F14"}}>{n}</p>
-                <p style={{fontSize:"12px",color:"#6B6B63"}}>{l}</p>
-              </div>
-            ))}
-          </div>
-          <div style={{padding:"24px"}}>
-            {[
-              {l:"Lote",v:`${lote.area_m2} m² · ${lote.topo_tipo}`},
-              {l:"Topografía",v:`${lote.dif_nivel_m}m de desnivel`},
-              {l:"Materiales",v:nombreMateriales},
-              {l:"Deck / terraza",v:nombreDeck},
-              {l:"Relación bosque",v:nombreBosque},
-              {l:"Vistas",v:configuracion.orientacion_vistas},
-              {l:"Parqueos",v:`${configuracion.parqueos} cubierto${configuracion.parqueos>1?"s":""}`},
-            ].map(({l,v})=>(
-              <div key={l} style={{display:"flex",gap:"12px",fontSize:"14px",paddingBottom:"10px",borderBottom:"1px solid #F5F0E8"}}>
-                <span style={{color:"#6B6B63",minWidth:"120px",flexShrink:0}}>{l}</span>
-                <span style={{color:"#1A1F14",fontWeight:500,textTransform:"capitalize"}}>{v}</span>
-              </div>
-            ))}
-          </div>
         </div>
 
         {/* Prompt */}
