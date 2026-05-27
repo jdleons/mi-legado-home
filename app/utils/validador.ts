@@ -122,7 +122,7 @@ export function generarPrompt(
 
   return `Photorealistic architectural concept render.
 Residential house of ${config.area_m2} square meters, ${config.niveles} level(s), ${config.habitaciones} bedrooms.
-PARKING: ${config.parqueos} covered garage space(s) integrated into the ground floor facade at street level — enclosed garage with door, NOT rooftop parking, NOT open carport on top of the building. Garage door faces the street directly.
+PARKING: ${config.parqueos} covered garage(s) at street level (top of lot). Since the camera looks DOWN from street level, the garage roof or entry may be partially visible at the top edge — do NOT show garage doors prominently. The garage is implied, not the focal point. Focus on the cascading living levels and terraces going downhill.
 Located at Legado del Bosque residential forest park, Guatemala City, Central America, 1,840 meters above sea level.
 
 ${orientacion_vial}
