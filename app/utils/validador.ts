@@ -111,6 +111,7 @@ export function generarPrompt(
   const estilo_desc = estilos.find((e) => e.id === config.estilo)?.prompt_descriptor || "contemporary forest architecture";
   const materiales_desc = config.materiales.map((m) => materiales.find((mat) => mat.id === m)?.prompt_keyword).filter(Boolean).join(", ");
   const topo_desc = topo_descriptores[lote.topo_tipo] || "sloped terrain with pine forest setting";
+  const desnivel_desc = `The lot has a total elevation change of exactly ${lote.dif_nivel_m} METERS (not floors, not levels — ${lote.dif_nivel_m} meters of vertical height difference across the lot). This is a terrain measurement in meters.`;
   const relacion_desc = relacion_bosque_opciones.find((r) => r.id === config.relacion_bosque)?.prompt_keyword || "forest views through panoramic windows";
   const deck_desc = deck_opciones.find((d) => d.id === config.deck_tipo)?.prompt_keyword || "terrace with forest views";
 
@@ -134,7 +135,7 @@ SITE CONTEXT: ${posicion_desc}
 
 ARCHITECTURE: ${estilo_desc}.
 
-TERRAIN: ${topo_desc}
+TERRAIN: ${topo_desc} ${desnivel_desc}
 
 MATERIALS: ${materiales_desc}. No reflective surfaces. No dominant white paint. Earth tones palette only.
 
