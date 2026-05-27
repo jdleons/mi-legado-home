@@ -69,6 +69,10 @@ export default function ResumenFinal({ lote, configuracion, lead, onReset }: Pro
         .render-btn { transition: all 0.3s ease !important; }
         .wsp-btn:hover { transform:translateY(-2px); box-shadow:0 16px 48px rgba(255,255,255,0.2) !important; }
         .wsp-btn { transition: all 0.3s ease !important; }
+        @media (max-width:640px) {
+          .resumen-stats { grid-template-columns: 1fr 1fr !important; }
+          .render-actions { flex-direction: column !important; }
+        }
       `}</style>
       <header style={{backgroundColor:"#0D110A",padding:"16px 28px",display:"flex",alignItems:"center",justifyContent:"space-between",borderBottom:"1px solid rgba(255,255,255,0.06)"}}>
         <img src="/logo-isotipo.png" alt="LDB" style={{height:"32px",objectFit:"contain"}} />
@@ -85,7 +89,7 @@ export default function ResumenFinal({ lote, configuracion, lead, onReset }: Pro
         </div>
       </header>
 
-      <div style={{maxWidth:"680px",margin:"0 auto",padding:"32px 16px"}}>
+      <div style={{maxWidth:"800px",margin:"0 auto",padding:"40px clamp(16px, 5vw, 60px)"}}>
         <p style={{color:"#556B2F",fontSize:"11px",fontWeight:500,textTransform:"uppercase",letterSpacing:"0.1em",marginBottom:"8px"}}>Paso 3 de 3 · Tu visión</p>
         <h2 style={{fontFamily:"'Cormorant Garamond', Georgia, serif",fontSize:"clamp(32px,5vw,52px)",color:"#1A1F14",marginBottom:"8px",fontWeight:300,lineHeight:1.1,animation:"fadeUp 0.7s ease 0.2s both"}}>
           {lead.nombre.split(" ")[0]}, esto es<br/><em>lo que construirás.</em>

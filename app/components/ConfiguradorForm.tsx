@@ -79,7 +79,7 @@ export default function ConfiguradorForm({ lote, lead, onComplete, onBack }: Pro
         </div>
       </header>
 
-      <div style={{maxWidth:"720px",margin:"0 auto",padding:"32px 16px"}}>
+      <div style={{maxWidth:"860px",margin:"0 auto",padding:"40px clamp(16px, 5vw, 60px)"}}>
         <p style={{color:"#8A9E6D",fontSize:"11px",fontWeight:500,textTransform:"uppercase" as const,letterSpacing:"0.2em",marginBottom:"12px",animation:"fadeUp 0.6s ease 0.1s both"}}>Paso 2 de 3 · Tu casa</p>
         <h2 style={{fontFamily:"'Cormorant Garamond', Georgia, serif",fontSize:"clamp(32px,5vw,48px)",color:"#1A1F14",marginBottom:"8px",fontWeight:300,lineHeight:1.1,animation:"fadeUp 0.6s ease 0.2s both"}}>Imagina cómo<br/><em>quieres vivir</em></h2>
         <p style={{color:"#6B6B63",fontSize:"15px",marginBottom:"28px",fontWeight:300,animation:"fadeUp 0.6s ease 0.3s both"}}>Define los trazos grandes de tu casa. Todo dentro de la normativa real de Legado del Bosque.</p>
@@ -87,7 +87,7 @@ export default function ConfiguradorForm({ lote, lead, onComplete, onBack }: Pro
         {/* Momentos de vida */}
         <div style={{backgroundColor:"#2C3B1F",borderRadius:"16px",padding:"24px",marginBottom:"24px"}}>
           <p style={{color:"#8A9E6D",fontSize:"11px",fontWeight:500,textTransform:"uppercase" as const,letterSpacing:"0.1em",marginBottom:"12px"}}>La vida que te espera</p>
-          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"12px"}}>
+          <div className="momentos-grid" style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"12px"}}>
             {[
               {icono:"☕",titulo:"Mañanas sin prisa",desc:"Café con vista al pino de siempre. El mismo que estará ahí mañana y en diez años."},
               {icono:"🌿",titulo:"Salir a correr entre árboles",desc:"Sin semáforos. Sin ruido. Solo el sonido de tus pasos y el bosque despertando."},
@@ -186,7 +186,7 @@ export default function ConfiguradorForm({ lote, lead, onComplete, onBack }: Pro
 
         {/* ESTILO ARQUITECTÓNICO - con imágenes */}
         <SeccionCard titulo="¿Cómo quieres sentirte en tu casa?" icono="🏛">
-          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"12px"}}>
+          <div className="momentos-grid" style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"12px"}}>
             {normativa.estilos_permitidos.map((estilo) => (
               <button key={estilo.id} onClick={() => setConfig({...config,estilo:estilo.id})}
                 style={{borderRadius:"12px",border:config.estilo===estilo.id?"3px solid #2C3B1F":"1px solid #E8DFC8",overflow:"hidden",cursor:"pointer",textAlign:"left" as const,backgroundColor:"white",transition:"all 0.2s",boxShadow:config.estilo===estilo.id?"0 4px 16px rgba(44,59,31,0.2)":"none"}}>
@@ -209,7 +209,7 @@ export default function ConfiguradorForm({ lote, lead, onComplete, onBack }: Pro
         {/* MATERIALES - con imágenes */}
         <SeccionCard titulo="La piel de tu casa" icono="🪨">
           <p style={{fontSize:"12px",color:"#6B6B63",marginBottom:"14px"}}>Selecciona uno o más materiales. Solo materiales aprobados por la normativa de LDB.</p>
-          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"12px"}}>
+          <div className="momentos-grid" style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"12px"}}>
             {materialesPermitidos.map((mat) => {
               const sel = config.materiales.includes(mat.id);
               return (
@@ -236,7 +236,7 @@ export default function ConfiguradorForm({ lote, lead, onComplete, onBack }: Pro
 
         {/* DECK - con imágenes */}
         <SeccionCard titulo="Deck y terraza" icono="🌿">
-          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"12px"}}>
+          <div className="momentos-grid" style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"12px"}}>
             {normativa.tipos_deck.map((deck) => (
               <button key={deck.id} onClick={() => setConfig({...config,deck_tipo:deck.id})}
                 style={{borderRadius:"12px",border:config.deck_tipo===deck.id?"3px solid #2C3B1F":"1px solid #E8DFC8",overflow:"hidden",cursor:"pointer",textAlign:"left" as const,backgroundColor:"white",transition:"all 0.2s",boxShadow:config.deck_tipo===deck.id?"0 4px 16px rgba(44,59,31,0.2)":"none"}}>
