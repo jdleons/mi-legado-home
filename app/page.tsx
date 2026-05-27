@@ -37,7 +37,7 @@ export default function HomePage() {
             Legado del Bosque · Parque Residencial
           </p>
           <h1 style={{fontFamily:"Georgia,serif",fontSize:"clamp(36px,6vw,72px)",color:"white",fontWeight:600,lineHeight:1.1,marginBottom:"16px",maxWidth:"700px",textShadow:"0 2px 20px rgba(0,0,0,0.5)"}}>
-            Diseña la casa que merece este entorno
+            Este entorno merece la casa de tus sueños
           </h1>
           <p style={{color:"rgba(255,255,255,0.65)",fontSize:"clamp(16px,2vw,20px)",marginBottom:"48px",maxWidth:"480px",lineHeight:1.7}}>
             Configura tu residencia ideal en Aurel dentro de los lineamientos reales de construcción de Legado del Bosque.
@@ -111,7 +111,7 @@ export default function HomePage() {
               </div>
               <button onClick={() => setPaso("configurador")}
                 style={{backgroundColor:"#2C3B1F",color:"white",padding:"14px 32px",borderRadius:"12px",fontWeight:600,cursor:"pointer",border:"none",fontSize:"15px",whiteSpace:"nowrap" as const}}>
-                Configurar mi casa →
+                Tu casa ideal, a un clic →
               </button>
             </div>
           </div>
