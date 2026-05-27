@@ -80,9 +80,9 @@ export default function ConfiguradorForm({ lote, lead, onComplete, onBack }: Pro
       </header>
 
       <div style={{maxWidth:"720px",margin:"0 auto",padding:"32px 16px"}}>
-        <p style={{color:"#556B2F",fontSize:"11px",fontWeight:500,textTransform:"uppercase" as const,letterSpacing:"0.1em",marginBottom:"8px"}}>Paso 2 de 3 · Tu casa</p>
-        <h2 style={{fontFamily:"Georgia,serif",fontSize:"30px",color:"#1A1F14",marginBottom:"4px"}}>Imagina cómo quieres vivir</h2>
-        <p style={{color:"#6B6B63",fontSize:"14px",marginBottom:"24px"}}>Define los trazos grandes de tu casa. Todo dentro de la normativa real de Legado del Bosque.</p>
+        <p style={{color:"#8A9E6D",fontSize:"11px",fontWeight:500,textTransform:"uppercase" as const,letterSpacing:"0.2em",marginBottom:"12px",animation:"fadeUp 0.6s ease 0.1s both"}}>Paso 2 de 3 · Tu casa</p>
+        <h2 style={{fontFamily:"'Cormorant Garamond', Georgia, serif",fontSize:"clamp(32px,5vw,48px)",color:"#1A1F14",marginBottom:"8px",fontWeight:300,lineHeight:1.1,animation:"fadeUp 0.6s ease 0.2s both"}}>Imagina cómo<br/><em>quieres vivir</em></h2>
+        <p style={{color:"#6B6B63",fontSize:"15px",marginBottom:"28px",fontWeight:300,animation:"fadeUp 0.6s ease 0.3s both"}}>Define los trazos grandes de tu casa. Todo dentro de la normativa real de Legado del Bosque.</p>
 
         {/* Momentos de vida */}
         <div style={{backgroundColor:"#2C3B1F",borderRadius:"16px",padding:"24px",marginBottom:"24px"}}>

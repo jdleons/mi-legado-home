@@ -61,17 +61,36 @@ export default function ResumenFinal({ lote, configuracion, lead, onReset }: Pro
 
   return (
     <div style={{minHeight:"100vh",backgroundColor:"#F5F0E8"}}>
-      <header style={{backgroundColor:"#2C3B1F",padding:"14px 24px",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
-        <span style={{fontFamily:"Georgia,serif",fontSize:"18px",color:"white"}}>Mi Legado</span>
-        <span style={{color:"#8A9E6D",fontSize:"12px",border:"1px solid rgba(138,158,109,0.3)",padding:"4px 12px",borderRadius:"20px"}}>Visualización conceptual</span>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap');
+        @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+        @keyframes spin { to { transform:rotate(360deg); } }
+        .render-btn:hover { transform:translateY(-2px); box-shadow:0 20px 60px rgba(44,59,31,0.5) !important; }
+        .render-btn { transition: all 0.3s ease !important; }
+        .wsp-btn:hover { transform:translateY(-2px); box-shadow:0 16px 48px rgba(255,255,255,0.2) !important; }
+        .wsp-btn { transition: all 0.3s ease !important; }
+      `}</style>
+      <header style={{backgroundColor:"#0D110A",padding:"16px 28px",display:"flex",alignItems:"center",justifyContent:"space-between",borderBottom:"1px solid rgba(255,255,255,0.06)"}}>
+        <img src="/logo-isotipo.png" alt="LDB" style={{height:"32px",objectFit:"contain"}} />
+        <div style={{display:"flex",alignItems:"center",gap:"8px"}}>
+          {["Lote","Casa","Concepto"].map((s,i) => (
+            <div key={s} style={{display:"flex",alignItems:"center",gap:"6px"}}>
+              <div style={{width:"22px",height:"22px",borderRadius:"50%",backgroundColor:i===2?"#8A9E6D":"rgba(255,255,255,0.15)",display:"flex",alignItems:"center",justifyContent:"center"}}>
+                <span style={{fontSize:"10px",color:i===2?"#1A1F14":"rgba(255,255,255,0.4)",fontWeight:600}}>{i===2?"✓":i+1}</span>
+              </div>
+              <span style={{fontSize:"11px",color:i===2?"white":"rgba(255,255,255,0.3)",letterSpacing:"0.05em"}}>{s}</span>
+              {i<2 && <span style={{color:"rgba(255,255,255,0.15)",fontSize:"11px",margin:"0 2px"}}>→</span>}
+            </div>
+          ))}
+        </div>
       </header>
 
       <div style={{maxWidth:"680px",margin:"0 auto",padding:"32px 16px"}}>
         <p style={{color:"#556B2F",fontSize:"11px",fontWeight:500,textTransform:"uppercase",letterSpacing:"0.1em",marginBottom:"8px"}}>Paso 3 de 3 · Tu visión</p>
-        <h2 style={{fontFamily:"Georgia,serif",fontSize:"32px",color:"#1A1F14",marginBottom:"4px"}}>
-          {lead.nombre.split(" ")[0]}, esto es lo que construirás
+        <h2 style={{fontFamily:"'Cormorant Garamond', Georgia, serif",fontSize:"clamp(32px,5vw,52px)",color:"#1A1F14",marginBottom:"8px",fontWeight:300,lineHeight:1.1,animation:"fadeUp 0.7s ease 0.2s both"}}>
+          {lead.nombre.split(" ")[0]}, esto es<br/><em>lo que construirás.</em>
         </h2>
-        <p style={{color:"#6B6B63",fontSize:"14px",marginBottom:"24px"}}>El primer trazo de tu casa en {lote.nombre}. Todo lo que sigue depende de este momento.</p>
+        <p style={{color:"#6B6B63",fontSize:"15px",marginBottom:"28px",fontWeight:300,animation:"fadeUp 0.7s ease 0.3s both"}}>El primer trazo de tu casa en {lote.nombre}. Todo lo que sigue depende de este momento.</p>
 
         {/* Render con IA */}
         <div style={{backgroundColor:"white",border:"1px solid #E8DFC8",borderRadius:"16px",overflow:"hidden",marginBottom:"16px"}}>
@@ -191,11 +210,12 @@ export default function ResumenFinal({ lote, configuracion, lead, onReset }: Pro
         </div>
 
         <div style={{backgroundColor:"#2C3B1F",borderRadius:"16px",padding:"32px",textAlign:"center"}}>
-          <p style={{fontFamily:"Georgia,serif",fontSize:"22px",color:"white",marginBottom:"8px"}}>El bosque ya tiene tu lote. Solo falta tu casa.</p>
+          <p style={{fontFamily:"'Cormorant Garamond', Georgia, serif",fontSize:"clamp(24px,4vw,36px)",color:"white",marginBottom:"12px",fontWeight:300,lineHeight:1.2}}>El bosque ya tiene tu lote.<br/><em>Solo falta tu casa.</em></p>
           <p style={{color:"#8A9E6D",fontSize:"14px",marginBottom:"24px"}}>Mariangel puede llevarte a caminar el terreno, sentir la pendiente, ver los pinos que vas a conservar. Ese paseo cambia todo.</p>
           <a href="https://wa.me/50255267809?text=Hola%2C%20generé%20mi%20concepto%20en%20Mi%20Legado%20y%20quisiera%20agendar%20una%20visita."
             target="_blank" rel="noopener noreferrer"
-            style={{display:"inline-block",backgroundColor:"white",color:"#2C3B1F",fontWeight:600,padding:"12px 32px",borderRadius:"12px",textDecoration:"none",fontSize:"14px"}}>
+            className="wsp-btn"
+            style={{display:"inline-block",backgroundColor:"white",color:"#1A1F14",fontWeight:700,padding:"16px 40px",borderRadius:"14px",textDecoration:"none",fontSize:"15px",letterSpacing:"0.03em",boxShadow:"0 8px 32px rgba(0,0,0,0.3)"}}>
             Quiero caminar mi lote →
           </a>
           <p style={{color:"rgba(138,158,109,0.6)",fontSize:"12px",marginTop:"12px"}}>Mariangel Ruiz · mruiz@legado.gt</p>
