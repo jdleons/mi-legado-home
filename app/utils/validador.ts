@@ -140,37 +140,32 @@ The house is split 70% above street level and 30% below street level, minimizing
   // Orientación vial específica por zona — corrige el problema de renders invertidos
   const orientacion_vial = getOrientacionVial(lote);
 
-  return `Photorealistic architectural concept render.
-Residential house of ${config.area_m2} square meters, ${config.niveles} level(s), ${config.habitaciones} bedrooms.
-PARKING: ${config.parqueos} covered garage(s) integrated at street level.
-- In Aurel Parque (street at top): garage is at the top edge, camera looks down — garage implied, not focal point.
-- In Aurel Valle (street at bottom): garage door faces the street at ground level, visible but not dominant — focus is on the house rising up the hillside behind it.
-Do NOT show garage on rooftop. Do NOT make garage the visual center of the render.
-Located at Legado del Bosque residential forest park, Guatemala City, Central America, 1,840 meters above sea level.
+  // Garage específico por zona
+  const garage_desc = lote.zona === "Aurel Parque"
+    ? `${config.parqueos} covered garage(s) flush with street level at the TOP of the image — doors face the street, roof-level only, NOT visible from below. Do NOT place cars or garages on terraces or rooftops.`
+    : `${config.parqueos} covered garage(s) at street level at the BOTTOM front — doors face the road, integrated into the ground floor facade.`;
+
+  return `Photorealistic architectural exterior render. Guatemala highland pine forest, golden hour.
 
 ${orientacion_vial}
 
-SITE CONTEXT: ${posicion_desc}
+HOUSE: ${config.area_m2}m² / ${config.niveles} level(s) / ${config.habitaciones} bedrooms. ${estilo_desc}.
 
-ARCHITECTURE: ${estilo_desc}.
+${desnivel_desc}
 
-TERRAIN: ${topo_desc} ${desnivel_desc}
+MATERIALS: ${materiales_desc}. Earth tones only. No white paint. No reflective glass.
 
-MATERIALS: ${materiales_desc}. No reflective surfaces. No dominant white paint. Earth tones palette only.
+GARAGE: ${garage_desc}
 
-OUTDOOR: ${deck_desc}.
+TERRACE: ${deck_desc}. Terrace is a CLEAN architectural surface — stone, wood or concrete only. NO trees, NO large plants growing ON the terrace slab. Potted plants maximum 60cm tall allowed at terrace edges only.
 
-FOREST RELATIONSHIP: ${relacion_desc}.
+TREES: ${lote.arboles_protegidos} mature Pinus oocarpa (guatemalan highland pine) growing FROM THE GROUND around the house — never on rooftops or terrace slabs. Trees frame the house, they do not grow through it.
 
-VIEWS: ${config.orientacion_vistas} orientation.
+FOREST: Dense pine forest surrounds the lot. Morning mist at mid-canopy level. Trees are tall (15-20m), straight trunks, dark green canopy.
 
-SETTING: Dense guatemalan highland pine forest (Pinus oocarpa), morning mist, golden hour light. ${lote.arboles_protegidos} protected mature pine trees integrated into the design. Internal curved boulevard with planted median visible. Gated residential park setting.
+ROAD: Curved stone-paved internal boulevard visible at street level. Gated community setting.
 
-ROAD: Sinuous internal boulevard with stone paving and mature trees lining the road, curving organically with the natural topography.
+PHOTOGRAPHY: Wide architectural shot, 16:9, hyperrealistic. Show the full house volume and its relationship with the slope.
 
-PHOTOGRAPHY: Architectural photography, golden hour, shot showing the correct relationship between street level and house position as described above. Hyperrealistic, 16:9 aspect ratio.
-
-IMPORTANT: Strictly follow the CRITICAL SITE ORIENTATION described above. The street-to-house relationship must be accurate. House integrates with topography. All ${lote.arboles_protegidos} protected trees preserved.
-
-DISCLAIMER: Conceptual visualization for sales purposes, subject to validation by Mario Noriega & Asociados (MN+A).`.trim();
+DO NOT: place trees on terraces, put cars on rooftops, show garage doors as the focal point, add swimming pools, use tropical vegetation.`.trim();
 }
