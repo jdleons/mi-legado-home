@@ -57,21 +57,46 @@ function getOrientacionVial(lote: Lote): string {
   const topo = lote.topo_tipo;
 
   if (zona === "Aurel Parque") {
-    return `CRITICAL SITE ORIENTATION - AUREL PARQUE: The access road and street are located at the TOP of the lot (upper level). The house descends DOWN the hillside away from the street. The garage and main entrance are at street level (top). The house steps DOWN the slope, with living areas and terraces at lower levels overlooking the forest below. The view from the house looks DOWNWARD into the forest. Street is ABOVE, forest is BELOW. Never show the street below the house in this lot.`;
+    return `CRITICAL SITE ORIENTATION — READ CAREFULLY:
+Viewpoint: standing on the street looking DOWN at the house.
+- Street/road is at the TOP of the image (highest point).
+- The house garage and entrance door are at street level (top).
+- The house body cascades DOWNHILL away from the street.
+- Living areas, terraces and decks are at lower levels, below the entrance.
+- The forest canopy fills the background BELOW the house.
+- Camera angle: slightly elevated, looking down the slope toward the house and forest.
+DO NOT place the street below the house. DO NOT show the house above the road.`;
   }
 
   if (zona === "Aurel Valle") {
     if (topo === "pronunciado") {
-      return `CRITICAL SITE ORIENTATION - AUREL VALLE: The internal curved boulevard is at the BOTTOM front of the lot. The house rises UP the hillside behind the street. The garage entry is at the lowest point (street level). The house climbs upward into the hillside, with upper floors having panoramic views over the treetops and valley. Street is at the BOTTOM front, house rises UP behind it.`;
+      return `CRITICAL SITE ORIENTATION — READ CAREFULLY:
+Viewpoint: standing on the street looking UP at the house.
+- Street/road is at the BOTTOM front of the image.
+- The garage entry door is at street level (bottom).
+- The house rises UP the hillside behind the street.
+- Upper floors and rooftop terrace are above, with panoramic forest views.
+- Camera angle: slightly low, looking up the slope toward the house.
+DO NOT place the street above the house. DO NOT show the house below the road.`;
     }
-    return `CRITICAL SITE ORIENTATION - AUREL VALLE: The curved internal road runs along the lower front edge of the lot. The house sits above the road on the hillside. Entry from below, house elevated above street level with forest views to the north.`;
+    return `CRITICAL SITE ORIENTATION — READ CAREFULLY:
+Viewpoint: standing on the street looking UP at the house.
+- The curved internal road runs along the lower front edge of the lot.
+- Garage and entrance are at road level (front, lower).
+- House sits elevated above the road on the hillside.
+- Camera angle: from road level looking up at the house facade.`;
   }
 
   if (zona === "Aurel Cerro") {
-    return `CRITICAL SITE ORIENTATION - AUREL CERRO: The access road wraps around the base of the hill. The house is positioned high on the hillside above the road, with dramatic elevation above the surrounding forest. Entry driveway climbs steeply from road to house. Maximum elevation and privacy.`;
+    return `CRITICAL SITE ORIENTATION — READ CAREFULLY:
+Viewpoint: standing below looking UP at the house on the hilltop.
+- Access road is at the base of the hill (bottom of image).
+- House sits dramatically high on the hillside, well above the road.
+- Steep driveway climbs from road up to the house.
+- Camera angle: from below looking up, house silhouetted against sky and forest.`;
   }
 
-  return `The access road is at one edge of the lot. The house is positioned on the slope with the main entrance facing the road and living areas oriented toward forest views.`;
+  return `SITE ORIENTATION: The access road runs along the front edge of the lot. House entrance faces the road. Living areas and terraces face the forest. Camera shows front facade with road in foreground.`;
 }
 
 export function generarPrompt(
