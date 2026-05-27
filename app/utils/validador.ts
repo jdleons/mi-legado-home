@@ -115,21 +115,22 @@ export function generarPrompt(
   // Criterio constructivo: distribución vertical respecto al nivel de calle
   let desnivel_desc = "";
   if (lote.topo_tipo === "pronunciado") {
-    desnivel_desc = `CONSTRUCTION CRITERION — STEEP SLOPE (${lote.dif_nivel_m} meters total elevation change):
-The house is split 50% above street level and 50% below street level, following the natural hillside without major earthwork platforms.
-- The top half (garage, entrance, upper living) sits AT and slightly ABOVE street level.
-- The bottom half (lower living areas, terraces, decks) descends INTO the hillside below street level, using the natural slope.
-- NO large retaining fills. The design follows the terrain, not the other way around.
-- Elevation change is ${lote.dif_nivel_m} METERS of vertical terrain drop — this is a site measurement in meters, NOT building floors.`;
+    desnivel_desc = `SLOPE: ${lote.dif_nivel_m}m elevation drop across the lot (steep).
+The house is a FREESTANDING ABOVE-GROUND structure built ON TOP of the hillside — NOT underground, NOT carved into the hill.
+- Concrete and steel foundations/pilotis are VISIBLE supporting the house above the slope.
+- The house steps down the hill as separate elevated platforms connected by stairs.
+- Each level is a distinct architectural volume sitting ON the terrain, with air and structure visible underneath the cantilevered parts.
+- Ground is visible UNDER the house between the support columns.
+- The house is NOT buried. The hillside is NOT cut away to create a platform.`;
   } else if (lote.topo_tipo === "medio") {
-    desnivel_desc = `CONSTRUCTION CRITERION — MEDIUM SLOPE (${lote.dif_nivel_m} meters total elevation change):
-The house is split 70% above street level and 30% below street level, minimizing earthwork and platform fills.
-- 70% of the house volume (main living, bedrooms, terrace) sits ABOVE street level, rising up the hillside.
-- 30% of the house (lower level, storage, semi-basement) is embedded INTO the hillside below street level, using the natural slope.
-- Minimal regrading. The architecture adapts to the terrain.
-- Elevation change is ${lote.dif_nivel_m} METERS of vertical terrain drop — this is a site measurement in meters, NOT building floors.`;
+    desnivel_desc = `SLOPE: ${lote.dif_nivel_m}m elevation drop across the lot (medium gradient, ~7%).
+The house is a FREESTANDING ABOVE-GROUND structure built ON TOP of the slope — NOT underground, NOT embedded in the earth.
+- The house sits visibly ON the hillside with its full architectural volume above ground.
+- Lower floors have taller exposed foundations on the downhill side as the terrain drops.
+- The structure is clearly above grade — walls, windows and facades are fully visible from outside.
+- NO excavation aesthetic. The house looks placed on the hill, not dug into it.`;
   } else {
-    desnivel_desc = `TERRAIN: Gently sloped lot with ${lote.dif_nivel_m} meters of elevation change. House sits primarily at and above grade with minimal earthwork.`;
+    desnivel_desc = `SLOPE: gentle ${lote.dif_nivel_m}m elevation change. House sits flat on the terrain, fully above ground, traditional foundation.`;
   }
   const relacion_desc = relacion_bosque_opciones.find((r) => r.id === config.relacion_bosque)?.prompt_keyword || "forest views through panoramic windows";
   const deck_desc = deck_opciones.find((d) => d.id === config.deck_tipo)?.prompt_keyword || "terrace with forest views";
