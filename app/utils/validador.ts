@@ -111,7 +111,26 @@ export function generarPrompt(
   const estilo_desc = estilos.find((e) => e.id === config.estilo)?.prompt_descriptor || "contemporary forest architecture";
   const materiales_desc = config.materiales.map((m) => materiales.find((mat) => mat.id === m)?.prompt_keyword).filter(Boolean).join(", ");
   const topo_desc = topo_descriptores[lote.topo_tipo] || "sloped terrain with pine forest setting";
-  const desnivel_desc = `The lot has a total elevation change of exactly ${lote.dif_nivel_m} METERS (not floors, not levels — ${lote.dif_nivel_m} meters of vertical height difference across the lot). This is a terrain measurement in meters.`;
+
+  // Criterio constructivo: distribución vertical respecto al nivel de calle
+  let desnivel_desc = "";
+  if (lote.topo_tipo === "pronunciado") {
+    desnivel_desc = `CONSTRUCTION CRITERION — STEEP SLOPE (${lote.dif_nivel_m} meters total elevation change):
+The house is split 50% above street level and 50% below street level, following the natural hillside without major earthwork platforms.
+- The top half (garage, entrance, upper living) sits AT and slightly ABOVE street level.
+- The bottom half (lower living areas, terraces, decks) descends INTO the hillside below street level, using the natural slope.
+- NO large retaining fills. The design follows the terrain, not the other way around.
+- Elevation change is ${lote.dif_nivel_m} METERS of vertical terrain drop — this is a site measurement in meters, NOT building floors.`;
+  } else if (lote.topo_tipo === "medio") {
+    desnivel_desc = `CONSTRUCTION CRITERION — MEDIUM SLOPE (${lote.dif_nivel_m} meters total elevation change):
+The house is split 70% above street level and 30% below street level, minimizing earthwork and platform fills.
+- 70% of the house volume (main living, bedrooms, terrace) sits ABOVE street level, rising up the hillside.
+- 30% of the house (lower level, storage, semi-basement) is embedded INTO the hillside below street level, using the natural slope.
+- Minimal regrading. The architecture adapts to the terrain.
+- Elevation change is ${lote.dif_nivel_m} METERS of vertical terrain drop — this is a site measurement in meters, NOT building floors.`;
+  } else {
+    desnivel_desc = `TERRAIN: Gently sloped lot with ${lote.dif_nivel_m} meters of elevation change. House sits primarily at and above grade with minimal earthwork.`;
+  }
   const relacion_desc = relacion_bosque_opciones.find((r) => r.id === config.relacion_bosque)?.prompt_keyword || "forest views through panoramic windows";
   const deck_desc = deck_opciones.find((d) => d.id === config.deck_tipo)?.prompt_keyword || "terrace with forest views";
 
