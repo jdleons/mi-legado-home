@@ -70,14 +70,13 @@ const GLOBAL_STYLES = `
   @media (max-width: 900px) {
     .hero-layout {
       grid-template-columns: 1fr;
-      padding: 80px 20px 40px;
-      gap: 32px;
+      padding: 72px 20px 32px;
+      gap: 24px;
       min-height: auto;
     }
     .hero-left { text-align: center; }
-    .hero-stats { justify-content: center !important; flex-wrap: wrap; gap: 32px !important; }
+    .hero-stats { display: none !important; }
     .hero-eyebrow { justify-content: center !important; }
-    .hero-stats .stat-item { min-width: 80px; }
   }
 
   /* RESPONSIVE LOTES */
@@ -182,12 +181,12 @@ export default function HomePage() {
             </div>
 
             <div style={{ animation: mounted ? "fadeUp 0.9s ease 0.55s both" : "none" }}>
-              <h1 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "clamp(48px,5.5vw,80px)", color: "white", fontWeight: 300, lineHeight: 1.05, marginBottom: "6px", letterSpacing: "-0.01em" }}>
+              <h1 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "clamp(36px,8vw,80px)", color: "white", fontWeight: 300, lineHeight: 1.05, marginBottom: "6px", letterSpacing: "-0.01em" }}>
                 Este entorno merece
               </h1>
               <h1 style={{
                 fontFamily: "'Cormorant Garamond', Georgia, serif",
-                fontSize: "clamp(48px,5.5vw,80px)", fontStyle: "italic", fontWeight: 300,
+                fontSize: "clamp(36px,8vw,80px)", fontStyle: "italic", fontWeight: 300,
                 lineHeight: 1.05, marginBottom: "32px", letterSpacing: "-0.01em",
                 background: "linear-gradient(135deg, #ffffff 0%, #8A9E6D 50%, #ffffff 100%)",
                 backgroundSize: "200% auto", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
@@ -198,7 +197,7 @@ export default function HomePage() {
             </div>
 
             <div style={{ animation: mounted ? "fadeUp 0.9s ease 0.7s both" : "none" }}>
-              <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "clamp(15px,1.5vw,18px)", marginBottom: "48px", maxWidth: "480px", lineHeight: 1.85, fontWeight: 300, letterSpacing: "0.02em" }}>
+              <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "clamp(14px,1.5vw,18px)", marginBottom: "clamp(24px,4vw,48px)", maxWidth: "480px", lineHeight: 1.85, fontWeight: 300, letterSpacing: "0.02em" }}>
                 Hay lugares que te piden una casa a la altura.<br />Este es uno de ellos.
               </p>
             </div>
@@ -218,10 +217,10 @@ export default function HomePage() {
           <div className="hero-right" style={{ animation: mounted ? "fadeUp 0.9s ease 0.7s both" : "none" }}>
             <div style={{
               backgroundColor: "rgba(255,255,255,0.04)", backdropFilter: "blur(24px)",
-              border: "1px solid rgba(255,255,255,0.08)", borderRadius: "20px", padding: "clamp(24px, 5vw, 44px)",
+              border: "1px solid rgba(255,255,255,0.08)", borderRadius: "20px", padding: "24px 20px",
               boxShadow: "0 40px 80px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.06)"
             }}>
-              <h2 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "28px", color: "white", fontWeight: 400, marginBottom: "8px", letterSpacing: "0.01em" }}>
+              <h2 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "clamp(22px, 5vw, 28px)", color: "white", fontWeight: 400, marginBottom: "8px", letterSpacing: "0.01em" }}>
                 Comenzar mi configuración
               </h2>
               <p style={{ color: "rgba(255,255,255,0.38)", fontSize: "13px", marginBottom: "32px", lineHeight: 1.7, fontWeight: 300 }}>
@@ -351,8 +350,8 @@ function LeadForm({ onSubmit }: { onSubmit: (data: Lead) => void }) {
   const inputStyle = (name: string): React.CSSProperties => ({
     width: "100%", backgroundColor: focused === name ? "rgba(255,255,255,0.09)" : "rgba(255,255,255,0.05)",
     border: focused === name ? "1px solid rgba(138,158,109,0.5)" : "1px solid rgba(255,255,255,0.1)",
-    borderRadius: "12px", padding: "14px 16px", color: "white", fontSize: "14px",
-    outline: "none", boxSizing: "border-box", marginBottom: "12px",
+    borderRadius: "12px", padding: "13px 14px", color: "white", fontSize: "14px",
+    outline: "none", boxSizing: "border-box", marginBottom: "10px",
     transition: "all 0.25s ease", fontWeight: 300, letterSpacing: "0.02em"
   });
 
@@ -366,7 +365,7 @@ function LeadForm({ onSubmit }: { onSubmit: (data: Lead) => void }) {
         <label htmlFor="tiene_lote" style={{ color: "rgba(255,255,255,0.38)", fontSize: "13px", cursor: "pointer", fontWeight: 300 }}>Ya tengo un lote en mente</label>
       </div>
       <button type="submit" disabled={loading} className="btn-primary"
-        style={{ width: "100%", backgroundColor: "#8A9E6D", color: "#1A1F14", fontWeight: 700, padding: "16px", borderRadius: "14px", border: "none", cursor: "pointer", fontSize: "15px", letterSpacing: "0.04em", boxShadow: "0 8px 32px rgba(138,158,109,0.25)" }}>
+        style={{ width: "100%", backgroundColor: "#8A9E6D", color: "#1A1F14", fontWeight: 700, padding: "14px", borderRadius: "14px", border: "none", cursor: "pointer", fontSize: "15px", letterSpacing: "0.04em", boxShadow: "0 8px 32px rgba(138,158,109,0.25)" }}>
         {loading ? (
           <span style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px" }}>
             <span style={{ width: "16px", height: "16px", border: "2px solid rgba(26,31,20,0.3)", borderTop: "2px solid #1A1F14", borderRadius: "50%", display: "inline-block", animation: "spin 0.8s linear infinite" }} />
