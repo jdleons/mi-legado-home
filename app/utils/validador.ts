@@ -157,18 +157,29 @@ The house steps down the slope in 2 visible levels, like a modern hillside house
   // Garage — siempre en plataforma plana al nivel de calle
   const garage_visual = `Garage: ${config.parqueos} covered space(s) on a flat platform at street level — this is the entry level of the house. The garage floor is flat and level with the road. From this flat entry platform, the house then develops over the slope: at least one full living level sits ABOVE the garage platform, and additional levels step DOWN the hillside below. The garage is integrated into the architecture, not floating or on a rooftop.`;
 
-  return `Photorealistic architectural render, golden hour light, Guatemala pine forest.
+  // Escala visual según niveles
+  const escala_visual = config.niveles === 1
+    ? "single-story house, low profile, one floor only"
+    : config.niveles === 2
+    ? "two-story house, modest scale, two floors clearly visible"
+    : "three-story house, three floors maximum, residential scale";
 
-Style: ${estilo_desc}. Materials: ${materiales_desc}.
-Size: ${config.area_m2}m², ${config.niveles} floors, ${config.habitaciones} bedrooms.
+  // Footprint aproximado (área construida / niveles = huella por piso)
+  const huella = Math.round(config.area_m2 / config.niveles);
 
-${slope_desc}
+  return `Photorealistic exterior render of a RESIDENTIAL HOUSE. Guatemala highland pine forest, golden hour.
 
-${orientacion_vial}
+SCALE: This is a private family home — NOT a hotel, NOT a resort. ${escala_visual}. Total built area: ${config.area_m2}m² across ${config.niveles} floor(s). Each floor footprint approximately ${huella}m². Lot size: around 800m². The house occupies roughly 40% of the lot — the rest is natural pine forest.
 
-${garage_visual}
+ARCHITECTURE: ${estilo_desc}. Materials: ${materiales_desc}.
 
-Terrace: ${deck_desc}. Clean concrete or wood surface. No trees on terrace.
-Forest: tall straight pine trees (15-20m) growing from the ground around the house. Morning mist.
-Photo: wide exterior shot showing full building volume on the slope. Hyperrealistic.`.trim();
+SLOPE: ${slope_desc}
+
+ORIENTATION: ${orientacion_vial}
+
+GARAGE: ${garage_visual}
+
+TERRACE: ${deck_desc}. Clean wood or stone surface. No trees growing on the terrace.
+FOREST: Tall straight pine trees (15-20m) at ground level around the house. Morning mist over the valley.
+SHOT: Wide aerial-ish exterior shot. Show the full house and its relationship with the hillside. Hyperrealistic, 16:9.`.trim();
 }
