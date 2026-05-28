@@ -65,19 +65,19 @@ const GLOBAL_STYLES = `
     margin: 0 auto;
   }
   .hero-left { text-align: left; }
-  .hero-right { }
   .hero-stats { justify-content: flex-start !important; }
 
   @media (max-width: 900px) {
     .hero-layout {
       grid-template-columns: 1fr;
-      padding: 100px 24px 60px;
-      gap: 48px;
-      text-align: center;
+      padding: 80px 20px 40px;
+      gap: 32px;
+      min-height: auto;
     }
     .hero-left { text-align: center; }
-    .hero-stats { justify-content: center !important; }
+    .hero-stats { justify-content: center !important; flex-wrap: wrap; gap: 32px !important; }
     .hero-eyebrow { justify-content: center !important; }
+    .hero-stats .stat-item { min-width: 80px; }
   }
 
   /* RESPONSIVE LOTES */
@@ -102,6 +102,19 @@ const GLOBAL_STYLES = `
   /* RESPONSIVE STEPPER */
   @media (max-width: 600px) {
     .stepper-label { display: none !important; }
+  }
+
+  /* MOBILE HERO FIXES */
+  @media (max-width: 900px) {
+    .hero-right { width: 100%; }
+    .hero-left h1 { font-size: clamp(36px, 9vw, 56px) !important; }
+    .eyebrow-line { display: none !important; }
+    .hero-eyebrow { justify-content: center; }
+    .scroll-indicator { display: none !important; }
+  }
+  @media (max-width: 480px) {
+    .hero-stats { gap: 24px !important; }
+    .hero-stats .stat-num { font-size: 28px !important; }
   }
 `;
 
@@ -147,7 +160,7 @@ export default function HomePage() {
         </div>
 
         {/* Header */}
-        <header style={{ position: "relative", zIndex: 10, padding: "28px 80px", display: "flex", alignItems: "center", justifyContent: "space-between", animation: mounted ? "fadeIn 1s ease 0.2s both" : "none" }}>
+        <header style={{ position: "relative", zIndex: 10, padding: "20px clamp(16px, 5vw, 80px)", display: "flex", alignItems: "center", justifyContent: "space-between", animation: mounted ? "fadeIn 1s ease 0.2s both" : "none" }}>
           <img src="/logo-isotipo.png" alt="LDB" style={{ height: "44px", objectFit: "contain" }} />
           <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
             <div style={{ width: "6px", height: "6px", borderRadius: "50%", backgroundColor: "#8A9E6D", animation: "pulse 2s ease-in-out infinite" }} />
@@ -161,9 +174,10 @@ export default function HomePage() {
           {/* Columna izquierda — copy */}
           <div className="hero-left">
             <div style={{ animation: mounted ? "fadeUp 0.9s ease 0.4s both" : "none" }}>
-              <p className="hero-eyebrow" style={{ color: "#8A9E6D", fontSize: "11px", fontWeight: 500, letterSpacing: "0.25em", textTransform: "uppercase", marginBottom: "28px", display: "flex", alignItems: "center", gap: "14px" }}>
-                <span style={{ display: "inline-block", width: "40px", height: "1px", backgroundColor: "#8A9E6D", flexShrink: 0 }} />
+              <p className="hero-eyebrow" style={{ color: "#8A9E6D", fontSize: "11px", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "24px", display: "flex", alignItems: "center", justifyContent: "center", gap: "12px" }}>
+                <span className="eyebrow-line" style={{ display: "inline-block", width: "32px", height: "1px", backgroundColor: "#8A9E6D", flexShrink: 0 }} />
                 Legado del Bosque · Parque Residencial
+                <span className="eyebrow-line" style={{ display: "inline-block", width: "32px", height: "1px", backgroundColor: "#8A9E6D", flexShrink: 0 }} />
               </p>
             </div>
 
@@ -189,11 +203,11 @@ export default function HomePage() {
               </p>
             </div>
 
-            {/* Stats — solo en desktop */}
-            <div className="hero-stats" style={{ display: "flex", gap: "56px", flexWrap: "wrap", animation: mounted ? "fadeUp 0.9s ease 0.85s both" : "none" }}>
+            {/* Stats */}
+            <div className="hero-stats" style={{ display: "flex", gap: "40px", flexWrap: "wrap", animation: mounted ? "fadeUp 0.9s ease 0.85s both" : "none" }}>
               {[{ n: "8", l: "lotes disponibles" }, { n: "155 mzs", l: "parque natural" }, { n: "70%", l: "reserva forestal" }].map(({ n, l }) => (
                 <div key={l} className="stat-item" style={{ textAlign: "left" }}>
-                  <p className="stat-num" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "38px", color: "white", fontWeight: 300, lineHeight: 1 }}>{n}</p>
+                  <p className="stat-num" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "34px", color: "white", fontWeight: 300, lineHeight: 1 }}>{n}</p>
                   <p style={{ color: "rgba(255,255,255,0.3)", fontSize: "10px", letterSpacing: "0.14em", textTransform: "uppercase", marginTop: "6px" }}>{l}</p>
                 </div>
               ))}
@@ -204,7 +218,7 @@ export default function HomePage() {
           <div className="hero-right" style={{ animation: mounted ? "fadeUp 0.9s ease 0.7s both" : "none" }}>
             <div style={{
               backgroundColor: "rgba(255,255,255,0.04)", backdropFilter: "blur(24px)",
-              border: "1px solid rgba(255,255,255,0.08)", borderRadius: "24px", padding: "44px",
+              border: "1px solid rgba(255,255,255,0.08)", borderRadius: "20px", padding: "clamp(24px, 5vw, 44px)",
               boxShadow: "0 40px 80px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.06)"
             }}>
               <h2 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "28px", color: "white", fontWeight: 400, marginBottom: "8px", letterSpacing: "0.01em" }}>
@@ -220,7 +234,7 @@ export default function HomePage() {
         </div>
 
         {/* Scroll indicator */}
-        <div style={{ position: "fixed", bottom: "32px", left: "50%", transform: "translateX(-50%)", zIndex: 10, display: "flex", flexDirection: "column", alignItems: "center", gap: "8px", opacity: scrollY > 80 ? 0 : 0.35, transition: "opacity 0.6s" }}>
+        <div style={{ position: "fixed", bottom: "32px", left: "50%", transform: "translateX(-50%)", zIndex: 5, display: "flex", flexDirection: "column", alignItems: "center", gap: "8px", opacity: scrollY > 80 ? 0 : 0.35, transition: "opacity 0.6s", pointerEvents: "none" }}>
           <span style={{ color: "white", fontSize: "9px", letterSpacing: "0.18em", textTransform: "uppercase" }}>Scroll</span>
           <div style={{ width: "1px", height: "36px", background: "linear-gradient(to bottom, white, transparent)", animation: "float 2s ease-in-out infinite" }} />
         </div>
