@@ -141,38 +141,36 @@ The house steps down the slope in 2 visible levels, like a modern hillside house
   const relacion_desc = relacion_bosque_opciones.find((r) => r.id === config.relacion_bosque)?.prompt_keyword || "forest views through panoramic windows";
   const deck_desc = deck_opciones.find((d) => d.id === config.deck_tipo)?.prompt_keyword || "terrace with forest views";
 
-  const loteExtra = (lote as unknown as { descriptores_render?: string; posicion_parque?: string });
-  const posicion_desc = loteExtra.descriptores_render || "";
-
-  // Orientación vial específica por zona — corrige el problema de renders invertidos
+  // Orientación y garage por zona
   const orientacion_vial = getOrientacionVial(lote);
 
-  // Garage específico por zona
-  const garage_desc = lote.zona === "Aurel Parque"
-    ? `${config.parqueos} covered garage(s) flush with street level at the TOP of the image — doors face the street, roof-level only, NOT visible from below. Do NOT place cars or garages on terraces or rooftops.`
-    : `${config.parqueos} covered garage(s) at street level at the BOTTOM front — doors face the road, integrated into the ground floor facade.`;
+  // Pendiente en lenguaje visual simple
+  let slope_desc = "";
+  if (lote.topo_tipo === "pronunciado") {
+    slope_desc = `Steep hillside (${lote.dif_nivel_m}m drop). House has 3 stepped platforms cascading downhill. Each platform is a concrete slab cantilevered over the slope — visible structure underneath. Street and garage at the top. Living levels step down. Terraces at lower levels face the forest.`;
+  } else if (lote.topo_tipo === "medio") {
+    slope_desc = `Gentle hillside (${lote.dif_nivel_m}m drop). House has 2 levels following the slope. Upper floor at street level. Lower floor steps down with a terrace extending outward. Exposed concrete base visible on the downhill side.`;
+  } else {
+    slope_desc = `Flat lot (${lote.dif_nivel_m}m drop). House sits at grade. Single level or stacked floors.`;
+  }
 
-  return `Photorealistic architectural exterior render. Guatemala highland pine forest, golden hour.
+  // Garage visual
+  const garage_visual = lote.zona === "Aurel Parque"
+    ? `Garage is at the TOP (street level) — ${config.parqueos} garage door(s) facing the street, integrated into the upper facade. NOT on rooftop.`
+    : `Garage is at the BOTTOM front (street level) — ${config.parqueos} garage door(s) on the ground floor facade facing the road.`;
+
+  return `Photorealistic architectural render, golden hour light, Guatemala pine forest.
+
+Style: ${estilo_desc}. Materials: ${materiales_desc}.
+Size: ${config.area_m2}m², ${config.niveles} floors, ${config.habitaciones} bedrooms.
+
+${slope_desc}
 
 ${orientacion_vial}
 
-HOUSE: ${config.area_m2}m² / ${config.niveles} level(s) / ${config.habitaciones} bedrooms. ${estilo_desc}.
+${garage_visual}
 
-${desnivel_desc}
-
-MATERIALS: ${materiales_desc}. Earth tones only. No white paint. No reflective glass.
-
-GARAGE: ${garage_desc}
-
-TERRACE: ${deck_desc}. Terrace is a CLEAN architectural surface — stone, wood or concrete only. NO trees, NO large plants growing ON the terrace slab. Potted plants maximum 60cm tall allowed at terrace edges only.
-
-TREES: ${lote.arboles_protegidos} mature Pinus oocarpa (guatemalan highland pine) growing FROM THE GROUND around the house — never on rooftops or terrace slabs. Trees frame the house, they do not grow through it.
-
-FOREST: Dense pine forest surrounds the lot. Morning mist at mid-canopy level. Trees are tall (15-20m), straight trunks, dark green canopy.
-
-ROAD: Curved stone-paved internal boulevard visible at street level. Gated community setting.
-
-PHOTOGRAPHY: Wide architectural shot, 16:9, hyperrealistic. Show the full house volume and its relationship with the slope.
-
-DO NOT: place trees on terraces, put cars on rooftops, show garage doors as the focal point, add swimming pools, use tropical vegetation.`.trim();
+Terrace: ${deck_desc}. Clean concrete or wood surface. No trees on terrace.
+Forest: tall straight pine trees (15-20m) growing from the ground around the house. Morning mist.
+Photo: wide exterior shot showing full building volume on the slope. Hyperrealistic.`.trim();
 }
