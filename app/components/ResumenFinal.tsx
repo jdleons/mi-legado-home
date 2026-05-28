@@ -139,7 +139,7 @@ export default function ResumenFinal({ lote, configuracion, lead, onReset }: Pro
             <div style={{padding:"0 24px 24px"}}>
               <button onClick={generarRender}
                 style={{width:"100%",padding:"14px",borderRadius:"10px",border:"none",background:"linear-gradient(135deg,#2C3B1F 0%,#3D5229 100%)",color:"white",fontWeight:600,cursor:"pointer",fontSize:"15px",display:"flex",alignItems:"center",justifyContent:"center",gap:"8px"}}>
-                <span style={{fontSize:"18px"}}>✨</span> Generar render con DALL·E 3
+                <span style={{fontSize:"18px"}}>✨</span> Generar render con GPT Image 2
               </button>
               <p style={{fontSize:"11px",color:"#9A9A93",textAlign:"center",marginTop:"8px"}}>Tarda ~20 segundos · Una imagen por sesión</p>
             </div>
@@ -148,7 +148,7 @@ export default function ResumenFinal({ lote, configuracion, lead, onReset }: Pro
             <div style={{padding:"40px 24px",textAlign:"center"}}>
               <div style={{width:"48px",height:"48px",border:"3px solid #E8DFC8",borderTop:"3px solid #2C3B1F",borderRadius:"50%",margin:"0 auto 16px",animation:"spin 1s linear infinite"}}/>
               <p style={{color:"#2C3B1F",fontWeight:500,fontSize:"14px"}}>Generando tu render…</p>
-              <p style={{color:"#6B6B63",fontSize:"12px",marginTop:"4px"}}>DALL·E 3 está visualizando tu casa</p>
+              <p style={{color:"#6B6B63",fontSize:"12px",marginTop:"4px"}}>GPT Image 2 está visualizando tu casa</p>
               <style>{`@keyframes spin{to{transform:rotate(360deg)}}`}</style>
             </div>
           )}
