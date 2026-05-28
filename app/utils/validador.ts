@@ -115,22 +115,28 @@ export function generarPrompt(
   // Criterio constructivo: distribución vertical respecto al nivel de calle
   let desnivel_desc = "";
   if (lote.topo_tipo === "pronunciado") {
-    desnivel_desc = `SLOPE: ${lote.dif_nivel_m}m elevation drop across the lot (steep).
-The house is a FREESTANDING ABOVE-GROUND structure built ON TOP of the hillside — NOT underground, NOT carved into the hill.
-- Concrete and steel foundations/pilotis are VISIBLE supporting the house above the slope.
-- The house steps down the hill as separate elevated platforms connected by stairs.
-- Each level is a distinct architectural volume sitting ON the terrain, with air and structure visible underneath the cantilevered parts.
-- Ground is visible UNDER the house between the support columns.
-- The house is NOT buried. The hillside is NOT cut away to create a platform.`;
+    desnivel_desc = `SLOPE CONSTRUCTION — ${lote.dif_nivel_m}m steep hillside:
+The house is designed exactly like a Brazilian or Mexican hillside house — visible stepped platforms following the terrain downhill.
+REFERENCE STYLE: Multi-level house where each floor is a distinct cantilevered concrete slab stepping down the hill. Like a terraced hillside villa.
+- Level 1 (top): street access, entrance, garage — at road level.
+- Level 2 (middle): main living areas on a concrete platform — visibly elevated above level 3.
+- Level 3 (bottom): lower deck/terrace — a clean wood or concrete platform floating above the natural slope.
+- Each level connected by exterior stairs integrated into the hillside.
+- Exposed concrete retaining walls visible between levels — this is a design feature, not a flaw.
+- The underside of cantilevered slabs is visible — air between the structure and the slope below.
+- The house sits ON the hillside. The slope is VISIBLE around and below the structure.
+- Trees grow from the ground around the house — never from platforms or rooftops.`;
   } else if (lote.topo_tipo === "medio") {
-    desnivel_desc = `SLOPE: ${lote.dif_nivel_m}m elevation drop across the lot (medium gradient, ~7%).
-The house is a FREESTANDING ABOVE-GROUND structure built ON TOP of the slope — NOT underground, NOT embedded in the earth.
-- The house sits visibly ON the hillside with its full architectural volume above ground.
-- Lower floors have taller exposed foundations on the downhill side as the terrain drops.
-- The structure is clearly above grade — walls, windows and facades are fully visible from outside.
-- NO excavation aesthetic. The house looks placed on the hill, not dug into it.`;
+    desnivel_desc = `SLOPE CONSTRUCTION — ${lote.dif_nivel_m}m medium hillside:
+The house steps down the slope in 2 visible levels, like a modern hillside house built on a gentle incline.
+- Upper level at street grade — entrance, main floor.
+- Lower level stepping down the slope — with a terrace/deck extending outward from the downhill facade.
+- The downhill facade is taller than the uphill facade — exposed concrete or stone base visible on the downhill side.
+- Clean wood or stone deck platform on the lower level, with glass railings.
+- The house is clearly ABOVE ground — full facade visible, no buried walls.
+- Mature pine trees (straight tall trunks, dark canopy) surround the lot at ground level.`;
   } else {
-    desnivel_desc = `SLOPE: gentle ${lote.dif_nivel_m}m elevation change. House sits flat on the terrain, fully above ground, traditional foundation.`;
+    desnivel_desc = `SLOPE: gentle ${lote.dif_nivel_m}m elevation change. House sits at grade with standard foundation. Single platform, no stepping required.`;
   }
   const relacion_desc = relacion_bosque_opciones.find((r) => r.id === config.relacion_bosque)?.prompt_keyword || "forest views through panoramic windows";
   const deck_desc = deck_opciones.find((d) => d.id === config.deck_tipo)?.prompt_keyword || "terrace with forest views";
