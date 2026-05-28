@@ -154,10 +154,8 @@ The house steps down the slope in 2 visible levels, like a modern hillside house
     slope_desc = `Flat lot (${lote.dif_nivel_m}m drop). House sits at grade. Single level or stacked floors.`;
   }
 
-  // Garage visual
-  const garage_visual = lote.zona === "Aurel Parque"
-    ? `Garage is at the TOP (street level) — ${config.parqueos} garage door(s) facing the street, integrated into the upper facade. NOT on rooftop.`
-    : `Garage is at the BOTTOM front (street level) — ${config.parqueos} garage door(s) on the ground floor facade facing the road.`;
+  // Garage — siempre en plataforma plana al nivel de calle
+  const garage_visual = `Garage: ${config.parqueos} covered space(s) on a flat platform at street level — this is the entry level of the house. The garage floor is flat and level with the road. From this flat entry platform, the house then develops over the slope: at least one full living level sits ABOVE the garage platform, and additional levels step DOWN the hillside below. The garage is integrated into the architecture, not floating or on a rooftop.`;
 
   return `Photorealistic architectural render, golden hour light, Guatemala pine forest.
 
