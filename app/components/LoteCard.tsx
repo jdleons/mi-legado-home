@@ -97,6 +97,9 @@ export default function LoteCard({ lote, seleccionado = false, onSelect }: LoteC
         style={{width:"100%",padding:"10px",borderRadius:"10px",border:"none",backgroundColor:seleccionado?"#2C3B1F":"#E8DFC8",color:seleccionado?"white":"#2C3B1F",fontWeight:500,cursor:"pointer",fontSize:"14px",transition:"all 0.2s"}}>
         {seleccionado?"✓ Lote seleccionado":"Seleccionar este lote"}
       </button>
+      <p style={{textAlign:"center",fontSize:"12px",color:"#9A9A93",marginTop:"10px"}}>
+        Enganche {lote.enganche_porcentaje}% en {lote.cuotas_enganche} cuotas
+      </p>
       </div>
     </div>
   );
