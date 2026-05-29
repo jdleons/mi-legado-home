@@ -26,7 +26,8 @@
     "mantenimiento_mensual_usd": 450,
     "enganche_porcentaje": 30,
     "cuotas_enganche": 18,
-    "credito_porcentaje": 70
+    "credito_porcentaje": 70,
+    "rotulo": "/rotulo-lote-21.png"
   },
   {
     "id": "aurel-valle-22",
@@ -55,7 +56,8 @@
     "mantenimiento_mensual_usd": 450,
     "enganche_porcentaje": 30,
     "cuotas_enganche": 18,
-    "credito_porcentaje": 70
+    "credito_porcentaje": 70,
+    "rotulo": "/rotulo-lote-22.png"
   },
   {
     "id": "aurel-parque-05",
@@ -84,7 +86,8 @@
     "mantenimiento_mensual_usd": 450,
     "enganche_porcentaje": 40,
     "cuotas_enganche": 18,
-    "credito_porcentaje": 60
+    "credito_porcentaje": 60,
+    "rotulo": "/rotulo-lote-5.png"
   },
   {
     "id": "aurel-parque-07",
@@ -113,7 +116,8 @@
     "mantenimiento_mensual_usd": 450,
     "enganche_porcentaje": 40,
     "cuotas_enganche": 18,
-    "credito_porcentaje": 60
+    "credito_porcentaje": 60,
+    "rotulo": "/rotulo-lote-7.png"
   },
   {
     "id": "aurel-parque-10",
@@ -142,7 +146,8 @@
     "mantenimiento_mensual_usd": 450,
     "enganche_porcentaje": 40,
     "cuotas_enganche": 18,
-    "credito_porcentaje": 60
+    "credito_porcentaje": 60,
+    "rotulo": "/rotulo-lote-10.png"
   },
   {
     "id": "aurel-parque-11",
@@ -171,7 +176,8 @@
     "mantenimiento_mensual_usd": 450,
     "enganche_porcentaje": 40,
     "cuotas_enganche": 18,
-    "credito_porcentaje": 60
+    "credito_porcentaje": 60,
+    "rotulo": "/rotulo-lote-11.png"
   },
   {
     "id": "aurel-parque-12",
@@ -200,7 +206,8 @@
     "mantenimiento_mensual_usd": 450,
     "enganche_porcentaje": 40,
     "cuotas_enganche": 18,
-    "credito_porcentaje": 60
+    "credito_porcentaje": 60,
+    "rotulo": "/rotulo-lote-12.png"
   },
   {
     "id": "aurel-parque-13",
@@ -229,6 +236,7 @@
     "mantenimiento_mensual_usd": 450,
     "enganche_porcentaje": 40,
     "cuotas_enganche": 18,
-    "credito_porcentaje": 60
+    "credito_porcentaje": 60,
+    "rotulo": "/rotulo-lote-13.png"
   }
 ]

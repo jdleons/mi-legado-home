@@ -35,8 +35,19 @@ export default function LoteCard({ lote, seleccionado = false, onSelect }: LoteC
 
   return (
     <div onClick={() => onSelect(lote)}
-      style={{border:seleccionado?"2px solid #2C3B1F":"1px solid #E8DFC8",borderRadius:"12px",padding:"20px",cursor:"pointer",backgroundColor:seleccionado?"rgba(44,59,31,0.04)":"white",transition:"all 0.2s",boxShadow:seleccionado?"0 4px 16px rgba(44,59,31,0.12)":"none"}}>
+      style={{border:seleccionado?"2px solid #2C3B1F":"1px solid #E8DFC8",borderRadius:"12px",overflow:"hidden",cursor:"pointer",backgroundColor:seleccionado?"rgba(44,59,31,0.04)":"white",transition:"all 0.2s",boxShadow:seleccionado?"0 4px 16px rgba(44,59,31,0.12)":"none"}}>
 
+      {(lote as unknown as {rotulo?:string}).rotulo && (
+        <div style={{backgroundColor:"#0D110A",borderRadius:"0",overflow:"hidden"}}>
+          <img
+            src={(lote as unknown as {rotulo?:string}).rotulo}
+            alt={`Rótulo ${lote.nombre}`}
+            style={{width:"100%",height:"200px",objectFit:"cover",objectPosition:"center",display:"block",opacity:0.95}}
+          />
+        </div>
+      )}
+
+      <div style={{padding:"20px"}}>
       <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:"16px"}}>
         <div>
           <p style={{fontSize:"10px",fontWeight:500,color:"#556B2F",textTransform:"uppercase",letterSpacing:"0.12em",marginBottom:"4px"}}>{lote.zona}</p>
@@ -86,6 +97,7 @@ export default function LoteCard({ lote, seleccionado = false, onSelect }: LoteC
         style={{width:"100%",padding:"10px",borderRadius:"10px",border:"none",backgroundColor:seleccionado?"#2C3B1F":"#E8DFC8",color:seleccionado?"white":"#2C3B1F",fontWeight:500,cursor:"pointer",fontSize:"14px",transition:"all 0.2s"}}>
         {seleccionado?"✓ Lote seleccionado":"Seleccionar este lote"}
       </button>
+      </div>
     </div>
   );
 }
