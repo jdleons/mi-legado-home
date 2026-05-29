@@ -152,19 +152,11 @@ The house steps down the slope in 2 visible levels, like a modern hillside house
   // Garage — solo insinuado, sin detalle de carros ni puertas
   const garage_visual = `Parking: ${config.parqueos} covered space(s) suggested at street level — just hint at its presence as part of the entry platform. Do not show cars, do not show garage doors prominently. The parking area blends naturally into the architecture at road level.`;
 
-  // Escala visual según niveles
-  const escala_visual = config.niveles === 1
-    ? "single-story house, low profile, one floor only"
-    : config.niveles === 2
-    ? "two-story house, modest scale, two floors clearly visible"
-    : "three-story house, three floors maximum, residential scale";
-
-  // Footprint aproximado (área construida / niveles = huella por piso)
   const huella = Math.round(config.area_m2 / config.niveles);
 
   return `Photorealistic exterior render of a RESIDENTIAL HOUSE. Guatemala highland pine forest, golden hour.
 
-SCALE: This is a private family home — NOT a hotel, NOT a resort. ${escala_visual}. Total built area: ${config.area_m2}m² across ${config.niveles} floor(s). Each floor footprint approximately ${huella}m². Lot size: around 800m². The house occupies roughly 40% of the lot — the rest is natural pine forest.
+SCALE: Private family home — NOT a hotel. Total area: ${config.area_m2}m², each floor ~${huella}m². Lot ~800m², house covers ~40%.
 
 ARCHITECTURE: ${estilo_desc}. Materials: ${materiales_desc}.
 
