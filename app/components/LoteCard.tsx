@@ -38,11 +38,11 @@ export default function LoteCard({ lote, seleccionado = false, onSelect }: LoteC
       style={{border:seleccionado?"2px solid #2C3B1F":"1px solid #E8DFC8",borderRadius:"12px",overflow:"hidden",cursor:"pointer",backgroundColor:seleccionado?"rgba(44,59,31,0.04)":"white",transition:"all 0.2s",boxShadow:seleccionado?"0 4px 16px rgba(44,59,31,0.12)":"none"}}>
 
       {(lote as unknown as {rotulo?:string}).rotulo && (
-        <div style={{backgroundColor:"#0D110A",borderRadius:"0",overflow:"hidden"}}>
+        <div style={{backgroundColor:"#F5F0E8",padding:"12px",display:"flex",justifyContent:"center",alignItems:"center",borderBottom:"1px solid #E8DFC8"}}>
           <img
             src={(lote as unknown as {rotulo?:string}).rotulo}
             alt={`Rótulo ${lote.nombre}`}
-            style={{width:"100%",height:"200px",objectFit:"cover",objectPosition:"center",display:"block",opacity:0.95}}
+            style={{width:"80%",maxWidth:"320px",height:"auto",display:"block",objectFit:"contain"}}
           />
         </div>
       )}
