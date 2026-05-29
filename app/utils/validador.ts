@@ -57,46 +57,40 @@ function getOrientacionVial(lote: Lote): string {
   const topo = lote.topo_tipo;
 
   if (zona === "Aurel Parque") {
-    return `CRITICAL SITE ORIENTATION — READ CAREFULLY:
-Viewpoint: standing on the street looking DOWN at the house.
-- Street/road is at the TOP of the image (highest point).
-- The house garage and entrance door are at street level (top).
-- The house body cascades DOWNHILL away from the street.
-- Living areas, terraces and decks are at lower levels, below the entrance.
-- The forest canopy fills the background BELOW the house.
-- Camera angle: slightly elevated, looking down the slope toward the house and forest.
-DO NOT place the street below the house. DO NOT show the house above the road.`;
+    return `SITE ORIENTATION — AUREL PARQUE:
+The street runs along the TOP edge of the lot. The terrain drops away from the street downhill.
+IMPORTANT: The street is NOT the highest point of the house — it is the ACCESS POINT.
+- The garage platform is flush with the street (same level as road).
+- From the garage level, the house extends ONE floor UP above the garage (above street level) AND ONE floor DOWN the slope below the garage.
+- The house has volume both above and below the street level — it is NOT buried, NOT flat with the street.
+- Think of it as: garage in the middle, one floor rising above it toward the sky, one floor stepping down into the hillside below.
+- The forest and valley are visible BELOW and BEYOND the house.
+- Camera: aerial view from above-front, showing the full house volume on the slope.`;
   }
 
   if (zona === "Aurel Valle") {
     if (topo === "pronunciado") {
-      return `CRITICAL SITE ORIENTATION — READ CAREFULLY:
-Viewpoint: standing on the street looking UP at the house.
-- Street/road is at the BOTTOM front of the image.
-- The garage entry door is at street level (bottom).
-- The house rises UP the hillside behind the street.
-- Upper floors and rooftop terrace are above, with panoramic forest views.
-- Camera angle: slightly low, looking up the slope toward the house.
-DO NOT place the street above the house. DO NOT show the house below the road.`;
+      return `SITE ORIENTATION — AUREL VALLE (steep):
+The street runs along the BOTTOM front edge of the lot. The terrain rises uphill away from the street.
+IMPORTANT: The street is the ACCESS POINT, not the lowest point of the house.
+- The garage platform is at street level (front, bottom).
+- From the garage, the house rises UP the hill: one or two floors climbing the slope above garage level.
+- The house volume is mostly ABOVE the garage — rising up the hillside.
+- Camera: from street level looking up at the house climbing the slope.`;
     }
-    return `CRITICAL SITE ORIENTATION — READ CAREFULLY:
-Viewpoint: standing on the street looking UP at the house.
-- The curved internal road runs along the lower front edge of the lot.
-- Garage and entrance are at road level (front, lower).
-- House sits elevated above the road on the hillside.
-- Camera angle: from road level looking up at the house facade.`;
+    return `SITE ORIENTATION — AUREL VALLE (medium):
+Street at the lower front. Garage at street level. House rises up the hill behind it.
+- One floor at garage level, additional floors stepping up the slope.
+- Camera: from street level, house visible above and behind the garage entry.`;
   }
 
   if (zona === "Aurel Cerro") {
-    return `CRITICAL SITE ORIENTATION — READ CAREFULLY:
-Viewpoint: standing below looking UP at the house on the hilltop.
-- Access road is at the base of the hill (bottom of image).
-- House sits dramatically high on the hillside, well above the road.
-- Steep driveway climbs from road up to the house.
-- Camera angle: from below looking up, house silhouetted against sky and forest.`;
+    return `SITE ORIENTATION — AUREL CERRO:
+Access road at the base. House climbs high up the hillside above the road.
+Garage at road level, house rises dramatically above. Camera from below looking up.`;
   }
 
-  return `SITE ORIENTATION: The access road runs along the front edge of the lot. House entrance faces the road. Living areas and terraces face the forest. Camera shows front facade with road in foreground.`;
+  return `SITE ORIENTATION: Garage at street level. House extends both above and below street level following the natural slope.`;
 }
 
 export function generarPrompt(
