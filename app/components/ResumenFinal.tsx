@@ -215,14 +215,14 @@ export default function ResumenFinal({ lote, configuracion, lead, onReset }: Pro
 
         <div style={{backgroundColor:"#2C3B1F",borderRadius:"16px",padding:"32px",textAlign:"center"}}>
           <p style={{fontFamily:"'Cormorant Garamond', Georgia, serif",fontSize:"clamp(24px,4vw,36px)",color:"white",marginBottom:"12px",fontWeight:300,lineHeight:1.2}}>El bosque ya tiene tu lote.<br/><em>Solo falta tu casa.</em></p>
-          <p style={{color:"#8A9E6D",fontSize:"14px",marginBottom:"24px"}}>Mariangel puede llevarte a caminar el terreno, sentir la pendiente, ver los pinos que vas a conservar. Ese paseo cambia todo.</p>
-          <a href="https://wa.me/50255267809?text=Hola%2C%20generé%20mi%20concepto%20en%20Mi%20Legado%20y%20quisiera%20agendar%20una%20visita."
+          <p style={{color:"#8A9E6D",fontSize:"14px",marginBottom:"24px"}}>Jennifer puede llevarte a caminar el terreno, sentir la pendiente, ver los pinos que vas a conservar. Ese paseo cambia todo.</p>
+          <a href="https://wa.me/50231126056?text=Hola%2C%20generé%20mi%20concepto%20en%20Mi%20Legado%20y%20quisiera%20agendar%20una%20visita."
             target="_blank" rel="noopener noreferrer"
             className="wsp-btn"
             style={{display:"inline-block",backgroundColor:"white",color:"#1A1F14",fontWeight:700,padding:"16px 40px",borderRadius:"14px",textDecoration:"none",fontSize:"15px",letterSpacing:"0.03em",boxShadow:"0 8px 32px rgba(0,0,0,0.3)"}}>
             Quiero caminar mi lote →
           </a>
-          <p style={{color:"rgba(138,158,109,0.6)",fontSize:"12px",marginTop:"12px"}}>Mariangel Ruiz · mruiz@legado.gt</p>
+          <p style={{color:"rgba(138,158,109,0.6)",fontSize:"12px",marginTop:"12px"}}>Jennifer Fernández · j.fernandez@bienescima.com</p>
         </div>
 
         <button onClick={onReset}

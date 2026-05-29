@@ -224,7 +224,7 @@ export default function HomePage() {
                 Comenzar mi configuración
               </h2>
               <p style={{ color: "rgba(255,255,255,0.38)", fontSize: "13px", marginBottom: "32px", lineHeight: 1.7, fontWeight: 300 }}>
-                Al final, tu concepto llega directo a Mariangel.
+                Al final, tu concepto llega directo a Jennifer.
               </p>
               <LeadForm onSubmit={(data) => { setLead(data); setPaso("lote"); window.scrollTo({top:0,behavior:"instant"}); }} />
             </div>
