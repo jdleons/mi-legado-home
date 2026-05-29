@@ -54,9 +54,7 @@ export default function LoteCard({ lote, seleccionado = false, onSelect }: LoteC
           <p style={{fontSize:"11px",color:"#6B6B63"}}>{lote.area_varas2.toLocaleString()} vrs²</p>
         </div>
         <div style={{backgroundColor:"#F5F0E8",borderRadius:"8px",padding:"12px"}}>
-          <p style={{fontSize:"11px",color:"#6B6B63",marginBottom:"2px"}}>Desde</p>
-          <p style={{fontWeight:500,color:"#1A1F14",fontSize:"15px"}}>{formatPrecio(lote.precio_total_usd)}</p>
-          <p style={{fontSize:"11px",color:"#6B6B63"}}>${lote.precio_vara2_usd}/vara²</p>
+
         </div>
       </div>
 
@@ -81,8 +79,7 @@ export default function LoteCard({ lote, seleccionado = false, onSelect }: LoteC
       <p style={{fontSize:"12px",color:"#6B6B63",lineHeight:1.5,marginBottom:"14px"}}>{lote.descripcion_topo}</p>
 
       <div style={{display:"flex",justifyContent:"space-between",fontSize:"11px",color:"#6B6B63",borderTop:"1px solid #E8DFC8",paddingTop:"10px",marginBottom:"14px"}}>
-        <span>Enganche {lote.enganche_porcentaje}%</span>
-        <span>{lote.cuotas_enganche} cuotas · ${lote.mantenimiento_mensual_usd}/mes mant.</span>
+
       </div>
 
       <button onClick={(e) => { e.stopPropagation(); onSelect(lote); }}

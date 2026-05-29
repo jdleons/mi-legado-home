@@ -113,7 +113,7 @@ export default function ResumenFinal({ lote, configuracion, lead, onReset }: Pro
           </div>
           <div style={{padding:"24px"}}>
             {[
-              {l:"Lote",v:`${lote.area_m2} m² · ${lote.topo_tipo}`},
+              {l:"Lote",v:`${lote.area_m2} m² ·{lote.topo_tipo}`},
               {l:"Topografía",v:`${lote.dif_nivel_m}m de desnivel`},
               {l:"Materiales",v:nombreMateriales},
               {l:"Deck / terraza",v:nombreDeck},

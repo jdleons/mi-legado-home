@@ -291,7 +291,7 @@ export default function HomePage() {
                   <div style={{ width: "40px", height: "40px", backgroundColor: "#8A9E6D", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", color: "#1A1F14", fontSize: "16px", flexShrink: 0 }}>✓</div>
                   <div>
                     <p style={{ fontWeight: 600, color: "white", fontSize: "15px" }}>{loteSeleccionado.nombre}</p>
-                    <p style={{ fontSize: "12px", color: "rgba(255,255,255,0.4)" }}>{loteSeleccionado.area_m2} m² · {loteSeleccionado.topo_tipo} · desde ${loteSeleccionado.precio_total_usd.toLocaleString()}</p>
+                    <p style={{ fontSize: "12px", color: "rgba(255,255,255,0.4)" }}>{loteSeleccionado.area_m2} m² · {loteSeleccionado.topo_tipo} · {loteSeleccionado.zona}</p>
                   </div>
                 </div>
                 <button className="continuar-btn" onClick={() => { setPaso("configurador"); window.scrollTo({top:0,behavior:"instant"}); }}
