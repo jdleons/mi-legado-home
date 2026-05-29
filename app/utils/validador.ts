@@ -140,14 +140,22 @@ The house steps down the slope in 2 visible levels, like a modern hillside house
   const orientacion_vial = getOrientacionVial(lote);
 
   // Pendiente en lenguaje visual simple
-  let slope_desc = "";
-  if (lote.topo_tipo === "pronunciado") {
-    slope_desc = `Steep hillside (${lote.dif_nivel_m}m drop). House has 3 stepped platforms cascading downhill. Each platform is a concrete slab cantilevered over the slope — visible structure underneath. Street and garage at the top. Living levels step down. Terraces at lower levels face the forest.`;
-  } else if (lote.topo_tipo === "medio") {
-    slope_desc = `Gentle hillside (${lote.dif_nivel_m}m drop). House has 2 levels following the slope. Upper floor at street level. Lower floor steps down with a terrace extending outward. Exposed concrete base visible on the downhill side.`;
+  // Distribución de niveles según lo que el usuario configuró
+  let levels_desc = "";
+  if (config.niveles === 1) {
+    levels_desc = `ONE FLOOR: Single level at street/garage level. Garage and all living spaces on the same floor. No stacked floors.`;
+  } else if (config.niveles === 2) {
+    levels_desc = `TWO FLOORS: Floor 1 = garage + entrance at street level (access floor, flush with road). Floor 2 = one full level ABOVE street — bedrooms, living areas, terrace. House grows upward from the street.`;
   } else {
-    slope_desc = `Flat lot (${lote.dif_nivel_m}m drop). House sits at grade. Single level or stacked floors.`;
+    levels_desc = `THREE FLOORS using the natural slope: Floor 1 (middle) = garage + entrance at street level. Floor 2 = one level ABOVE street (main living, terrace, forest views). Floor 3 = one level BELOW street stepping down into the hillside (lower bedroom, service, cantilevered terrace over the slope). Middle floor at street level, one floor up, one floor down.`;
   }
+
+  // Pendiente del terreno
+  const slope_desc = lote.topo_tipo === "pronunciado"
+    ? `Steep hillside, ${lote.dif_nivel_m}m elevation drop. Exposed concrete retaining walls visible between levels.`
+    : lote.topo_tipo === "medio"
+    ? `Medium hillside, ${lote.dif_nivel_m}m elevation drop. Structure steps naturally with the terrain.`
+    : `Gentle slope, ${lote.dif_nivel_m}m elevation drop. Minimal earthwork.`;
 
   // Garage — solo insinuado, sin detalle de carros ni puertas
   const garage_visual = `Parking: ${config.parqueos} covered space(s) suggested at street level — just hint at its presence as part of the entry platform. Do not show cars, do not show garage doors prominently. The parking area blends naturally into the architecture at road level.`;
@@ -160,6 +168,7 @@ SCALE: Private family home — NOT a hotel. Total area: ${config.area_m2}m², ea
 
 ARCHITECTURE: ${estilo_desc}. Materials: ${materiales_desc}.
 
+LEVELS: ${levels_desc}
 SLOPE: ${slope_desc}
 
 ORIENTATION: ${orientacion_vial}
