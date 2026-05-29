@@ -62,8 +62,9 @@ The street runs along the TOP edge of the lot. The terrain drops away from the s
 IMPORTANT: The street is NOT the highest point of the house — it is the ACCESS POINT.
 - The garage platform is flush with the street (same level as road).
 - From the garage level, the house extends ONE floor UP above the garage (above street level) AND ONE floor DOWN the slope below the garage.
+- Living areas, bedrooms and terraces can be on ANY level — both above AND below the garage floor. There is no rule that living areas must be below.
 - The house has volume both above and below the street level — it is NOT buried, NOT flat with the street.
-- Think of it as: garage in the middle, one floor rising above it toward the sky, one floor stepping down into the hillside below.
+- Think of it as: garage in the middle, architectural volumes rising above it AND stepping down the hillside below.
 - The forest and valley are visible BELOW and BEYOND the house.
 - Camera: aerial view from above-front, showing the full house volume on the slope.`;
   }
