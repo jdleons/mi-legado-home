@@ -140,12 +140,18 @@ The house steps down the slope in 2 visible levels, like a modern hillside house
   const orientacion_vial = getOrientacionVial(lote);
 
   // Pendiente en lenguaje visual simple
-  // Distribución de niveles según lo que el usuario configuró
+  // Distribución de niveles según configuración Y pendiente del terreno
   let levels_desc = "";
   if (config.niveles === 1) {
     levels_desc = `ONE FLOOR: Single level at street/garage level. Garage and all living spaces on the same floor. No stacked floors.`;
   } else if (config.niveles === 2) {
-    levels_desc = `TWO FLOORS: Floor 1 = garage + entrance at street level (access floor, flush with road). Floor 2 = one full level ABOVE street — bedrooms, living areas, terrace. House grows upward from the street.`;
+    if (lote.topo_tipo === "pronunciado") {
+      // Pendiente pronunciada: más natural bajar que subir
+      levels_desc = `TWO FLOORS following the steep slope: Floor 1 = garage + entrance at street level (access floor, flush with road). Floor 2 = one level BELOW street, stepping down into the hillside — living areas and cantilevered terrace over the slope. The house descends with the terrain rather than fighting it.`;
+    } else {
+      // Pendiente media o plana: más natural subir
+      levels_desc = `TWO FLOORS: Floor 1 = garage + entrance at street level (access floor, flush with road). Floor 2 = one full level ABOVE street — bedrooms, living areas, terrace with forest views. House grows upward from the street.`;
+    }
   } else {
     levels_desc = `THREE FLOORS using the natural slope: Floor 1 (middle) = garage + entrance at street level. Floor 2 = one level ABOVE street (main living, terrace, forest views). Floor 3 = one level BELOW street stepping down into the hillside (lower bedroom, service, cantilevered terrace over the slope). Middle floor at street level, one floor up, one floor down.`;
   }
