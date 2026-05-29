@@ -66,7 +66,7 @@ IMPORTANT: The street is NOT the highest point of the house — it is the ACCESS
 - The house has volume both above and below the street level — it is NOT buried, NOT flat with the street.
 - Think of it as: garage in the middle, architectural volumes rising above it AND stepping down the hillside below.
 - The forest and valley are visible BELOW and BEYOND the house.
-- Camera: aerial view from above-front, showing the full house volume on the slope.`;
+- Camera: choose the most flattering angle to show the full house volume on the slope and its relationship with the forest.`;
   }
 
   if (zona === "Aurel Valle") {
@@ -77,7 +77,7 @@ IMPORTANT: The street is the ACCESS POINT, not the lowest point of the house.
 - The garage platform is at street level (front, bottom).
 - From the garage, the house rises UP the hill: one or two floors climbing the slope above garage level.
 - The house volume is mostly ABOVE the garage — rising up the hillside.
-- Camera: from street level looking up at the house climbing the slope.`;
+- Camera: choose the best angle to show the house rising up the hillside from the street.`;
     }
     return `SITE ORIENTATION — AUREL VALLE (medium):
 Street at the lower front. Garage at street level. House rises up the hill behind it.
@@ -149,8 +149,8 @@ The house steps down the slope in 2 visible levels, like a modern hillside house
     slope_desc = `Flat lot (${lote.dif_nivel_m}m drop). House sits at grade. Single level or stacked floors.`;
   }
 
-  // Garage — siempre en plataforma plana al nivel de calle
-  const garage_visual = `Garage: ${config.parqueos} covered space(s) on a flat platform at street level — this is the entry level of the house. The garage floor is flat and level with the road. From this flat entry platform, the house then develops over the slope: at least one full living level sits ABOVE the garage platform, and additional levels step DOWN the hillside below. The garage is integrated into the architecture, not floating or on a rooftop.`;
+  // Garage — solo insinuado, sin detalle de carros ni puertas
+  const garage_visual = `Parking: ${config.parqueos} covered space(s) suggested at street level — just hint at its presence as part of the entry platform. Do not show cars, do not show garage doors prominently. The parking area blends naturally into the architecture at road level.`;
 
   // Escala visual según niveles
   const escala_visual = config.niveles === 1
