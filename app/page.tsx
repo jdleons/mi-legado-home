@@ -226,7 +226,7 @@ export default function HomePage() {
               <p style={{ color: "rgba(255,255,255,0.38)", fontSize: "13px", marginBottom: "32px", lineHeight: 1.7, fontWeight: 300 }}>
                 Al final, tu concepto llega directo a Mariangel.
               </p>
-              <LeadForm onSubmit={(data) => { setLead(data); setPaso("lote"); }} />
+              <LeadForm onSubmit={(data) => { setLead(data); setPaso("lote"); window.scrollTo({top:0,behavior:"instant"}); }} />
             </div>
           </div>
 
@@ -294,7 +294,7 @@ export default function HomePage() {
                     <p style={{ fontSize: "12px", color: "rgba(255,255,255,0.4)" }}>{loteSeleccionado.area_m2} m² · {loteSeleccionado.topo_tipo} · desde ${loteSeleccionado.precio_total_usd.toLocaleString()}</p>
                   </div>
                 </div>
-                <button className="continuar-btn" onClick={() => setPaso("configurador")}
+                <button className="continuar-btn" onClick={() => { setPaso("configurador"); window.scrollTo({top:0,behavior:"instant"}); }}
                   style={{ backgroundColor: "#8A9E6D", color: "#1A1F14", padding: "14px 40px", borderRadius: "14px", fontWeight: 700, cursor: "pointer", border: "none", fontSize: "15px", whiteSpace: "nowrap", letterSpacing: "0.03em" }}>
                   Diseñar mi casa →
                 </button>
@@ -307,11 +307,11 @@ export default function HomePage() {
   }
 
   if (paso === "configurador" && loteSeleccionado) {
-    return <ConfiguradorForm lote={loteSeleccionado} lead={lead!} onComplete={(config) => { setConfiguracion(config); setPaso("resumen"); }} onBack={() => setPaso("lote")} />;
+    return <ConfiguradorForm lote={loteSeleccionado} lead={lead!} onComplete={(config) => { setConfiguracion(config); setPaso("resumen"); window.scrollTo({top:0,behavior:"instant"}); }} onBack={() => { setPaso("lote"); window.scrollTo({top:0,behavior:"instant"}); }} />;
   }
 
   if (paso === "resumen" && loteSeleccionado && configuracion && lead) {
-    return <ResumenFinal lote={loteSeleccionado} configuracion={configuracion} lead={lead} onReset={() => { setPaso("bienvenida"); setLoteSeleccionado(null); setConfiguracion(null); }} />;
+    return <ResumenFinal lote={loteSeleccionado} configuracion={configuracion} lead={lead} onReset={() => { setPaso("bienvenida"); setLoteSeleccionado(null); setConfiguracion(null); window.scrollTo({top:0,behavior:"instant"}); }} />;
   }
 
   return null;
